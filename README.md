@@ -1,5 +1,5 @@
 # Bil - Auktion - Backend
-Dette er backend koden til vores projekt.
+Dette er backend-koden til vores projekt.
 
 ---------------------------
 - Mohammad Adel Murtada
