@@ -1,9 +1,10 @@
 package com.example.kwbruunauktion.security.api;
 
 
-import com.example.template.security.dto.LoginRequest;
-import com.example.template.security.dto.LoginResponse;
-import com.example.template.security.entity.UserWithRoles;
+
+import com.example.kwbruunauktion.security.dto.LoginRequest;
+import com.example.kwbruunauktion.security.dto.LoginResponse;
+import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;

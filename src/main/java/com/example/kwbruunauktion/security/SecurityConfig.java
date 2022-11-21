@@ -1,8 +1,9 @@
 package com.example.kwbruunauktion.security;
 
 
-import com.example.template.security.error.CustomOAuth2AccessDeniedHandler;
-import com.example.template.security.error.CustomOAuth2AuthenticationEntryPoint;
+
+import com.example.kwbruunauktion.security.error.CustomOAuth2AccessDeniedHandler;
+import com.example.kwbruunauktion.security.error.CustomOAuth2AuthenticationEntryPoint;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.jwk.source.JWKSource;

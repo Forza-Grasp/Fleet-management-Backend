@@ -1,7 +1,8 @@
 package com.example.kwbruunauktion.security.repository;
 
 
-import com.example.template.security.entity.UserWithRoles;
+
+import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface

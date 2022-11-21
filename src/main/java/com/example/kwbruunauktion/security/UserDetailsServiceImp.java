@@ -1,7 +1,8 @@
 package com.example.kwbruunauktion.security;
 
-import com.example.template.security.entity.UserWithRoles;
-import com.example.template.security.repository.UserWithRolesRepository;
+
+import com.example.kwbruunauktion.security.entity.UserWithRoles;
+import com.example.kwbruunauktion.security.repository.UserWithRolesRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

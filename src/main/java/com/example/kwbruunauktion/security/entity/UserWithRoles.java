@@ -1,7 +1,8 @@
 package com.example.kwbruunauktion.security.entity;
 
 
-import com.example.template.security.dto.UserWithRolesRequest;
+
+import com.example.kwbruunauktion.security.dto.UserWithRolesRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
