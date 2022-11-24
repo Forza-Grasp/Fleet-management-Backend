@@ -1,13 +1,14 @@
 package com.example.kwbruunauktion.auktionSystem.entity;
 
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignBidStatus;
-import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
+
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
 
 @Setter
 @Getter
