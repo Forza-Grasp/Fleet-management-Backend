@@ -10,7 +10,7 @@ Kort opsummeret, skal systemet først kunne oprette opkøbere, der hver skal hav
 Vi har opsat en CI/CD pipeline med tilhørende test. I forhold til git har vi en pull/ request opsætning, hvor vi kan reviewe og acceptere hinadnens comits før de bliver merged til main branch.
 
 Status:
-Vi har løst alle opgaver i fælleskab i denne uge. Vores primære fokus har været systemudvikling hvor vi har løst de mest væsenlige opgaver i scrum og xp. Her har vi lavet klasse diagrammer, domain models, eer diagrammmer, task nework diagram, Funktion points. Derudover har vi også lavet CI/DI sammen. Der er opsat packages så vi er klar til at kode i starten af næste uge.
+Vi har løst alle opgaver i fælleskab i denne uge. Vores primære fokus har været systemudvikling hvor vi har løst de mest væsenlige opgaver i scrum og xp. Her har vi lavet klasse diagrammer, domain models, eer diagrammmer, task nework diagram, Funktion points. Derudover har vi også lavet CI/DI sammen. Der er opsat packages så vi er klar til at kode i starten af næste uge. Vores database er sat op på en virtual machine med en docker, frontend på en static web page og backend på en web service.
 
 Git hub repo’s:
 Vi har lavet en organization til vores projekt hvor vores repositories ligger under 
