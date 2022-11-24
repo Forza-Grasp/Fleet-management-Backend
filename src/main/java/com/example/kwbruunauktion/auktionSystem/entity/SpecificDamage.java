@@ -9,6 +9,7 @@ import javax.persistence.*;
 @ToString
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 public class SpecificDamage {
@@ -23,5 +24,5 @@ public class SpecificDamage {
     private double price;
 
     @ManyToOne
-    DamageMatrix damageMatrix;
+    private DamageMatrix damageMatrix;
 }
