@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.entity;
 
+import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -29,9 +30,10 @@ public class Campaign {
     private CampaignStatus campaignStatus;
 
     @Column(nullable = false, length = 100)
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate activeDate;
 
     @OneToMany (mappedBy = "campaign")
+    @ToString.Exclude
     private List<LcdvCodes> lcdvCodes = new ArrayList<>();
 }
