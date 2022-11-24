@@ -47,6 +47,11 @@ public class Member extends UserWithRoles {
   @ToString.Exclude
   List<SpecificCarModel> ViewableCarBrands;
 
+
+  @OneToOne (mappedBy = "member")
+  private CampaignBid campaignBid;
+
   @OneToOne(mappedBy = "member")
   private DamageMatrix damageMatrix;
+
 }

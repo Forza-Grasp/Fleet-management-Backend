@@ -3,6 +3,8 @@ package com.example.kwbruunauktion.auktionSystem.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -21,6 +23,7 @@ public class LcdvCodes {
     @Column(nullable = false, length = 400)
     private String lcdvCode;
 
-    @ManyToOne
-    private Campaign campaign;
+    @OneToMany(mappedBy = "lcdvCodes")
+    @ToString.Exclude
+    private List<Campaign> campaign = new ArrayList<>();
 }

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Getter
@@ -58,4 +59,8 @@ public class SpecificCar {
 
     @Column(length = 30, nullable = false)
     private String holdPeriod;
+
+    @OneToMany(mappedBy = "specificCar")
+    @ToString.Exclude
+    private List<CampaignBid> campaignBid;
 }
