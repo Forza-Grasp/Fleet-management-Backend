@@ -43,11 +43,15 @@ public class Member extends UserWithRoles {
   @Column(length = 30, nullable = false)
   private String zipCode;
 
-  @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.ALL)
   @ToString.Exclude
   List<SpecificCarModel> ViewableCarBrands;
 
+
   @OneToOne (mappedBy = "member")
-    private CampaignBid campaignBid;
+  private CampaignBid campaignBid;
+
+  @OneToOne(mappedBy = "member")
+  private DamageMatrix damageMatrix;
 
 }
