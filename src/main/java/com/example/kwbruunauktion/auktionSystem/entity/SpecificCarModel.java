@@ -19,15 +19,16 @@ public class SpecificCarModel {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(length = 30, nullable = false)
+  @Column(length = 100, nullable = false)
   private String brand;
 
-  @Column(length = 50, nullable = false)
+  @Column(length = 100, nullable = false)
   private String model;
 
-  @Column(length = 30, nullable = false)
+  @Column(length = 100, nullable = false)
   private String modelYear;
 
+  @JoinTable(name = "specificCarModelMembers")
   @ManyToMany
   @ToString.Exclude
   private List<Member> member;

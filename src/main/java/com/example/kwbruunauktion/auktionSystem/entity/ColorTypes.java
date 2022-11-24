@@ -18,7 +18,7 @@ public class ColorTypes {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(length = 30, nullable = false)
+  @Column(length = 100, nullable = false)
   private String type;
 
   @OneToOne(mappedBy = "colorType")

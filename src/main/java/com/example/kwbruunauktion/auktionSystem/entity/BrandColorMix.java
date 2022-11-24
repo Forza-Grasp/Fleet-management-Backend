@@ -25,6 +25,6 @@ public class BrandColorMix {
   @OneToOne(cascade = CascadeType.ALL)
   private ColorMix colorMix;
 
-  @Column(length = 30, nullable = false)
+  @Column(length = 100, nullable = false)
   private double price;
 }

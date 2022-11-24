@@ -23,7 +23,8 @@ public class LcdvCodes {
     @Column(nullable = false, length = 400)
     private String lcdvCode;
 
-    @OneToMany(mappedBy = "lcdvCodes")
+    @JoinTable(name = "lcdvcodes_campaign")
+    @ManyToMany
     @ToString.Exclude
-    private List<Campaign> campaign = new ArrayList<>();
+    private List<Campaign> campaign;
 }

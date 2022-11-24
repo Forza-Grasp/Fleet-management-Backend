@@ -21,7 +21,7 @@ public class SpecificDamage {
     @Column(length = 450,nullable = false)
     private String damages;
 
-    @Column(length = 50,nullable = false)
+    @Column(length = 100, nullable = false)
     private double price;
 
     @ManyToOne

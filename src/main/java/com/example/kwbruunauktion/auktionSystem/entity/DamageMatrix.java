@@ -20,7 +20,7 @@ public class DamageMatrix {
     @OneToOne(cascade = CascadeType.ALL)
     private Member member;
 
-    @Column(length = 50)
-    private String Valuta;
+    @Column(length = 100, nullable = false)
+    private String valuta;
 
 }

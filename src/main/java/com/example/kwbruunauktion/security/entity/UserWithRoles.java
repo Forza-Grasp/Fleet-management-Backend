@@ -1,7 +1,6 @@
 package com.example.kwbruunauktion.security.entity;
 
 
-
 import com.example.kwbruunauktion.security.dto.UserWithRolesRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,77 +25,87 @@ import java.util.stream.Collectors;
 @Setter
 @ToString
 @AllArgsConstructor
-@Entity
+@Entity(name = "members")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DISCRIMINATOR_TYPE")
 public class UserWithRoles implements UserDetails {
 
-    @Transient
-    private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+  @Transient
+  private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @Id
-    @Column(nullable = false,length = 50,unique = true)
-    String username;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false,length = 50,unique = true)
-    String email;
+  @Column(nullable = false, length = 100, unique = true)
+  String username;
 
-    //60 = length of a bcrypt encoded password
-    @Column(nullable = false, length = 60)
-    String password;
+  @Column(nullable = false, length = 100, unique = true)
+  String email;
 
-    private boolean enabled= true;
+  //60 = length of a bcrypt encoded password
+  @Column(nullable = false, length = 60)
+  String password;
 
-    @CreationTimestamp
-    private LocalDateTime created;
+  private boolean enabled = true;
 
-    @UpdateTimestamp
-    private LocalDateTime edited;
+  @CreationTimestamp
+  private LocalDateTime created;
 
-    @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "ENUM('BUYER','ADMIN','ECONOMY')")
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "security_role")
-    List<Role> roles = new ArrayList<>();
+  @UpdateTimestamp
+  private LocalDateTime edited;
 
-    public UserWithRoles() {}
+  @Enumerated(EnumType.STRING)
+  @Column(columnDefinition = "ENUM('BUYER','ADMIN','ECONOMY')")
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "security_role")
+  List<Role> roles = new ArrayList<>();
 
-
-   // We will use this constructor when/if users must be created via an HTTP-request
-    public UserWithRoles(UserWithRolesRequest body) {
-        this.username = body.getUsername();
-        this.setPassword(body.getPassword());
-        this.email = body.getEmail();
-    }
-
-    public UserWithRoles(String user, String password, String email){
-        this.username = user;
-        setPassword(password);
-        this.email = email;
-    }
-
-    public void setPassword(String pw){
-        this.password = passwordEncoder.encode(pw);
-    }
-
-    public void addRole(Role role){
-        roles.add(role);
-    }
+  public UserWithRoles() {
+  }
 
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.toString())).collect(Collectors.toList());
-    }
+  // We will use this constructor when/if users must be created via an HTTP-request
+  public UserWithRoles(UserWithRolesRequest body) {
+    this.username = body.getUsername();
+    this.setPassword(body.getPassword());
+    this.email = body.getEmail();
+  }
 
-    //You can, but are NOT expected to use the fields below
-    @Override
-    public boolean isAccountNonExpired() {return enabled;}
+  public UserWithRoles(String user, String password, String email) {
+    this.username = user;
+    setPassword(password);
+    this.email = email;
+  }
 
-    @Override
-    public boolean isAccountNonLocked() { return enabled;}
+  public void setPassword(String pw) {
+    this.password = passwordEncoder.encode(pw);
+  }
 
-    @Override
-    public boolean isCredentialsNonExpired() { return enabled; }
+  public void addRole(Role role) {
+    roles.add(role);
+  }
+
+
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return roles.stream().map(role -> new SimpleGrantedAuthority(role.toString())).collect(Collectors.toList());
+  }
+
+  //You can, but are NOT expected to use the fields below
+  @Override
+  public boolean isAccountNonExpired() {
+    return enabled;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return enabled;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return enabled;
+  }
 }
 

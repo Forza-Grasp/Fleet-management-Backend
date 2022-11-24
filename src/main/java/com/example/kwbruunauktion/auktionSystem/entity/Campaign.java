@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Setter
@@ -32,9 +33,11 @@ public class Campaign {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate activeDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private LcdvCodes lcdvCodes;
+    @JoinTable(name = "campaign_lcdvcodes")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<LcdvCodes> lcdvCodes;
 
-    @OneToOne (mappedBy = "campaign")
+    @OneToOne(mappedBy = "campaign")
     private CampaignBid campaignBid;
 }
