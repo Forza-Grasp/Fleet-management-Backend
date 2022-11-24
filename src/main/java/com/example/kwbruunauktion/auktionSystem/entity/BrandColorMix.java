@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.entity;
 
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,25 +13,19 @@ import javax.persistence.*;
 @AllArgsConstructor
 
 @Entity
-public class SpecificCarModel {
+public class BrandColorMix {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
 
+  @OneToOne(cascade = CascadeType.ALL)
+  private SpecificCarModel specificCarModel;
+
+  @OneToOne(cascade = CascadeType.ALL)
+  private ColorMix colorMix;
+
   @Column(length = 30, nullable = false)
-  private String brand;
-
-  @Column(length = 50, nullable = false)
-  private String model;
-
-  @Column(length = 30, nullable = false)
-  private String modelYear;
-
-  @ManyToOne
-  private Member member;
-
-  @OneToOne(mappedBy = "specificCarModel")
-  private BrandColorMix brandColorMix;
+  private double price;
 }

@@ -44,6 +44,7 @@ public class Member extends UserWithRoles {
   private String zipCode;
 
   @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+  @ToString.Exclude
   List<SpecificCarModel> ViewableCarBrands;
 
 }

@@ -1,5 +1,7 @@
 package com.example.kwbruunauktion.auktionSystem.entity;
 
+
+import com.example.kwbruunauktion.auktionSystem.enums.ColorTypes;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 
 @Entity
-public class SpecificCarModel {
+public class ColorMix {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,17 +22,15 @@ public class SpecificCarModel {
   private Long id;
 
   @Column(length = 30, nullable = false)
-  private String brand;
+  private String colorCode;
 
-  @Column(length = 50, nullable = false)
-  private String model;
+  @Enumerated(EnumType.STRING)
+  @Column(length = 30, nullable = false)
+  private ColorTypes colorType;
 
   @Column(length = 30, nullable = false)
-  private String modelYear;
+  private String colorName;
 
-  @ManyToOne
-  private Member member;
-
-  @OneToOne(mappedBy = "specificCarModel")
+  @OneToOne(mappedBy = "colorMix")
   private BrandColorMix brandColorMix;
 }
