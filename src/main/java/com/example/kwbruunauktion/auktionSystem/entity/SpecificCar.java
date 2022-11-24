@@ -1,4 +1,4 @@
-package com.example.kwbruunauktion.security.entity;
+package com.example.kwbruunauktion.auktionSystem.entity;
 
 import lombok.*;
 
