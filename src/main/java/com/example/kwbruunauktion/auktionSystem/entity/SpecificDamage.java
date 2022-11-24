@@ -13,6 +13,7 @@ import javax.persistence.*;
 
 @Entity
 public class SpecificDamage {
+
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;

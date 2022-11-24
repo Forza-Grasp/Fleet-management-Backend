@@ -3,6 +3,7 @@ package com.example.kwbruunauktion.auktionSystem.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,8 +28,9 @@ public class SpecificCarModel {
   @Column(length = 30, nullable = false)
   private String modelYear;
 
-  @ManyToOne
-  private Member member;
+  @ManyToMany
+  @ToString.Exclude
+  private List<Member> member;
 
   @OneToOne(mappedBy = "specificCarModel")
   private BrandColorMix brandColorMix;
