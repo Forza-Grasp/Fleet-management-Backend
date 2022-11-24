@@ -15,7 +15,6 @@ import javax.persistence.*;
 public class SpecificDamage {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private long id;
 
     @Column(length = 450,nullable = false)

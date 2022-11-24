@@ -20,7 +20,7 @@ import java.util.List;
 public class Campaign {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @OneToOne (cascade = CascadeType.ALL)
     private CampaignCar campaignCar;

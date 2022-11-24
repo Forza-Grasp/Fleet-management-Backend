@@ -15,10 +15,10 @@ import javax.persistence.*;
 public class DamageMatrix {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private Long id;
 
-    @Column (length = 50,nullable = false)
-    long menberid;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Member member;
 
     @Column(length = 50)
     private String Valuta;

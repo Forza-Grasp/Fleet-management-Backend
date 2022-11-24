@@ -16,7 +16,7 @@ public class LcdvCodes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false, length = 400)
     private String lcdvCode;
