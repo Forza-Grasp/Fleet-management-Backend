@@ -4,6 +4,5 @@ public enum CampaignStatus {
     DRAFT,
     ACTIVE,
     CANCELLED,
-    ENDED,
-    DELETEME
+    ENDED
 }
