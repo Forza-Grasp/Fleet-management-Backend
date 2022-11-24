@@ -58,4 +58,7 @@ public class SpecificCar {
 
     @Column(length = 30, nullable = false)
     private String holdPeriod;
+
+    @OneToMany(mappedBy = "specificCar")
+    private List<S>
 }

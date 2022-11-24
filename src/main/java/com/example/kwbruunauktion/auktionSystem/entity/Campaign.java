@@ -36,4 +36,7 @@ public class Campaign {
     @OneToMany (mappedBy = "campaign")
     @ToString.Exclude
     private List<LcdvCodes> lcdvCodes = new ArrayList<>();
+
+    @OneToOne (mappedBy = "campaign")
+    private CampaignBid campaignBid;
 }

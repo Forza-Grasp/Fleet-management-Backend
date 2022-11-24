@@ -5,5 +5,5 @@ public enum CampaignStatus {
     ACTIVE,
     CANCELLED,
     ENDED,
-    DELETEME
+    ACTIVE_BID
 }
