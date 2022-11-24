@@ -21,3 +21,7 @@ Backend:
 https://github.com/Forza-Grasp/Bil-auktion-Backend.git
 Frontend:
 https://github.com/Forza-Grasp/Bil-auktion-Frontend.git
+
+Deployed frontend and backend:
+Frontend: https://kwbfm.mohammadmurtada.dk/
+Backend: https://kwbruun-fleet-management.azurewebsites.net
