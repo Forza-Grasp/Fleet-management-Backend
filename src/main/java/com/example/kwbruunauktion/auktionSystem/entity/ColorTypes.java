@@ -1,6 +1,5 @@
 package com.example.kwbruunauktion.auktionSystem.entity;
 
-
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,21 +12,17 @@ import javax.persistence.*;
 @AllArgsConstructor
 
 @Entity
-public class ColorMix {
+public class ColorTypes {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Column(length = 30, nullable = false)
-  private String colorCode;
+  private String type;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  private ColorTypes colorType;
+  @OneToOne(mappedBy = "colorType")
+  private ColorMix colorMix;
 
-  @Column(length = 30, nullable = false)
-  private String colorName;
 
-  @OneToOne(mappedBy = "colorMix")
-  private BrandColorMix brandColorMix;
 }

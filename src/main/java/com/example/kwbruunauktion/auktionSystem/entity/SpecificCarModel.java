@@ -16,7 +16,6 @@ public class SpecificCarModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
   private Long id;
 
   @Column(length = 30, nullable = false)
