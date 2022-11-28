@@ -1,12 +1,10 @@
-package com.example.kwbruunauktion.auktionSystem.entity;
+package com.example.kwbruunauktion.auktionSystem.entity.users;
 
+import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -16,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity
-public class Member extends UserWithRoles {
+public class UserBuyer extends UserWithRoles {
 
   @Column(length = 100, nullable = false)
   private String firstName;
