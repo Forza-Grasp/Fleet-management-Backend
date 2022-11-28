@@ -25,7 +25,7 @@ public class ColorMix {
   @Column(length = 100, nullable = false)
   private String colorCode;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = CascadeType.ALL)
   private ColorTypes colorType;
 
   @Column(length = 100, nullable = false)

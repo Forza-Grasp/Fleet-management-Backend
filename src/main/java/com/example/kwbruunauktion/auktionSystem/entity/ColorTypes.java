@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +14,6 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Entity
 public class ColorTypes {
 
@@ -24,8 +24,8 @@ public class ColorTypes {
   @Column(length = 100, nullable = false)
   private String type;
 
-  @OneToOne(mappedBy = "colorType")
-  private ColorMix colorMix;
+  @OneToMany(mappedBy = "colorType")
+  private List<ColorMix> colorMixes;
 
   @CreationTimestamp
   private LocalDateTime created;
@@ -33,5 +33,10 @@ public class ColorTypes {
   @UpdateTimestamp
   private LocalDateTime updated;
 
-
+  public ColorTypes(String type, List<ColorMix> colorMixes, LocalDateTime created, LocalDateTime updated) {
+    this.type = type;
+    this.colorMixes = colorMixes;
+    this.created = created;
+    this.updated = updated;
+  }
 }
