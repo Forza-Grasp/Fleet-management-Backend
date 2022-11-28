@@ -4,6 +4,8 @@ import com.example.kwbruunauktion.auktionSystem.dto.users.request.UserAdminReque
 import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserAdminResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserAdmin;
 import com.example.kwbruunauktion.auktionSystem.repository.users.UserAdminRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,19 +21,25 @@ public class UserAdminService {
     this.userAdminRepository = userAdminRepository;
   }
 
-  public List<UserAdminResponse> getAllUserAdmin(){
+  public List<UserAdminResponse> getAllUserAdmin() {
     List<UserAdmin> allUserAdminsList = userAdminRepository.findAll();
     return allUserAdminsList.stream().map(UserAdminResponse::new).toList();
 
   }
 
-  public UserAdminResponse getUserAdminById(Long id){
-    UserAdmin foundUserAdmin = userAdminRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found"));
+  public List<UserAdminResponse> getAllUserAdmin(Pageable p) {
+    Page<UserAdmin> allUserAdminsList = userAdminRepository.findAll(p);
+    return allUserAdminsList.stream().map(UserAdminResponse::new).toList();
+
+  }
+
+  public UserAdminResponse getUserAdminById(Long id) {
+    UserAdmin foundUserAdmin = userAdminRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     return new UserAdminResponse(foundUserAdmin);
   }
 
-  public void addUserAdmin(UserAdminRequest userAdminRequest){
-    if (userAdminRepository.existsById(userAdminRequest.getId())){
+  public void addUserAdmin(UserAdminRequest userAdminRequest) {
+    if (userAdminRepository.existsById(userAdminRequest.getId())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User with this ID already exist");
     }if (userAdminRepository.existsByUsername(userAdminRequest.getUserName())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this username already exist");
@@ -45,17 +53,29 @@ public class UserAdminService {
     userAdminRepository.deleteById(id);
   }
 
-  public void updateUserAdmin(Long id, UserAdminRequest userAdminRequest){
+  public void updateUserAdmin(UserAdminRequest userAdminRequest) {
     if (!userAdminRepository.existsById(userAdminRequest.getId())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this ID doest not exist");
     }
-    UserAdmin userAdmin = userAdminRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found"));
-    userAdmin.setUsername(userAdminRequest.getUserName());
-    userAdmin.setFirstName(userAdminRequest.getFirstName());
-    userAdmin.setLastName(userAdminRequest.getLastName());
-    userAdmin.setEmail(userAdminRequest.getEmail());
-    userAdmin.setPhoneNumber(userAdminRequest.getPhoneNumber());
-    userAdmin.setOwnership(userAdminRequest.getOwnerShip());
+    UserAdmin userAdmin = userAdminRepository.findById(userAdminRequest.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    if (userAdminRequest.getUserName() != null) {
+      userAdmin.setUsername(userAdminRequest.getUserName());
+    }
+    if (userAdminRequest.getFirstName() != null) {
+      userAdmin.setFirstName(userAdminRequest.getFirstName());
+    }
+    if (userAdminRequest.getLastName() != null) {
+      userAdmin.setLastName(userAdminRequest.getLastName());
+    }
+    if (userAdminRequest.getEmail() != null) {
+      userAdmin.setEmail(userAdminRequest.getEmail());
+    }
+    if (userAdminRequest.getPhoneNumber() != null) {
+      userAdmin.setPhoneNumber(userAdminRequest.getPhoneNumber());
+    }
+    if (userAdminRequest.getOwnerShip() != null) {
+      userAdmin.setOwnership(userAdminRequest.getOwnerShip());
+    }
     userAdminRepository.save(userAdmin);
   }
 

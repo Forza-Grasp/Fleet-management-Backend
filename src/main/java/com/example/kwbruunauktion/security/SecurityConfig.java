@@ -92,6 +92,22 @@ public class SecurityConfig {
         .antMatchers("/session-demo.html").permitAll()
         .antMatchers("/api/cookie/**").permitAll()
 
+        //userAdmin
+        .antMatchers(HttpMethod.GET, "/api/users/admin").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/users/admin/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/users/admin/{id}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/users/admin/").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/users/admin/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/users/admin/").permitAll()
+
+
+        //userEconomy
+        .antMatchers(HttpMethod.GET, "/api/users/economy").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/users/economy/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/users/economy/{id}").permitAll()
+
+
         //Allow anonymous access to this endpoint
         //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
 

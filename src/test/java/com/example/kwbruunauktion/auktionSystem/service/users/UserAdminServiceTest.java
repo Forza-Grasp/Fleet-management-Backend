@@ -142,7 +142,7 @@ class UserAdminServiceTest {
     assertEquals("Peter", foundUserAdmin.getFirstName());
     foundUserAdmin.setFirstName("Malthe");
     UserAdminRequest userAdminRequest = new UserAdminRequest(foundUserAdmin);
-    userAdminService.updateUserAdmin(1L, userAdminRequest);
+    userAdminService.updateUserAdmin(userAdminRequest);
     assertEquals("Malthe", userAdminRepository.findById(1L).get().getFirstName());
   }
 }
