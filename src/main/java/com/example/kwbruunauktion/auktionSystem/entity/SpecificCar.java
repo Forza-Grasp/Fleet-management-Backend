@@ -63,4 +63,7 @@ public class SpecificCar {
     @OneToMany(mappedBy = "specificCar")
     @ToString.Exclude
     private List<CampaignBid> campaignBid;
+
+    @Column(length = 100, nullable = false)
+    private Long ownershipId;
 }

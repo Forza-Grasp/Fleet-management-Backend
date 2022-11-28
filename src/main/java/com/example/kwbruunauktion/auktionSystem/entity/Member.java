@@ -55,4 +55,7 @@ public class Member extends UserWithRoles {
   @OneToOne(mappedBy = "member")
   private DamageMatrix damageMatrix;
 
+  @Column(length = 100, nullable = false)
+  private Long ownershipId;
+
 }

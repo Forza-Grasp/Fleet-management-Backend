@@ -66,18 +66,6 @@ public class CampaignCar {
   @Column(nullable = false, length = 300)
   private String campaignPictureOne;
 
-  @Column(nullable = false, length = 300)
-  private String campaignPictureTwo;
-
-  @Column(nullable = false, length = 300)
-  private String campaignPictureThree;
-
-  @Column(nullable = false, length = 300)
-  private String campaignPictureFour;
-
-  @Column(nullable = false, length = 300)
-  private String campaignPictureFive;
-
   @OneToOne(mappedBy = "campaignCar")
   private Campaign campaign;
 }
