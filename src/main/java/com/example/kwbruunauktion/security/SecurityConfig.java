@@ -97,15 +97,19 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET, "/api/users/admin/all").permitAll()
         .antMatchers(HttpMethod.GET, "/api/users/admin/{id}").permitAll()
 
-        .antMatchers(HttpMethod.POST, "/api/users/admin/").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/users/admin").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/users/admin/{id}").permitAll()
-        .antMatchers(HttpMethod.PUT, "/api/users/admin/").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/users/admin").permitAll()
 
 
         //userEconomy
         .antMatchers(HttpMethod.GET, "/api/users/economy").permitAll()
         .antMatchers(HttpMethod.GET, "/api/users/economy/all").permitAll()
         .antMatchers(HttpMethod.GET, "/api/users/economy/{id}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/users/economy").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/users/economy/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/users/economy").permitAll()
 
 
         //Allow anonymous access to this endpoint

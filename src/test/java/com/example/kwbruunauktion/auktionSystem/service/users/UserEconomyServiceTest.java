@@ -139,7 +139,7 @@ class UserEconomyServiceTest {
     assertEquals("Peter", foundUserEconomy.getFirstName());
     foundUserEconomy.setFirstName("MoJens");
     UserEconomyRequest userEconomyRequest = new UserEconomyRequest(foundUserEconomy);
-    userEconomyService.updateUserEconomy(1L, userEconomyRequest);
+    userEconomyService.updateUserEconomy(userEconomyRequest);
     assertEquals("MoJens", userEconomyRepository.findById(1L).get().getFirstName());
 
   }
