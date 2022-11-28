@@ -11,7 +11,6 @@ import javax.persistence.OneToOne;
 @Getter
 @Setter
 @ToString
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 
