@@ -1,6 +1,7 @@
 package com.example.kwbruunauktion.auktionSystem.entity.users;
 
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
+import com.example.kwbruunauktion.security.entity.Role;
 import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import lombok.*;
 
@@ -28,4 +29,15 @@ public class UserAdmin extends UserWithRoles {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Ownership ownership;
+
+
+    @Builder(builderMethodName = "userAdminBuilder")
+    public UserAdmin(String user, String password, String email, String firstName, String lastName, String phoneNumber, Ownership ownership) {
+        super(user, password, email);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.ownership = ownership;
+        getRoles().add(Role.ADMIN);
+    }
 }

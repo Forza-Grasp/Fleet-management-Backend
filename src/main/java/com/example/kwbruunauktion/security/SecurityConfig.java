@@ -97,12 +97,7 @@ public class SecurityConfig {
 
         //necessary to allow for "nice" JSON Errors
         .antMatchers("/error").permitAll()
-
         //.antMatchers("/", "/**").permitAll()
-
-        .antMatchers(HttpMethod.GET,"/api/cars").hasAnyAuthority("ADMIN","USER")
-        .antMatchers(HttpMethod.GET,"/api/cars/all").hasAnyAuthority("ADMIN","USER")
-        .antMatchers(HttpMethod.GET,"/api/cars/filter").hasAnyAuthority("ADMIN","USER")
 
 
         // Demonstrates another way to add roles to an endpoint

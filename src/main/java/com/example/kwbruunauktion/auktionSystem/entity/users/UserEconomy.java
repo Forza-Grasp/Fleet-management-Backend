@@ -1,6 +1,7 @@
 package com.example.kwbruunauktion.auktionSystem.entity.users;
 
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
+import com.example.kwbruunauktion.security.entity.Role;
 import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -40,4 +41,15 @@ public class UserEconomy extends UserWithRoles {
     private LocalDateTime updated;
 
 
+    @Builder(builderMethodName = "userEconomyBuilder")
+    public UserEconomy(String user, String password, String email, String firstName, String lastName, String phoneNumber, Ownership ownership, LocalDateTime created, LocalDateTime updated) {
+        super(user, password, email);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.ownership = ownership;
+        this.created = created;
+        this.updated = updated;
+        getRoles().add(Role.ECONOMY);
+    }
 }

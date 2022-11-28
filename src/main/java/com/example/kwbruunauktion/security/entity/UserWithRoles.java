@@ -28,9 +28,9 @@ import java.util.stream.Collectors;
 @Setter
 @ToString
 @AllArgsConstructor
-@Entity(name = "members")
+@Entity(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "DISCRIMINATOR_TYPE")
+@DiscriminatorColumn(name = "user_type")
 @SuperBuilder
 public class UserWithRoles implements UserDetails {
 
