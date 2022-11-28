@@ -24,5 +24,8 @@ public class Ownership {
     @Column(length = 100, nullable = false)
     String abbreviation;
 
+    @OneToOne(mappedBy = "ownership")
+    private UserAdmin userAdmin;
+
 
 }
