@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.entity;
 
+import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,5 +28,10 @@ public class Ownership {
     @OneToOne(mappedBy = "ownership")
     private UserAdmin userAdmin;
 
+    @OneToOne(mappedBy = "ownership")
+    private UserEconomy userEconomy;
+
+    @OneToOne(mappedBy = "ownership")
+    private UserBuyer userBuyer;
 
 }
