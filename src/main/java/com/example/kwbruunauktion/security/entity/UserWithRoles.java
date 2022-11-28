@@ -88,6 +88,13 @@ public class UserWithRoles implements UserDetails {
     this.email = email;
   }
 
+  public UserWithRoles(Long id, String user, String password, String email) {
+    this.id = id;
+    this.username = user;
+    setPassword(password);
+    this.email = email;
+  }
+
   public void setPassword(String pw) {
     this.password = passwordEncoder.encode(pw);
   }

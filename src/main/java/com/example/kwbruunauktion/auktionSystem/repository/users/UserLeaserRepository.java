@@ -1,4 +1,4 @@
-package com.example.kwbruunauktion.auktionSystem.repository;
+package com.example.kwbruunauktion.auktionSystem.repository.users;
 
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
 import org.springframework.data.jpa.repository.JpaRepository;

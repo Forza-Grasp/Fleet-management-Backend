@@ -36,8 +36,8 @@ public class UserEconomy extends UserWithRoles {
 
 
     @Builder(builderMethodName = "userEconomyBuilder")
-    public UserEconomy(String user, String password, String email, String firstName, String lastName, String phoneNumber, Ownership ownership) {
-        super(user, password, email);
+    public UserEconomy(Long id, String user, String password, String email, String firstName, String lastName, String phoneNumber, Ownership ownership) {
+        super(id, user, password, email);
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
