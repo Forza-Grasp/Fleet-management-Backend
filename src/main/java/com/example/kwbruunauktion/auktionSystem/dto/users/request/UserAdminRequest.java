@@ -25,6 +25,8 @@ public class UserAdminRequest {
 
   private Ownership ownerShip;
 
+  private String password;
+
   private String userName;
 
   public static UserAdmin getUserAdminEntity(UserAdminRequest u){
@@ -32,6 +34,7 @@ public class UserAdminRequest {
         .id(u.getId())
         .firstName(u.getFirstName())
         .lastName(u.getLastName())
+        .password(u.getPassword())
         .phoneNumber(u.getPhoneNumber())
         .email(u.getEmail())
         .ownership(u.getOwnerShip())
@@ -47,6 +50,7 @@ public class UserAdminRequest {
     this.email = userAdmin.getEmail();
     this.ownerShip = userAdmin.getOwnership();
     this.userName = userAdmin.getUsername();
+    this.password = userAdmin.getPassword();
   }
 
 }
