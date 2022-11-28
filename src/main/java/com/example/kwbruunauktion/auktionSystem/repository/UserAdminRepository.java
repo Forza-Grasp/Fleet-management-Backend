@@ -1,6 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.repository;
 
-import com.example.kwbruunauktion.auktionSystem.entity.UserAdmin;
+import com.example.kwbruunauktion.auktionSystem.entity.users.UserAdmin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
