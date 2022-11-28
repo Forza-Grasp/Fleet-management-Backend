@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserBuyerRepository extends JpaRepository<UserBuyer, Long> {
 
+    boolean existsByUsername(String username);
+
 }

@@ -38,7 +38,7 @@ public class UserBuyerRequest {
 
     public static UserBuyer getUserBuyerEntity(UserBuyerRequest userBuyerRequest) {
         return UserBuyer.userBuyerBuilder()
-
+                .id(userBuyerRequest.getId())
                 .user(userBuyerRequest.getUsername())
                 .email(userBuyerRequest.getEmail())
                 .firstName(userBuyerRequest.getFirstName())
@@ -53,6 +53,23 @@ public class UserBuyerRequest {
                 .country(userBuyerRequest.getCountry())
                 .ownership(userBuyerRequest.getOwnership())
                 .build();
+    }
+
+    public UserBuyerRequest(UserBuyer userBuyer) {
+        this.id = userBuyer.getId();
+        this.username = userBuyer.getUsername();
+        this.email = userBuyer.getEmail();
+        this.firstName = userBuyer.getFirstName();
+        this.lastName = userBuyer.getLastName();
+        this.phoneNumber = userBuyer.getPhoneNumber();
+        this.companyName = userBuyer.getCompanyName();
+        this.companyEuVatNumber = userBuyer.getCompanyEuVatNumber();
+        this.addressLine1 = userBuyer.getAddressLine1();
+        this.addressLine2 = userBuyer.getAddressLine2();
+        this.city = userBuyer.getCity();
+        this.zipCode = userBuyer.getZipCode();
+        this.country = userBuyer.getCountry();
+        this.ownership = userBuyer.getOwnership();
     }
 
 
