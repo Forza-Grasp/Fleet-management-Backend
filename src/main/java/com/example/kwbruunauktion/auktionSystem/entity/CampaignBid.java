@@ -2,6 +2,7 @@ package com.example.kwbruunauktion.auktionSystem.entity;
 
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignBidStatus;
 
+import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -23,14 +24,11 @@ public class CampaignBid {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne (cascade = CascadeType.ALL)
-    private Member member;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Campaign campaign;
+    @OneToOne()
+    private UserWithRoles userWithRoles;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    private SpecificCar specificCar;
+    private Campaign campaign;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 100)

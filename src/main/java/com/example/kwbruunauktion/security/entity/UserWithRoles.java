@@ -1,11 +1,14 @@
 package com.example.kwbruunauktion.security.entity;
 
 
+import com.example.kwbruunauktion.auktionSystem.entity.CampaignBid;
+import com.example.kwbruunauktion.auktionSystem.entity.DamageMatrix;
 import com.example.kwbruunauktion.security.dto.UserWithRolesRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,6 +31,7 @@ import java.util.stream.Collectors;
 @Entity(name = "members")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DISCRIMINATOR_TYPE")
+@SuperBuilder
 public class UserWithRoles implements UserDetails {
 
   @Transient
@@ -60,6 +64,12 @@ public class UserWithRoles implements UserDetails {
   @ElementCollection(fetch = FetchType.EAGER)
   @CollectionTable(name = "security_role")
   List<Role> roles = new ArrayList<>();
+
+  @OneToOne()
+  private CampaignBid campaignBid;
+
+  @OneToOne()
+  private DamageMatrix damageMatrix;
 
   public UserWithRoles() {
   }

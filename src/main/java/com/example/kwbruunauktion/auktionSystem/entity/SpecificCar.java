@@ -60,7 +60,4 @@ public class SpecificCar {
     @Column(length = 100, nullable = false)
     private String holdPeriod;
 
-    @OneToMany(mappedBy = "specificCar")
-    @ToString.Exclude
-    private List<CampaignBid> campaignBid;
 }

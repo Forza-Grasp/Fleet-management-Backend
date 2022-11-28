@@ -2,14 +2,16 @@ package com.example.kwbruunauktion.auktionSystem.entity;
 
 import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 @ToString
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -47,12 +49,5 @@ public class Member extends UserWithRoles {
   @ManyToMany(cascade = CascadeType.ALL)
   @ToString.Exclude
   List<SpecificCarModel> viewableCarBrands;
-
-
-  @OneToOne(mappedBy = "member")
-  private CampaignBid campaignBid;
-
-  @OneToOne(mappedBy = "member")
-  private DamageMatrix damageMatrix;
 
 }
