@@ -25,7 +25,7 @@ public class UserAdminResponse {
 
   private String email;
 
-  private Ownership ownerShipId;
+  private Ownership ownerShip;
 
   private String userName;
 
@@ -35,7 +35,7 @@ public class UserAdminResponse {
     this.lastName = userAdmin.getLastName();
     this.phoneNumber = userAdmin.getPhoneNumber();
     this.email = userAdmin.getEmail();
-    this.ownerShipId = userAdmin.getOwnership();
+    this.ownerShip = userAdmin.getOwnership();
     this.userName = userAdmin.getUsername();
   }
 }
