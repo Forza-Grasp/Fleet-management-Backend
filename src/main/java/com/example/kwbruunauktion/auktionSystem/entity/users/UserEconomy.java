@@ -22,13 +22,13 @@ import java.time.LocalDateTime;
 @Entity
 public class UserEconomy extends UserWithRoles {
 
-    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'no value'")
     private String firstName;
 
-    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'no value'")
     private String lastName;
 
-    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'no value'")
     private String phoneNumber;
 
     @OneToOne(cascade = CascadeType.ALL)

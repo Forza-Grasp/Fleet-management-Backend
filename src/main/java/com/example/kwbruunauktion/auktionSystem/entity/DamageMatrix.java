@@ -21,7 +21,8 @@ public class DamageMatrix {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(nullable = false, name = "user_id")
     private UserWithRoles userWithRoles;
 
     @Column(length = 100, nullable = false)

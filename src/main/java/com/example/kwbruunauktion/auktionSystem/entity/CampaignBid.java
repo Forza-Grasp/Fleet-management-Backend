@@ -24,7 +24,8 @@ public class CampaignBid {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne()
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private UserWithRoles userWithRoles;
 
     @ManyToOne(cascade = CascadeType.ALL)
