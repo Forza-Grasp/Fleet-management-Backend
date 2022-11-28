@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.entity;
 
+import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,7 +32,7 @@ public class SpecificCarModel {
   @JoinTable(name = "specificCarModelMembers")
   @ManyToMany
   @ToString.Exclude
-  private List<Member> member;
+  private List<UserBuyer> userBuyer;
 
   @OneToOne(mappedBy = "specificCarModel")
   private BrandColorMix brandColorMix;
