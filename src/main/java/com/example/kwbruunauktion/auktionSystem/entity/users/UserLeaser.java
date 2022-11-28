@@ -13,7 +13,6 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 
 @Entity
 public class UserLeaser extends UserWithRoles {
