@@ -1,8 +1,10 @@
 package com.example.kwbruunauktion.auktionSystem.service.users;
 
-import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserLeaserResponse;
+import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserBuyerResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
+import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
+import com.example.kwbruunauktion.auktionSystem.repository.users.UserBuyerRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.users.UserLeaserRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,26 +18,26 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class UserLeaserServiceTest {
+class UserBuyerServiceTest {
 
-    UserLeaserService userLeaserService;
+    UserBuyerService userBuyerService;
 
-    public static UserLeaserRepository userLeaserRepository;
+    public static UserBuyerRepository userBuyerRepository;
 
-    static int userLeaserSize;
+    static int userBuyerSize;
 
     @BeforeAll
-    public static void setupData(@Autowired UserLeaserRepository userLeaser_Repository) {
-        userLeaserRepository = userLeaser_Repository;
-        List<UserLeaser> userLeaserList = List.of(
-                UserLeaser.userLeaserBuilder()
+    public static void setupData(@Autowired UserBuyerRepository userBuyer_Repository) {
+        userBuyerRepository = userBuyer_Repository;
+        List<UserBuyer> userBuyerList = List.of(
+                UserBuyer.userBuyerBuilder()
                         .id(1L)
                         .firstName("Peter")
                         .lastName("Parker")
                         .phoneNumber("12345678")
-                        .email("leaser1@one.com")
+                        .email("buyer@one.com")
                         .password("1234")
-                        .user("leaser1")
+                        .user("buyer1")
                         .addressLine1("address1")
                         .addressLine2("address2")
                         .city("Copenhagen NV")
@@ -49,14 +51,14 @@ class UserLeaserServiceTest {
                                 .abbreviation("own1")
                                 .build())
                         .build(),
-                UserLeaser.userLeaserBuilder()
+                UserBuyer.userBuyerBuilder()
                         .id(2L)
                         .firstName("Jens")
                         .lastName("Hansen")
                         .phoneNumber("44221122")
-                        .email("leaser2@one.com")
+                        .email("buyer2@one.com")
                         .password("4321")
-                        .user("leaser2")
+                        .user("buyer2")
                         .addressLine1("address1")
                         .addressLine2("address2")
                         .city("Copenhagen NV")
@@ -70,14 +72,14 @@ class UserLeaserServiceTest {
                                 .abbreviation("own2")
                                 .build())
                         .build(),
-                UserLeaser.userLeaserBuilder()
+                UserBuyer.userBuyerBuilder()
                         .id(3L)
                         .firstName("Kasper")
                         .lastName("Olsen")
                         .phoneNumber("12345678")
-                        .email("leaser3@one.dk")
+                        .email("buyer3@one.dk")
                         .password("123456")
-                        .user("leaser3")
+                        .user("buyer3")
                         .addressLine1("address1")
                         .addressLine2("address2")
                         .city("Copenhagen NV")
@@ -92,36 +94,35 @@ class UserLeaserServiceTest {
                                 .build())
                         .build());
 
-        userLeaserRepository.saveAll(userLeaserList);
-        userLeaserSize = userLeaserRepository.findAll().size();
+        userBuyerRepository.saveAll(userBuyerList);
+        userBuyerSize = userBuyerRepository.findAll().size();
 
     }
 
     @BeforeEach
-    public void setUserLeaserServiceUp() {
-        userLeaserService = new UserLeaserService(userLeaserRepository);
+    public void setUserBuyerService(){
+        userBuyerService = new UserBuyerService(userBuyerRepository);
     }
 
     @Test
-    void getAllUserLeasers() {
-        int actualResult = userLeaserRepository.findAll().size();
-        int expectedResult = userLeaserSize;
+    void getAllUserBuyers() {
+        int actualResult = userBuyerRepository.findAll().size();
+        int expectedResult = userBuyerSize;
         assertEquals(expectedResult, actualResult);
-
     }
 
     @Test
-    void getUserLeaserById() {
-        UserLeaserResponse userLeaserResponse = userLeaserService.getUserLeaserById(1L);
-        String actualResult = userLeaserResponse.getFirstName();
+    void getUserBuyerById() {
+        UserBuyerResponse userBuyerResponse = userBuyerService.getUserBuyerById(1L);
+        String actualResult = userBuyerResponse.getFirstName();
         String expectedResult = "Peter";
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
-    void createUserLeaser() {
+    void createUserBuyer() {
         String expectedFirstName = "Laura";
-        UserLeaser newUserLeaser = UserLeaser.userLeaserBuilder()
+        UserBuyer newUserBuyer = UserBuyer.userBuyerBuilder()
                 .id(4L)
                 .firstName(expectedFirstName)
                 .lastName("Nielsen")
@@ -143,44 +144,41 @@ class UserLeaserServiceTest {
                         .build())
                 .build();
 
-        UserLeaser addedUserLeaser = userLeaserRepository.save(newUserLeaser);
-        int actualResult = userLeaserRepository.findAll().size();
-        int expectedResult = userLeaserSize + 1;
-        String actualFirstName = addedUserLeaser.getFirstName();
+        UserBuyer addedUserBuyer = userBuyerRepository.save(newUserBuyer);
+        int actualResult = userBuyerRepository.findAll().size();
+        int expectedResult = userBuyerSize + 1;
+        String actualFirstName = addedUserBuyer.getFirstName();
 
         assertEquals(expectedResult, actualResult);
         assertEquals(expectedFirstName, actualFirstName);
-
     }
 
     @Test
-    void editUserLeaser() {
-        // find first userLeaser
-        UserLeaser findUserLeaser = userLeaserRepository.findAll().get(0);
-        String firstNameBefore = findUserLeaser.getFirstName();
+    void editUserBuyer() {
+        UserBuyer findUserBuyer = userBuyerRepository.findAll().get(0);
+        String firstNameBefore = findUserBuyer.getFirstName();
         String newFirstName = "Karl";
-        Optional<UserLeaser> userLeaserToEdit = userLeaserRepository.findById(1L);
+        Optional<UserBuyer> userBuyerToEdit = userBuyerRepository.findById(1L);
 
-        if (userLeaserToEdit.isPresent()) {
-            UserLeaser userLeaser = userLeaserToEdit.get();
+        if (userBuyerToEdit.isPresent()) {
+            UserBuyer userBuyer = userBuyerToEdit.get();
 
-            userLeaser.setFirstName(newFirstName);
-            userLeaserRepository.save(userLeaser);
+            userBuyer.setFirstName(newFirstName);
+            userBuyerRepository.save(userBuyer);
         }
 
-        String firstNameAfter = userLeaserRepository.findAll().get(0).getFirstName();
+        String firstNameAfter = userBuyerRepository.findAll().get(0).getFirstName();
         assertNotEquals(firstNameBefore, firstNameAfter);
         assertEquals(newFirstName, firstNameAfter);
-
     }
 
     @Test
-    void deleteUserLeaser() {
-        UserLeaser userLeaserToDelete = userLeaserRepository.findAll().get(0);
-        userLeaserRepository.delete(userLeaserToDelete);
-        int actualResult = userLeaserRepository.findAll().size();
-        int expectedResult = userLeaserSize - 1;
+    void deleteUserBuyer() {
+        UserBuyer findUserBuyer = userBuyerRepository.findAll().get(0);
+        Long id = findUserBuyer.getId();
+        userBuyerRepository.deleteById(id);
+        int actualResult = userBuyerRepository.findAll().size();
+        int expectedResult = userBuyerSize - 1;
         assertEquals(expectedResult, actualResult);
-
     }
 }
