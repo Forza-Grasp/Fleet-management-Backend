@@ -18,31 +18,31 @@ import java.util.List;
 @Entity
 public class UserBuyer extends UserWithRoles {
 
-  @Column(length = 100, nullable = false)
+  @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
   private String firstName;
 
-  @Column(length = 100, nullable = false)
+  @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
   private String lastName;
 
-  @Column(length = 100, nullable = false)
+  @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
   private String phoneNumber;
 
-  @Column(length = 100, nullable = false)
+  @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
   private String companyName;
 
-  @Column(length = 100, nullable = false)
+  @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
   private String companyEuVatNumber;
 
-  @Column(length = 100, nullable = false)
+  @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
   private String addressLine1;
 
-  @Column(length = 100)
+  @Column(length = 100,columnDefinition = "varchar(255) default 'info missing'")
   private String addressLine2;
 
-  @Column(length = 100, nullable = false)
+  @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
   private String city;
 
-  @Column(length = 100, nullable = false)
+  @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
   private String zipCode;
 
   @JoinTable(name = "viewableCarBrands")
