@@ -26,6 +26,9 @@ public class Ownership {
     String abbreviation;
 
     @OneToOne(mappedBy = "ownership")
+    private UserEconomy userEconomy;
+
+    @OneToOne(mappedBy = "ownership")
     private UserBuyer userBuyer;
 
 
