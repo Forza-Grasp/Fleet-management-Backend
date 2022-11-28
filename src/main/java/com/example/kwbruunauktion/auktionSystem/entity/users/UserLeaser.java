@@ -43,7 +43,7 @@ public class UserLeaser extends UserWithRoles {
     private String city;
 
     @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
-    private String postalCode;
+    private String zipCode;
 
     @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String country;
@@ -57,7 +57,7 @@ public class UserLeaser extends UserWithRoles {
     private Ownership ownership;
 
     @Builder(builderMethodName = "userLeaserBuilder")
-    public UserLeaser(String user, String password, String email, String firstName, String lastName, String phoneNumber, String companyName, String companyEuVatNumber, String addressLine1, String addressLine2, String city, String postalCode, String country, List<SpecificCarModel> viewableCarBrands, Ownership ownership) {
+    public UserLeaser(String user, String password, String email, String firstName, String lastName, String phoneNumber, String companyName, String companyEuVatNumber, String addressLine1, String addressLine2, String city, String zipCode, String country, List<SpecificCarModel> viewableCarBrands, Ownership ownership) {
         super(user, password, email);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -67,7 +67,7 @@ public class UserLeaser extends UserWithRoles {
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.city = city;
-        this.postalCode = postalCode;
+        this.zipCode = zipCode;
         this.country = country;
         this.viewableCarBrands = viewableCarBrands;
         this.ownership = ownership;

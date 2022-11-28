@@ -34,22 +34,15 @@ public class UserEconomy extends UserWithRoles {
     @OneToOne(cascade = CascadeType.ALL)
     private Ownership ownership;
 
-    @CreationTimestamp
-    private LocalDateTime created;
-
-    @UpdateTimestamp
-    private LocalDateTime updated;
-
 
     @Builder(builderMethodName = "userEconomyBuilder")
-    public UserEconomy(String user, String password, String email, String firstName, String lastName, String phoneNumber, Ownership ownership, LocalDateTime created, LocalDateTime updated) {
+    public UserEconomy(String user, String password, String email, String firstName, String lastName, String phoneNumber, Ownership ownership) {
         super(user, password, email);
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.ownership = ownership;
-        this.created = created;
-        this.updated = updated;
+
         getRoles().add(Role.ECONOMY);
     }
 }

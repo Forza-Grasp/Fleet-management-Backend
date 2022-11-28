@@ -2,6 +2,7 @@ package com.example.kwbruunauktion.auktionSystem.configuration;
 
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserAdmin;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
+import com.example.kwbruunauktion.auktionSystem.entity.users.UserEconomy;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
 import com.example.kwbruunauktion.auktionSystem.repository.UserAdminRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.UserBuyerRepository;
@@ -45,7 +46,7 @@ public class setupDevUsers implements ApplicationRunner {
 
         userAdminRepository.save(admin1);
 
-        UserBuyer buyer = UserBuyer.userBuyerBuilder()
+        UserBuyer buyer1 = UserBuyer.userBuyerBuilder()
                 .user("buyer")
                 .password("buyer")
                 .email("buyer@one.dk")
@@ -53,14 +54,40 @@ public class setupDevUsers implements ApplicationRunner {
                 .lastName("Adel")
                 .phoneNumber("12345678")
                 .city("Aarhus")
+                .companyEuVatNumber("DK29233133")
                 .zipCode("8000")
                 .addressLine1("Vej 1")
                 .addressLine2("Vej 2")
                 .companyName("Mo's Cars")
                 .build();
-        userBuyerRepository.save(buyer);
+        userBuyerRepository.save(buyer1);
 
+        UserLeaser leaser1 = UserLeaser.userLeaserBuilder()
+                .user("buyer")
+                .password("buyer")
+                .email("buyer@one.dk")
+                .firstName("Simon")
+                .lastName("Igild")
+                .phoneNumber("12345678")
+                .city("Aarhus")
+                .companyEuVatNumber("DK24021422")
+                .zipCode("8000")
+                .addressLine1("Vej 1")
+                .addressLine2("Vej 2")
+                .companyName("Mo's Cars")
+                .build();
+        userLeaserRepository.save(leaser1);
 
+        UserEconomy economy1 = UserEconomy.userEconomyBuilder()
+                .user("economy1")
+                .password("economy1")
+                .email("economy1@one.dk")
+                .firstName("Malthe")
+                .lastName("Holm")
+                .phoneNumber("12345678")
+                .build();
+
+        userEconomyRepository.save(economy1);
 
 
     }
