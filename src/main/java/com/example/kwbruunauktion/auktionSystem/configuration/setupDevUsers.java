@@ -58,7 +58,7 @@ public class setupDevUsers implements ApplicationRunner {
                 .addressLine2("Vej 2")
                 .companyName("Mo's Cars")
                 .build();
-        userBuyerRepository.save(buyer);
+        //userBuyerRepository.save(buyer);
 
 
 
