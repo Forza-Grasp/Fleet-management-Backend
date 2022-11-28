@@ -1,5 +1,8 @@
-package com.example.kwbruunauktion.auktionSystem.entity;
+package com.example.kwbruunauktion.auktionSystem.entity.users;
 
+import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
+import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
+import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,7 +16,7 @@ import java.util.List;
 @Builder
 
 @Entity
-public class UserLeaser {
+public class UserLeaser extends UserWithRoles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
