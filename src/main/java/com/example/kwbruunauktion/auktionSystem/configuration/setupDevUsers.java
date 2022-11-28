@@ -1,6 +1,7 @@
 package com.example.kwbruunauktion.auktionSystem.configuration;
 
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserAdmin;
+import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
 import com.example.kwbruunauktion.auktionSystem.repository.UserAdminRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.UserBuyerRepository;
@@ -41,6 +42,23 @@ public class setupDevUsers implements ApplicationRunner {
                 .build();
 
         userAdminRepository.save(admin1);
+
+        UserBuyer buyer = UserBuyer.userBuyerBuilder()
+                .user("buyer")
+                .password("buyer")
+                .email("buyer@one.dk")
+                .firstName("Mo")
+                .lastName("Adel")
+                .phoneNumber("12345678")
+                .city("Aarhus")
+                .zipCode("8000")
+                .addressLine1("Vej 1")
+                .addressLine2("Vej 2")
+                .companyName("Mo's Cars")
+                .build();
+        userBuyerRepository.save(buyer);
+
+
 
 
     }
