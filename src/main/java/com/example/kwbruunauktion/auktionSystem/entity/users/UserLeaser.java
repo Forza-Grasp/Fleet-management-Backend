@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Entity
+@Entity(name = "user_leaser")
 public class UserLeaser extends UserWithRoles {
 
     @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'no value'")

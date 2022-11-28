@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Entity
+@Entity(name = "user_economy")
 public class UserEconomy extends UserWithRoles {
 
     @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'no value'")

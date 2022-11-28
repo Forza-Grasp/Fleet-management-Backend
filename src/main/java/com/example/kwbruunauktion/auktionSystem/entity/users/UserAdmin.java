@@ -16,7 +16,7 @@ import javax.persistence.OneToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 
-@Entity
+@Entity(name = "user_admin")
 public class UserAdmin extends UserWithRoles {
     @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'No Value'")
     private String firstName;
