@@ -18,6 +18,7 @@ public class UserLeaserRequest {
     private Long id;
     private String username;
     private String email;
+    private String password;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -37,6 +38,7 @@ public class UserLeaserRequest {
                 .id(userLeaserRequest.getId())
                 .user(userLeaserRequest.getUsername())
                 .email(userLeaserRequest.getEmail())
+                .password(userLeaserRequest.getPassword())
                 .firstName(userLeaserRequest.getFirstName())
                 .lastName(userLeaserRequest.getLastName())
                 .phoneNumber(userLeaserRequest.getPhoneNumber())

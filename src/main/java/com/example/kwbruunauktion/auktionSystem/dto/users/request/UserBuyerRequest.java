@@ -21,6 +21,7 @@ public class UserBuyerRequest {
     private Long id;
     private String username;
     private String email;
+    private String password;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -41,6 +42,7 @@ public class UserBuyerRequest {
                 .id(userBuyerRequest.getId())
                 .user(userBuyerRequest.getUsername())
                 .email(userBuyerRequest.getEmail())
+                .password(userBuyerRequest.getPassword())
                 .firstName(userBuyerRequest.getFirstName())
                 .lastName(userBuyerRequest.getLastName())
                 .phoneNumber(userBuyerRequest.getPhoneNumber())
