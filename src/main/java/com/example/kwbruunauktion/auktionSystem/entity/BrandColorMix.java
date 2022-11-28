@@ -19,6 +19,7 @@ public class BrandColorMix {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+
   @OneToOne(cascade = CascadeType.ALL)
   private SpecificCarModel specificCarModel;
 
