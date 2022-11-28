@@ -65,7 +65,7 @@ public class UserWithRoles implements UserDetails {
   @CollectionTable(name = "security_role")
   List<Role> roles = new ArrayList<>();
 
-  @OneToOne()
+  @OneToOne(mappedBy = "userWithRoles")
   private CampaignBid campaignBid;
 
   @OneToOne()
