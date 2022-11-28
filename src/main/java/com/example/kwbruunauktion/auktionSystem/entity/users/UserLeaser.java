@@ -42,7 +42,7 @@ public class UserLeaser extends UserWithRoles {
     @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'no value'")
     private String city;
 
-    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'no value'")
     private String zipCode;
 
     @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'no value'")

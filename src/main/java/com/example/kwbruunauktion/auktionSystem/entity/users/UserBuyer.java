@@ -45,6 +45,9 @@ public class UserBuyer extends UserWithRoles {
   @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'no value'")
   private String zipCode;
 
+  @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'no value'")
+  private String country;
+
   @JoinTable(name = "viewableCarBrands")
   @ManyToMany(cascade = CascadeType.ALL)
   @ToString.Exclude
@@ -54,7 +57,7 @@ public class UserBuyer extends UserWithRoles {
   private Ownership ownership;
 
   @Builder(builderMethodName = "userBuyerBuilder")
-  public UserBuyer(String user, String password, String email, String firstName, String lastName, String phoneNumber, String companyName, String companyEuVatNumber, String addressLine1, String addressLine2, String city, String zipCode, List<SpecificCarModel> viewableCarBrands, Ownership ownership) {
+  public UserBuyer(String user, String password, String email, String firstName, String lastName, String phoneNumber, String companyName, String companyEuVatNumber, String addressLine1, String addressLine2, String city, String zipCode, String country, List<SpecificCarModel> viewableCarBrands, Ownership ownership) {
     super(user, password, email);
     this.firstName = firstName;
     this.lastName = lastName;
@@ -65,6 +68,7 @@ public class UserBuyer extends UserWithRoles {
     this.addressLine2 = addressLine2;
     this.city = city;
     this.zipCode = zipCode;
+    this.country = country;
     this.viewableCarBrands = viewableCarBrands;
     this.ownership = ownership;
     getRoles().add(Role.BUYER);

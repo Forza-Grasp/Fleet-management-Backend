@@ -47,7 +47,7 @@ public class setupDevUsers implements ApplicationRunner {
         userAdminRepository.save(admin1);
 
         UserBuyer buyer1 = UserBuyer.userBuyerBuilder()
-                .user("buyer")
+                .user("buyer1")
                 .password("buyer")
                 .email("buyer@one.dk")
                 .firstName("Mo")
@@ -60,13 +60,14 @@ public class setupDevUsers implements ApplicationRunner {
                 .addressLine2("Vej 2")
                 .companyName("Mo's Cars")
                 .companyEuVatNumber("12345678")
+                .country("Denmark")
                 .build();
         userBuyerRepository.save(buyer1);
 
         UserLeaser leaser1 = UserLeaser.userLeaserBuilder()
-                .user("buyer")
+                .user("leaser1")
                 .password("buyer")
-                .email("buyer@one.dk")
+                .email("leaser@one.dk")
                 .firstName("Simon")
                 .lastName("Igild")
                 .phoneNumber("12345678")
@@ -76,6 +77,7 @@ public class setupDevUsers implements ApplicationRunner {
                 .addressLine1("Vej 1")
                 .addressLine2("Vej 2")
                 .companyName("Mo's Cars")
+                .country("Denmark")
                 .build();
         userLeaserRepository.save(leaser1);
 
