@@ -30,8 +30,15 @@ public class UserAdminService {
     return new UserAdminResponse(foundUserAdmin);
   }
 
-  public void addUserAdmin(UserAdminRequest userAdminRequest){
-
+  public UserAdminResponse addUserAdmin(UserAdminRequest userAdminRequest){
+    if (userAdminRepository.existsById(userAdminRequest.getId())){
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User with this ID already exist");
+    }if (userAdminRepository.existsByUsername(userAdminRequest.getUserName())) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this username already exist");
+    }
+    UserAdmin newUserAdmin = UserAdminRequest.getUserAdminEntity(userAdminRequest);
+    newUserAdmin = userAdminRepository.save(newUserAdmin);
+    return new UserAdminResponse(newUserAdmin);
   }
 
   public void deleteUserAdmin(@PathVariable Long id){
@@ -39,7 +46,17 @@ public class UserAdminService {
   }
 
   public void updateUserAdmin(Long id, UserAdminRequest userAdminRequest){
-
+    if (!userAdminRepository.existsById(userAdminRequest.getId())) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this ID doest not exist");
+    }
+    UserAdmin userAdmin = userAdminRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found"));
+    userAdmin.setUsername(userAdminRequest.getUserName());
+    userAdmin.setFirstName(userAdminRequest.getFirstName());
+    userAdmin.setLastName(userAdminRequest.getLastName());
+    userAdmin.setEmail(userAdminRequest.getEmail());
+    userAdmin.setPhoneNumber(userAdminRequest.getPhoneNumber());
+    userAdmin.setOwnership(userAdminRequest.getOwnerShip());
+    userAdminRepository.save(userAdmin);
   }
 
 
