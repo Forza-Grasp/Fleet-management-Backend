@@ -17,6 +17,8 @@ public class SpecificCarModelRequest {
 
     private Long id;
 
+    private String brand;
+
     private String model;
 
     private String modelYear;
@@ -24,6 +26,7 @@ public class SpecificCarModelRequest {
 
     public SpecificCarModelRequest(SpecificCarModel specificCarModel) {
         this.id = specificCarModel.getId();
+        this.brand = specificCarModel.getBrand();
         this.model = specificCarModel.getModel();
         this.modelYear = specificCarModel.getModelYear();
     }

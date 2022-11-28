@@ -34,6 +34,7 @@ public class SpecificCarModelService {
             throw new RuntimeException("SpecificCarModel with this ID already exist");
         }
         SpecificCarModel createdSpecificCarModel = SpecificCarModel.builder()
+                .brand(specificCarModelRequest.getBrand())
                 .model(specificCarModelRequest.getModel())
                 .modelYear(specificCarModelRequest.getModelYear())
                 .build();
@@ -45,6 +46,7 @@ public class SpecificCarModelService {
     public void editSpecificCarModel(SpecificCarModelRequest specificCarModelRequest, Long id) {
         SpecificCarModel specificCarModel = specificCarModelRepository.findById(id).orElseThrow(() -> new RuntimeException("SpecificCarModel with this ID does not exist"));
 
+        specificCarModel.setBrand(specificCarModelRequest.getBrand());
         specificCarModel.setModel(specificCarModelRequest.getModel());
         specificCarModel.setModelYear(specificCarModelRequest.getModelYear());
         specificCarModelRepository.save(specificCarModel);
