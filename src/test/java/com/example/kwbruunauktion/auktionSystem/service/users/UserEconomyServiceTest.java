@@ -1,10 +1,13 @@
 package com.example.kwbruunauktion.auktionSystem.service.users;
 
 import com.example.kwbruunauktion.auktionSystem.dto.users.request.UserAdminRequest;
-import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserAdminResponse;
+import com.example.kwbruunauktion.auktionSystem.dto.users.request.UserEconomyRequest;
+import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserEconomyResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserAdmin;
+import com.example.kwbruunauktion.auktionSystem.entity.users.UserEconomy;
 import com.example.kwbruunauktion.auktionSystem.repository.users.UserAdminRepository;
+import com.example.kwbruunauktion.auktionSystem.repository.users.UserEconomyRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,18 +19,17 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class UserAdminServiceTest {
+class UserEconomyServiceTest {
 
+  public UserEconomyService userEconomyService;
 
-  public UserAdminService userAdminService;
-
-  public static UserAdminRepository userAdminRepository;
+  public static UserEconomyRepository userEconomyRepository;
 
   @BeforeAll
-  public static void setupData(@Autowired UserAdminRepository userAdmin_Repository){
-    userAdminRepository = userAdmin_Repository;
-    List<UserAdmin> userAdminList = List.of(
-        UserAdmin.userAdminBuilder()
+  public static void setupData(@Autowired UserEconomyRepository userEconomy_Repository) {
+    userEconomyRepository = userEconomy_Repository;
+    List<UserEconomy> userEconomyList = List.of(
+        UserEconomy.userEconomyBuilder()
             .id(1L)
             .firstName("Peter")
             .lastName("Parker")
@@ -41,7 +43,7 @@ class UserAdminServiceTest {
                 .abbreviation("own1")
                 .build())
             .build(),
-        UserAdmin.userAdminBuilder()
+        UserEconomy.userEconomyBuilder()
             .id(2L)
             .firstName("Jens")
             .lastName("Hansen")
@@ -55,7 +57,7 @@ class UserAdminServiceTest {
                 .abbreviation("own2")
                 .build())
             .build(),
-        UserAdmin.userAdminBuilder()
+        UserEconomy.userEconomyBuilder()
             .id(3L)
             .firstName("Kasper")
             .lastName("Olsen")
@@ -69,7 +71,7 @@ class UserAdminServiceTest {
                 .abbreviation("own3")
                 .build())
             .build(),
-        UserAdmin.userAdminBuilder()
+        UserEconomy.userEconomyBuilder()
             .id(4L)
             .firstName("Marie")
             .lastName("Hedegaard")
@@ -84,29 +86,35 @@ class UserAdminServiceTest {
                 .build())
             .build()
     );
-    userAdminRepository.saveAll(userAdminList);
+    userEconomyRepository.saveAll(userEconomyList);
   }
 
   @BeforeEach
-  public void setUserAdminService() {
-    userAdminService = new UserAdminService(userAdminRepository);
+  public void setUserEconomyService() {
+    userEconomyService = new UserEconomyService(userEconomyRepository);
   }
 
   @Test
-  void getAllUserAdmin() {
-    List<UserAdminResponse> userAdminResponseList = userAdminService.getAllUserAdmin();
-    assertEquals(4, userAdminResponseList.size());
+  void getAllUserEconomy() {
+    List<UserEconomyResponse> userEconomyResponseList = userEconomyService.getAllUserEconomy();
+    assertEquals(4, userEconomyResponseList.size());
   }
 
   @Test
-  void getUserAdminById() {
-    UserAdminResponse userAdminResponse = userAdminService.getUserAdminById(1L);
-    assertEquals("Peter", userAdminResponse.getFirstName());
+  void getUserEconomyById() {
+    UserEconomyResponse userEconomyResponse = userEconomyService.getUserEconomyById(1L);
+    assertEquals("Peter", userEconomyResponse.getFirstName());
   }
 
   @Test
-  void addUserAdmin() {
-    UserAdmin userAdmin = UserAdmin.userAdminBuilder()
+  void deleteUserEconomy() {
+    userEconomyService.deleteUserEconomy(1L);
+    assertEquals(3, userEconomyRepository.count());
+  }
+
+  @Test
+  void addUserEconomy() {
+    UserEconomy newUser = UserEconomy.userEconomyBuilder()
         .id(5L)
         .firstName("Mohammad")
         .lastName("Kaspersky")
@@ -120,29 +128,19 @@ class UserAdminServiceTest {
             .abbreviation("own5")
             .build())
         .build();
-    UserAdminRequest userAdminRequest = new UserAdminRequest(userAdmin);
-    userAdminService.addUserAdmin(userAdminRequest);
-    assertEquals(5, userAdminRepository.count());
-
-
-
-
-
+    UserEconomyRequest newRequest = new UserEconomyRequest(newUser);
+    userEconomyService.addUserEconomy(newRequest);
+    assertEquals(5, userEconomyRepository.count());
   }
 
   @Test
-  void deleteUserAdmin() {
-    userAdminService.deleteUserAdmin(1L);
-    assertEquals(3, userAdminRepository.count());
-  }
+  void updateUserEconomy() {
+    UserEconomy foundUserEconomy = userEconomyRepository.findById(1L).get();
+    assertEquals("Peter", foundUserEconomy.getFirstName());
+    foundUserEconomy.setFirstName("MoJens");
+    UserEconomyRequest userEconomyRequest = new UserEconomyRequest(foundUserEconomy);
+    userEconomyService.updateUserEconomy(1L, userEconomyRequest);
+    assertEquals("MoJens", userEconomyRepository.findById(1L).get().getFirstName());
 
-  @Test
-  void updateUserAdmin() {
-    UserAdmin foundUserAdmin = userAdminRepository.findById(1L).get();
-    assertEquals("Peter", foundUserAdmin.getFirstName());
-    foundUserAdmin.setFirstName("Malthe");
-    UserAdminRequest userAdminRequest = new UserAdminRequest(foundUserAdmin);
-    userAdminService.updateUserAdmin(1L, userAdminRequest);
-    assertEquals("Malthe", userAdminRepository.findById(1L).get().getFirstName());
   }
 }

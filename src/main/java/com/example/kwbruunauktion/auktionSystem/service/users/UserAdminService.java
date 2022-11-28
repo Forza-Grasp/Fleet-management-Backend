@@ -19,7 +19,7 @@ public class UserAdminService {
     this.userAdminRepository = userAdminRepository;
   }
 
-  public List<UserAdminResponse> getAll(){
+  public List<UserAdminResponse> getAllUserAdmin(){
     List<UserAdmin> allUserAdminsList = userAdminRepository.findAll();
     return allUserAdminsList.stream().map(UserAdminResponse::new).toList();
 
@@ -30,7 +30,7 @@ public class UserAdminService {
     return new UserAdminResponse(foundUserAdmin);
   }
 
-  public UserAdminResponse addUserAdmin(UserAdminRequest userAdminRequest){
+  public void addUserAdmin(UserAdminRequest userAdminRequest){
     if (userAdminRepository.existsById(userAdminRequest.getId())){
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User with this ID already exist");
     }if (userAdminRepository.existsByUsername(userAdminRequest.getUserName())) {
@@ -38,7 +38,7 @@ public class UserAdminService {
     }
     UserAdmin newUserAdmin = UserAdminRequest.getUserAdminEntity(userAdminRequest);
     newUserAdmin = userAdminRepository.save(newUserAdmin);
-    return new UserAdminResponse(newUserAdmin);
+    new UserAdminResponse(newUserAdmin);
   }
 
   public void deleteUserAdmin(@PathVariable Long id){
