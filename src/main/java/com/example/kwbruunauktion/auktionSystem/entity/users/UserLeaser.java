@@ -18,34 +18,34 @@ import java.util.List;
 @Entity
 public class UserLeaser extends UserWithRoles {
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String firstName;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String lastName;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 10, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String phoneNumber;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String companyName;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String companyEuVatNumber;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 10, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String addressLine1;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String addressLine2;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String city;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String postalCode;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String country;
 
     @JoinTable(name = "viewableCarBrands")

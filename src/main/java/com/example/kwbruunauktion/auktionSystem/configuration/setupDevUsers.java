@@ -9,7 +9,9 @@ import com.example.kwbruunauktion.auktionSystem.repository.UserLeaserRepository;
 import com.example.kwbruunauktion.security.repository.UserWithRolesRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class setupDevUsers implements ApplicationRunner {
 
     UserWithRolesRepository userWithRolesRepository;

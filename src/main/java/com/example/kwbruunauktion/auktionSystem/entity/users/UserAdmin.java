@@ -18,13 +18,13 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class UserAdmin extends UserWithRoles {
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String firstName;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String lastName;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'info missing'")
     private String phoneNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
