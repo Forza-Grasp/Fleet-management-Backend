@@ -6,34 +6,36 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-@Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@Setter
 @ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
-public class LcdvCodes {
+public class CampaignColorPrice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 400)
-    private String lcdvCode;
+    @ManyToOne
+    @JoinColumn(name = "brand_color_mix_id")
+    private BrandColorMix brandColorMix;
 
-    @JoinTable(name = "lcdvcodes_campaign")
-    @ManyToMany
-    @ToString.Exclude
-    private List<Campaign> campaign;
+    @ManyToOne
+    @JoinColumn(name = "campaign_id")
+    private Campaign campaign;
+
+    @Column(length = 100)
+    private double price;
 
     @CreationTimestamp
     private LocalDateTime created;
 
     @UpdateTimestamp
     private LocalDateTime updated;
+
 }

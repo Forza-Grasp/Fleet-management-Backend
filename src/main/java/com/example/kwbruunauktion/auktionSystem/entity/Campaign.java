@@ -3,9 +3,12 @@ package com.example.kwbruunauktion.auktionSystem.entity;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -38,6 +41,16 @@ public class Campaign {
     @ToString.Exclude
     private List<LcdvCodes> lcdvCodes;
 
-    @OneToOne(mappedBy = "campaign")
-    private CampaignBid campaignBid;
+    @OneToMany(mappedBy = "campaign")
+    private List<CampaignBid> campaignBids;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<CampaignColorPrice> campaignColorPrices;
+
+    @CreationTimestamp
+    private LocalDateTime created;
+
+    @UpdateTimestamp
+    private LocalDateTime updated;
 }

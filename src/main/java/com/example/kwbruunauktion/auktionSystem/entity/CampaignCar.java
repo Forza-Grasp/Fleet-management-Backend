@@ -2,9 +2,12 @@ package com.example.kwbruunauktion.auktionSystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -66,18 +69,12 @@ public class CampaignCar {
   @Column(nullable = false, length = 300)
   private String campaignPictureOne;
 
-  @Column(nullable = false, length = 300)
-  private String campaignPictureTwo;
-
-  @Column(nullable = false, length = 300)
-  private String campaignPictureThree;
-
-  @Column(nullable = false, length = 300)
-  private String campaignPictureFour;
-
-  @Column(nullable = false, length = 300)
-  private String campaignPictureFive;
-
   @OneToOne(mappedBy = "campaignCar")
   private Campaign campaign;
+
+  @CreationTimestamp
+  private LocalDateTime created;
+
+  @UpdateTimestamp
+  private LocalDateTime updated;
 }
