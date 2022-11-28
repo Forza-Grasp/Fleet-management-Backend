@@ -14,6 +14,7 @@ import javax.persistence.*;
 
 @Entity
 public class BrandColorMix {
+  //jeh
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
