@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,6 +26,7 @@ public class ColorTypes {
   private String type;
 
   @OneToMany(mappedBy = "colorType")
+  @JsonIgnore
   private List<ColorMix> colorMixes;
 
   @CreationTimestamp
@@ -32,11 +34,4 @@ public class ColorTypes {
 
   @UpdateTimestamp
   private LocalDateTime updated;
-
-  public ColorTypes(String type, List<ColorMix> colorMixes, LocalDateTime created, LocalDateTime updated) {
-    this.type = type;
-    this.colorMixes = colorMixes;
-    this.created = created;
-    this.updated = updated;
-  }
 }
