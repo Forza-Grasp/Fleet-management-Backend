@@ -114,7 +114,11 @@ public class SecurityConfig {
         //DamageMatrix
         .antMatchers(HttpMethod.GET, "/api/damageMatrix").permitAll()
         .antMatchers(HttpMethod.GET, "/api/damageMatrix/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/damageMatrix/{id}").permitAll()
 
+        .antMatchers(HttpMethod.POST, "/api/damageMatrix").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/damageMatrix/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/damageMatrix").permitAll()
         //Allow anonymous access to this endpoint
         //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
 

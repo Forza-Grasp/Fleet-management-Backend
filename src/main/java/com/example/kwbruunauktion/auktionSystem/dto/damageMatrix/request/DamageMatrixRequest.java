@@ -19,9 +19,11 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DamageMatrixRequest {
 
-  private Long id;
+  private Long matrixId;
 
   private String valuta;
+
+  private Long userId;
 
   private UserWithRoles userWithRoles;
 
@@ -33,7 +35,7 @@ public class DamageMatrixRequest {
 
   public static DamageMatrix getDamageMatrixEntity(DamageMatrixRequest d){
     return DamageMatrix.builder()
-        .id(d.getId())
+        .id(d.getMatrixId())
         .valuta(d.getValuta())
         .userWithRoles(d.getUserWithRoles())
         .created(d.getCreated())
@@ -42,11 +44,11 @@ public class DamageMatrixRequest {
   }
 
   public DamageMatrixRequest(DamageMatrix damageMatrix) {
-    this.id = damageMatrix.getId();
-    this.userWithRoles = damageMatrix.getUserWithRoles();
+    this.matrixId = damageMatrix.getId();
     this.valuta = damageMatrix.getValuta();
     this.created = damageMatrix.getCreated();
     this.updated = damageMatrix.getUpdated();
+    this.userId = damageMatrix.getUserWithRoles().getId();
   }
 
 }

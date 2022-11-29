@@ -19,12 +19,12 @@ public class SpecificDamageResponse {
 
   private double price;
 
-  private Long damageMatrixId;
+  private Long matrixId;
 
   public SpecificDamageResponse(SpecificDamage s) {
     this.id = s.getId();
     this.damages = s.getDamage();
     this.price = s.getPrice();
-    this.damageMatrixId = s.getDamageMatrix().getId();
+    this.matrixId = s.getDamageMatrix().getId();
   }
 }

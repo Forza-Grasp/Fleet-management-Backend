@@ -30,7 +30,7 @@ public class DamageMatrix {
     @Column(length = 100, nullable = false)
     private String valuta;
 
-    @OneToMany(mappedBy = "damageMatrix")
+    @OneToMany(mappedBy = "damageMatrix",cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<SpecificDamage> specificDamage;
 

@@ -114,6 +114,11 @@ public class setupDevUsers implements ApplicationRunner {
         .valuta("DKK")
         .build();
     damageMatrixRepository.save(damageMatrix1);
+    DamageMatrix damageMatrix2 = DamageMatrix.builder()
+        .userWithRoles(buyer1)
+        .valuta("DKK")
+        .build();
+    damageMatrixRepository.save(damageMatrix2);
     List<SpecificDamage> damages = List.of(
         SpecificDamage.builder()
             .damage("Bumper")
@@ -124,6 +129,16 @@ public class setupDevUsers implements ApplicationRunner {
             .damage("Front")
             .price(2000)
             .damageMatrix(damageMatrix1)
+            .build(),
+        SpecificDamage.builder()
+            .damage("Front")
+            .price(1500)
+            .damageMatrix(damageMatrix2)
+            .build(),
+        SpecificDamage.builder()
+            .damage("back")
+            .price(3000)
+            .damageMatrix(damageMatrix2)
             .build()
     );
     specificDamageRepository.saveAll(damages);

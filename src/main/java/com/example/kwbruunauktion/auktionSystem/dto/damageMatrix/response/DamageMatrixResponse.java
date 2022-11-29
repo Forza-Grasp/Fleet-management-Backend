@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DamageMatrixResponse {
 
-  private Long id;
+  private Long matrixId;
 
-  private Long userWithRolesId;
+  private Long userId;
 
   private String valuta;
 
@@ -36,8 +36,8 @@ public class DamageMatrixResponse {
   private LocalDateTime updated;
 
   public DamageMatrixResponse(DamageMatrix d){
-    this.id = d.getId();
-    this.userWithRolesId = d.getUserWithRoles().getId();
+    this.matrixId = d.getId();
+    this.userId = d.getUserWithRoles().getId();
     if (d.getSpecificDamage() != null){
       this.specificDamages = d.getSpecificDamage().stream().map(SpecificDamageResponse::new).collect(Collectors.toList());
     }

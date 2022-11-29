@@ -102,7 +102,7 @@ class DamageMatrixServiceTest {
 
   @BeforeEach
   public void setDamageMatrixService() {
-    damageMatrixService = new DamageMatrixService(damageMatrixRepository);
+    damageMatrixService = new DamageMatrixService(damageMatrixRepository, userBuyerRepository);
   }
 
   @Test

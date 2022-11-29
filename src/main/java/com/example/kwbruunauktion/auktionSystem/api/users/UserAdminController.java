@@ -45,7 +45,7 @@ public class UserAdminController {
     userAdminService.deleteUserAdmin(id);
   }
 
-  @PutMapping()
+  @PutMapping
   public void updateUserAdmin(@RequestBody UserAdminRequest userAdminRequest) {
     userAdminService.updateUserAdmin(userAdminRequest);
   }
