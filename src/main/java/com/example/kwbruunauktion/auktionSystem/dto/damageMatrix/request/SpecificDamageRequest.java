@@ -20,6 +20,7 @@ public class SpecificDamageRequest {
   private double price;
 
   private DamageMatrix damageMatrix;
+  private Long matrixId;
 
   public static SpecificDamage getSpecificDamageEntity(SpecificDamageRequest s) {
     return SpecificDamage.builder()
@@ -34,7 +35,7 @@ public class SpecificDamageRequest {
     this.id = specificDamage.getId();
     this.damage = specificDamage.getDamage();
     this.price = specificDamage.getPrice();
-    this.damageMatrix = specificDamage.getDamageMatrix();
+    this.matrixId = specificDamage.getDamageMatrix().getId();
   }
 
 }

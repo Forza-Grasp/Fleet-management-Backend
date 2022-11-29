@@ -3,10 +3,7 @@ package com.example.kwbruunauktion.auktionSystem.dto.damageMatrix.response;
 import com.example.kwbruunauktion.auktionSystem.entity.damageMatrix.DamageMatrix;
 import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,6 +14,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @AllArgsConstructor
+@ToString
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DamageMatrixResponse {

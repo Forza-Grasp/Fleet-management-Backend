@@ -30,6 +30,11 @@ public class DamageMatrixController {
     return damageMatrixService.getAllDamageMatrix();
   }
 
+  @GetMapping("/user/{id}")
+  public List<DamageMatrixResponse> getAllDamageMatrixByUserId(@PathVariable Long id) {
+    return damageMatrixService.getAllDamageMatrixByUserId(id);
+  }
+
   @GetMapping("/{id}")
   public DamageMatrixResponse getDamageMatrixById(@PathVariable Long id){
     return damageMatrixService.getDamageMatrixById(id);

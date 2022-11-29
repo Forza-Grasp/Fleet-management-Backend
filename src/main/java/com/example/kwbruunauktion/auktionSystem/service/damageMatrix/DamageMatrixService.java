@@ -75,5 +75,10 @@ public class DamageMatrixService {
     damageMatrixRepository.save(foundDamageMatrix);
   }
 
+  public List<DamageMatrixResponse> getAllDamageMatrixByUserId(Long id) {
+    List<DamageMatrix> damageMatrixList = damageMatrixRepository.findAllByUserWithRolesId(id);
+    return damageMatrixList.stream().map(DamageMatrixResponse::new).toList();
+  }
+
 
 }

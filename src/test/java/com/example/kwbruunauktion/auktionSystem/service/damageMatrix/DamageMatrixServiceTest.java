@@ -47,7 +47,7 @@ class DamageMatrixServiceTest {
         .country("Denmark")
         .build());
     UserBuyer userBuyer2 = userBuyerRepository.save(UserBuyer.userBuyerBuilder()
-        .id(1L)
+        .id(2L)
         .user("buyer2")
         .password("buyer")
         .email("buyer@two.dk")
@@ -161,5 +161,13 @@ class DamageMatrixServiceTest {
     damageMatrixService.updateDamageMatrix(damageMatrixRequest);
     DamageMatrixResponse damageMatrixResponse2 = damageMatrixService.getDamageMatrixById(2L);
     assertEquals("USD", damageMatrixResponse2.getValuta());
+  }
+
+  @Test
+  void getAllDamageMatrixByUserId(){
+    List<DamageMatrixResponse> damageMatrixResponseList = damageMatrixService.getAllDamageMatrixByUserId(1L);
+    assertEquals(1, damageMatrixResponseList.size());
+    assertEquals("DKK", damageMatrixResponseList.get(0).getValuta());
+
   }
 }
