@@ -130,16 +130,7 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.DELETE, "/api/specificDamage/{id}").permitAll()
         .antMatchers(HttpMethod.PUT, "/api/specificDamage").permitAll()
 
-
-
-
-        //Allow anonymous access to this endpoint
-            //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
-
-        //necessary to allow for "nice" JSON Errors
-        .antMatchers("/error").permitAll()
-        //.antMatchers("/", "/**").permitAll()
-
+        //ColorType
         .antMatchers(HttpMethod.GET,"/api/color-types").permitAll()
         .antMatchers(HttpMethod.GET,"/api/color-types/{id}").permitAll()
         .antMatchers(HttpMethod.DELETE,"/api/color-types/{id}").permitAll()
@@ -164,6 +155,17 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.POST, "/api/specificcarmodel").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/specificcarmodel/{id}").permitAll()
         .antMatchers(HttpMethod.PUT, "/api/specificcarmodel/{id}").permitAll()
+
+
+
+
+        //Allow anonymous access to this endpoint
+            //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
+
+        //necessary to allow for "nice" JSON Errors
+        .antMatchers("/error").permitAll()
+        //.antMatchers("/", "/**").permitAll()
+
         // Demonstrates another way to add roles to an endpoint
         // .antMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
         .anyRequest().authenticated());
