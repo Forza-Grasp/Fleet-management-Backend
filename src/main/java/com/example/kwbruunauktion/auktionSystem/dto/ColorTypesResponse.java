@@ -18,14 +18,12 @@ import java.util.List;
 public class ColorTypesResponse {
     private Long id;
     private String type;
-    private List<ColorMix> colorMixes;
     private LocalDateTime created;
     private LocalDateTime updated;
 
     public ColorTypesResponse(ColorTypes colorType) {
         this.id = colorType.getId();
         this.type = colorType.getType();
-        this.colorMixes = colorType.getColorMixes();
         this.created = colorType.getCreated();
         this.updated = colorType.getUpdated();
     }

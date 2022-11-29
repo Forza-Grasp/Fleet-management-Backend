@@ -91,15 +91,19 @@ public class SecurityConfig {
         //Next two lines only required if you plan to do the cookie/session-demo from within this project
         .antMatchers("/session-demo.html").permitAll()
         .antMatchers("/api/cookie/**").permitAll()
-
         //Allow anonymous access to this endpoint
-        //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
+            //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
 
-        //necessary to allow for "nice" JSON Errors
-        .antMatchers("/error").permitAll()
+            //necessary to allow for "nice" JSON Errors
+            .antMatchers("/error").permitAll()
 
-        //.antMatchers("/", "/**").permitAll()
+            //.antMatchers("/", "/**").permitAll()
 
+        .antMatchers(HttpMethod.GET,"/api/color-types").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/color-types/{id}").permitAll()
+        .antMatchers(HttpMethod.DELETE,"/api/color-types/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT,"/api/color-types/{id}").permitAll()
+        .antMatchers(HttpMethod.POST,"/api/color-types/{id}").permitAll()
         .antMatchers(HttpMethod.GET,"/api/cars").hasAnyAuthority("ADMIN","USER")
         .antMatchers(HttpMethod.GET,"/api/cars/all").hasAnyAuthority("ADMIN","USER")
         .antMatchers(HttpMethod.GET,"/api/cars/filter").hasAnyAuthority("ADMIN","USER")
