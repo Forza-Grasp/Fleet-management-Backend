@@ -21,7 +21,7 @@ public class ConfigurationColormix implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("test");
+        /*
         ColorTypes colorType1 = ColorTypes.builder()
                 .type("Metallic")
                 .build();
@@ -36,12 +36,14 @@ public class ConfigurationColormix implements ApplicationRunner {
         colorTypesRepository.save(colorType3);
 
         ColorMix colorMix = ColorMix.builder()
-                .colorType(colorType1)
-                .brandColorMix(null)
-                .colorName("Silver")
                 .colorCode("DFSKL")
+                .colorName("Silver")
+                .colorType(colorType1)
+
                 .build();
         colorMixRepository.save(colorMix);
+        */
+
 
 
     }

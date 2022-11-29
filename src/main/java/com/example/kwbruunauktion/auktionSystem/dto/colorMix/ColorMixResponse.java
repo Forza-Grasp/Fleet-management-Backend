@@ -1,4 +1,4 @@
-package com.example.kwbruunauktion.auktionSystem.dto;
+package com.example.kwbruunauktion.auktionSystem.dto.colorMix;
 
 import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;

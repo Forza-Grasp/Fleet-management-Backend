@@ -33,9 +33,8 @@ public class ColorTypes {
   @UpdateTimestamp
   private LocalDateTime updated;
 
-  public ColorTypes(String type, List<ColorMix> colorMixes, LocalDateTime created, LocalDateTime updated) {
+  public ColorTypes(String type, LocalDateTime created, LocalDateTime updated) {
     this.type = type;
-    this.colorMixes = colorMixes;
     this.created = created;
     this.updated = updated;
   }
