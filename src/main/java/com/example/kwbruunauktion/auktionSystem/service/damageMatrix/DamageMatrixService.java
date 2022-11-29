@@ -61,6 +61,9 @@ public class DamageMatrixService {
   }
 
   public void deleteDamageMatrix(@PathVariable Long id) {
+    if (!damageMatrixRepository.existsById(id)) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "DamageMatrix not found");
+    }
     damageMatrixRepository.deleteById(id);
   }
 
