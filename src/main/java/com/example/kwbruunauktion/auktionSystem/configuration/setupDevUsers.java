@@ -35,15 +35,6 @@ public class setupDevUsers implements ApplicationRunner {
     SpecificDamageRepository specificDamageRepository;
 
 
-    public setupDevUsers(UserWithRolesRepository userWithRolesRepository, UserAdminRepository userAdminRepository,
-                         UserEconomyRepository userEconomyRepository, UserLeaserRepository userLeaserRepository, UserBuyerRepository userBuyerRepository, SpecificCarModelRepository specificCarModelRepository) {
-        this.userWithRolesRepository = userWithRolesRepository;
-        this.userAdminRepository = userAdminRepository;
-        this.userEconomyRepository = userEconomyRepository;
-        this.userLeaserRepository = userLeaserRepository;
-        this.userBuyerRepository = userBuyerRepository;
-        this.specificCarModelRepository = specificCarModelRepository;
-    }
   public setupDevUsers(UserWithRolesRepository userWithRolesRepository, UserAdminRepository userAdminRepository,
                        UserEconomyRepository userEconomyRepository, UserLeaserRepository userLeaserRepository,
                        UserBuyerRepository userBuyerRepository, DamageMatrixRepository damageMatrixRepository,
@@ -156,8 +147,6 @@ public class setupDevUsers implements ApplicationRunner {
             .build()
     );
     specificDamageRepository.saveAll(damages);
-
-    // Add
 
 
   }
