@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/specificcarmodel")
@@ -21,6 +23,9 @@ public class SpecificCarModelController {
     SpecificCarModelResponse getSpecificCarModelById(@PathVariable Long id) {
         return specificCarModelService.getSpecificCarModelById(id);
     }
+
+    @GetMapping
+    List<SpecificCarModelResponse> getAllSpecificCarModels() {return specificCarModelService.getSpecificCarModels();}
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
