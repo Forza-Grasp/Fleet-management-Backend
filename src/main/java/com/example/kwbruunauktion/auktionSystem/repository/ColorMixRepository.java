@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ColorMixRepository extends JpaRepository<ColorMix, Long> {
-
+    ColorMix findColorMixById(Long id);
 }
 
