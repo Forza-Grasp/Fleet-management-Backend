@@ -1,6 +1,7 @@
 package com.example.kwbruunauktion.security;
 
 
+
 import com.example.kwbruunauktion.security.error.CustomOAuth2AccessDeniedHandler;
 import com.example.kwbruunauktion.security.error.CustomOAuth2AuthenticationEntryPoint;
 import com.nimbusds.jose.JOSEException;
@@ -111,8 +112,8 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET, "/api/specificcarmodel").permitAll()
         .antMatchers(HttpMethod.GET, "/api/specificcarmodel/all").permitAll()
         .antMatchers(HttpMethod.GET, "/api/specificcarmodel/{id}").permitAll()
-        
-        //ColorMix        
+
+        //ColorMix
         .antMatchers(HttpMethod.GET, "/api/colormix").permitAll()
         .antMatchers(HttpMethod.GET, "/api/colormix/{id}").permitAll()
         .antMatchers(HttpMethod.POST, "/api/colormix").permitAll()
@@ -123,6 +124,9 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.DELETE, "/api/specificcarmodel/{id}").permitAll()
         .antMatchers(HttpMethod.PUT, "/api/specificcarmodel/{id}").permitAll()
         // Demonstrates another way to add roles to an endpoint
+        //Ownership
+            .antMatchers(HttpMethod.GET,"/api/ownership").hasAnyAuthority("ADMIN","USER")
+            // Demonstrates another way to add roles to an endpoint
         // .antMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
         .anyRequest().authenticated());
 
@@ -173,5 +177,7 @@ public class SecurityConfig {
       throws Exception {
     return authenticationConfiguration.getAuthenticationManager();
   }
+
+
 }
 

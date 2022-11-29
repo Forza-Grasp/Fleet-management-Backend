@@ -2,6 +2,7 @@ package com.example.kwbruunauktion.auktionSystem.api;
 
 import com.example.kwbruunauktion.auktionSystem.dto.OwnershipRepsonse;
 import com.example.kwbruunauktion.auktionSystem.dto.OwnershipRequest;
+import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelResponse;
 import com.example.kwbruunauktion.auktionSystem.service.OwnershipService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,8 +21,9 @@ public class OwnershipController {
         this.ownershipService = ownershipService;
     }
 
+    @GetMapping
      public List<OwnershipRepsonse> getOwnerships(){
-      return ownershipService.getOwnerships();
+        return ownershipService.getOwnerships();
     }
 
     @PutMapping(path = "/{id}")
