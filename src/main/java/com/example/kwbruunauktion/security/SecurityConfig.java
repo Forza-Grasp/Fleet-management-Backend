@@ -111,6 +111,9 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.DELETE, "/api/users/economy/{id}").permitAll()
         .antMatchers(HttpMethod.PUT, "/api/users/economy").permitAll()
 
+        //DamageMatrix
+        .antMatchers(HttpMethod.GET, "/api/damageMatrix").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/damageMatrix/all").permitAll()
 
         //Allow anonymous access to this endpoint
         //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
