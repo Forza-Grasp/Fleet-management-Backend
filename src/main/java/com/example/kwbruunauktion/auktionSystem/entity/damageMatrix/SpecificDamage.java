@@ -1,4 +1,4 @@
-package com.example.kwbruunauktion.auktionSystem.entity;
+package com.example.kwbruunauktion.auktionSystem.entity.damageMatrix;
 
 import lombok.*;
 
@@ -19,7 +19,7 @@ public class SpecificDamage {
     private long id;
 
     @Column(length = 450,nullable = false)
-    private String damages;
+    private String damage;
 
     @Column(length = 100, nullable = false)
     private double price;
