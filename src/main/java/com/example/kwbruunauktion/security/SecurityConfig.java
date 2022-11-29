@@ -125,7 +125,15 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.PUT, "/api/specificcarmodel/{id}").permitAll()
         // Demonstrates another way to add roles to an endpoint
         //Ownership
-            .antMatchers(HttpMethod.GET,"/api/ownership").hasAnyAuthority("ADMIN","USER")
+        .antMatchers(HttpMethod.GET,"/api/ownership").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/ownership/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT,"/api/ownership/{id}").permitAll()
+        .antMatchers(HttpMethod.DELETE,"/api/ownership/{id}").permitAll()
+        .antMatchers(HttpMethod.POST,"/api/ownership").permitAll()
+
+
+
+
             // Demonstrates another way to add roles to an endpoint
         // .antMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
         .anyRequest().authenticated());

@@ -26,7 +26,12 @@ public class OwnershipController {
         return ownershipService.getOwnerships();
     }
 
-    @PutMapping(path = "/{id}")
+    @GetMapping("/{id}")
+    OwnershipRepsonse getOwnershipById(@PathVariable Long id) {
+        return ownershipService.getOwnershipById(id);
+    }
+
+    @PutMapping("/{id}")
     ResponseEntity<Boolean> editOwnership(@RequestBody OwnershipRequest ownershipRequest, @PathVariable Long id){
         ownershipService.editOwnership(ownershipRequest, id);
         return new ResponseEntity<>(true, HttpStatus.OK);
@@ -37,7 +42,7 @@ public class OwnershipController {
         return ownershipService.addOwnership(body);
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping("/{id}")
     ResponseEntity<Boolean> deleteOwnership(@PathVariable Long id) {
         ownershipService.deleteOwnership(id);
         return new ResponseEntity<>(true, HttpStatus.OK);

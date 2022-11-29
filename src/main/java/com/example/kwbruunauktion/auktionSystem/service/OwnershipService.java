@@ -22,6 +22,10 @@ public class OwnershipService {
         this.ownershipRepository = ownershipRepository;
     }
 
+    public OwnershipRepsonse getOwnershipById(@PathVariable Long id) {
+        return new OwnershipRepsonse(ownershipRepository.findById(id).orElseThrow(() -> new RuntimeException("OwnershiID not found")));
+    }
+
     public List<OwnershipRepsonse> getOwnerships(){
         List<Ownership> ownerships = ownershipRepository.findAll();
         return ownerships.stream().map(o->new OwnershipRepsonse(o)).collect(Collectors.toList());
