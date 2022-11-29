@@ -2,6 +2,7 @@ package com.example.kwbruunauktion.auktionSystem.service;
 
 import com.example.kwbruunauktion.auktionSystem.dto.BrandColorMixRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.BrandColorMixResponse;
+import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
@@ -9,8 +10,10 @@ import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import com.example.kwbruunauktion.auktionSystem.repository.BrandColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -60,11 +63,19 @@ public class BrandColorMixService {
         return new BrandColorMixResponse(createdBrandColorMix);
     }
 
-    public void editBrandColorMix(BrandColorMixRequest brandColorMixRequest, Long id) {
+    public void editBrandColorMix(BrandColorMixRequest brandColorMixRequest, Long id, Long specificCarModelId, Long colorMixId) {
+        BrandColorMix brandColorMix = brandColorMixRepository.findById(id).orElseThrow(() -> new RuntimeException("BrandColorMix with this ID does not exist"));
 
+        SpecificCarModel specificCarModel = specificCarModelRepository.findSpecificCarModelById(specificCarModelId);
+        ColorMix colorMix = colorMixRepository.findColorMixById(colorMixId);
+        brandColorMix.setSpecificCarModel(specificCarModel);
+        brandColorMix.setColorMix(colorMix);
+
+        brandColorMixRepository.save(brandColorMix);
     }
 
     public void deleteBrandColorMix(@PathVariable Long id) {
-
+        BrandColorMix brandColorMix = brandColorMixRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"BrandColorMix with this ID does not exist"));
+        brandColorMixRepository.delete(brandColorMix);
     }
 }

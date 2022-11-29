@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.service;
 
+import com.example.kwbruunauktion.auktionSystem.dto.BrandColorMixRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.BrandColorMixResponse;
 import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
@@ -158,6 +159,26 @@ class BrandColorMixServiceTest {
 
     @Test
     void addBrandColorMix() {
+        List<BrandColorMixResponse> listOfBrandColorMix = brandColorMixService.getAllBrandColorMix();
+        assertEquals(3, listOfBrandColorMix.size());
+
+        BrandColorMix brandColorMix = BrandColorMix.builder()
+                .id(4L)
+                .build();
+        BrandColorMixRequest brandColorMixRequest = new BrandColorMixRequest(brandColorMix);
+        brandColorMixService.addBrandColorMix(brandColorMixRequest, 2L, 2L);
+
+        List<BrandColorMixResponse> listOfBrandColorMixAfterAdd = brandColorMixService.getAllBrandColorMix();
+        assertEquals(4, listOfBrandColorMixAfterAdd.size());
+
+        assertEquals("Mazda", listOfBrandColorMixAfterAdd.get(3).getSpecificCarModel().getBrand());
+        assertEquals("F5", listOfBrandColorMixAfterAdd.get(3).getSpecificCarModel().getModel());
+        assertEquals("2015", listOfBrandColorMixAfterAdd.get(3).getSpecificCarModel().getModelYear());
+
+        assertEquals("Red Shiny", listOfBrandColorMixAfterAdd.get(3).getColorMix().getColorName());
+        assertEquals("RS", listOfBrandColorMixAfterAdd.get(3).getColorMix().getColorCode());
+        assertEquals("Shiny", listOfBrandColorMixAfterAdd.get(3).getColorMix().getColorType().getType());
+
     }
 
     @Test
@@ -166,14 +187,14 @@ class BrandColorMixServiceTest {
 
     @Test
     void deleteBrandColorMix() {
-       List<BrandColorMixResponse> listOfBrandColorMix = brandColorMixService.getBrandColorMixById();
-       assertEquals(2, listOfBrandColorMix.size());
-       assertEquals("Ford Fiesta", listOfBrandColorMix.get(0).getColorMix());
+       List<BrandColorMixResponse> listOfBrandColorMix = brandColorMixService.getAllBrandColorMix();
+       assertEquals(3, listOfBrandColorMix.size());
+       assertEquals("Ford Fiesta", listOfBrandColorMix.get(0).getSpecificCarModel().getBrand());
 
        brandColorMixService.deleteBrandColorMix(1L);
 
-       List<BrandColorMixResponse> listOfBrandColorMixNew = brandColorMixService.getBrandColorMixById();
-       assertEquals(1, listOfBrandColorMixNew.size());
-       assertEquals("Mazda", listOfBrandColorMixNew.get(0).getColorMix());
+       List<BrandColorMixResponse> listOfBrandColorMixNew = brandColorMixService.getAllBrandColorMix();
+       assertEquals(2, listOfBrandColorMixNew.size());
+       assertEquals("Mazda", listOfBrandColorMixNew.get(0).getSpecificCarModel().getBrand());
     }
 }

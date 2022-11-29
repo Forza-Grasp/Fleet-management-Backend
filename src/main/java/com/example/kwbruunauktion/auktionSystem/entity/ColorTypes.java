@@ -27,6 +27,7 @@ public class ColorTypes {
 
   @OneToMany(mappedBy = "colorType")
   @JsonIgnore
+  @ToString.Exclude
   private List<ColorMix> colorMixes;
 
   @CreationTimestamp
