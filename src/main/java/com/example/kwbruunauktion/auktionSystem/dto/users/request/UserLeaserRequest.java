@@ -1,12 +1,15 @@
 package com.example.kwbruunauktion.auktionSystem.dto.users.request;
 
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
+import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,7 +33,7 @@ public class UserLeaserRequest {
     private String zipCode;
     private String country;
 
-
+    private List<SpecificCarModel> viewableCarBrands;
     private Ownership ownership;
 
     public static UserLeaser getUserLeaserEntity(UserLeaserRequest userLeaserRequest) {
@@ -49,6 +52,7 @@ public class UserLeaserRequest {
                 .city(userLeaserRequest.getCity())
                 .zipCode(userLeaserRequest.getZipCode())
                 .country(userLeaserRequest.getCountry())
+                .viewableCarBrands(userLeaserRequest.getViewableCarBrands())
                 .ownership(userLeaserRequest.getOwnership())
                 .build();
     }
@@ -67,6 +71,7 @@ public class UserLeaserRequest {
         this.city = userLeaser.getCity();
         this.zipCode = userLeaser.getZipCode();
         this.country = userLeaser.getCountry();
+        this.viewableCarBrands = userLeaser.getViewableCarBrands();
         this.ownership = userLeaser.getOwnership();
     }
 

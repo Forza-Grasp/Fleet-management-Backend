@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.dto.users.response;
 
+import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
 import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -32,8 +34,9 @@ public class UserLeaserResponse {
     private String zipCode;
     private String country;
 
+    private List<SpecificCarModelResponse> viewableCarBrands;
     private Ownership ownership;
-    private List<SpecificCarModel> viewableCarModels;
+
 
     public UserLeaserResponse(UserLeaser userLeaser){
         this.id = userLeaser.getId();
@@ -49,7 +52,8 @@ public class UserLeaserResponse {
         this.city = userLeaser.getCity();
         this.zipCode = userLeaser.getZipCode();
         this.country = userLeaser.getCountry();
+        this.viewableCarBrands = userLeaser.getViewableCarBrands().stream().map(SpecificCarModelResponse::new).collect(Collectors.toList());
         this.ownership = userLeaser.getOwnership();
-        // this.viewableCarModels = userLeaser.getViewableCarBrands().stream().map();
+
     }
 }
