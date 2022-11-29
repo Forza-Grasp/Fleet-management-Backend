@@ -1,6 +1,7 @@
 package com.example.kwbruunauktion.auktionSystem.service;
 
 import com.example.kwbruunauktion.auktionSystem.dto.BrandColorMixResponse;
+import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorTypes;
@@ -165,5 +166,14 @@ class BrandColorMixServiceTest {
 
     @Test
     void deleteBrandColorMix() {
+       List<BrandColorMixResponse> listOfBrandColorMix = brandColorMixService.getBrandColorMixById();
+       assertEquals(2, listOfBrandColorMix.size());
+       assertEquals("Ford Fiesta", listOfBrandColorMix.get(0).getColorMix());
+
+       brandColorMixService.deleteBrandColorMix(1L);
+
+       List<BrandColorMixResponse> listOfBrandColorMixNew = brandColorMixService.getBrandColorMixById();
+       assertEquals(1, listOfBrandColorMixNew.size());
+       assertEquals("Mazda", listOfBrandColorMixNew.get(0).getColorMix());
     }
 }
