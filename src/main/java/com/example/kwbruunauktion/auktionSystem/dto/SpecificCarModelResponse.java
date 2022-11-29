@@ -1,6 +1,7 @@
 package com.example.kwbruunauktion.auktionSystem.dto;
 
 
+import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
 import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -27,4 +28,6 @@ public class SpecificCarModelResponse {
         this.modelYear = specificCarModel.getModelYear();
     }
 
+    public SpecificCarModelResponse(Ownership ownership) {
+    }
 }

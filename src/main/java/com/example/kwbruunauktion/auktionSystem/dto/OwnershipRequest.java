@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SuperBuilder
 
 public class OwnershipRequest {
 
@@ -35,11 +34,9 @@ public class OwnershipRequest {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm",shape = JsonFormat.Shape.STRING)
     private LocalDateTime updated;
 
-    public OwnershipRequest(long id, String name, String abbreviation, LocalDateTime created, LocalDateTime updated) {
-        this.id = id;
-        this.name = name;
-        this.abbreviation = abbreviation;
-        this.created = created;
-        this.updated = updated;
+    public OwnershipRequest(Ownership ownership) {
+        this.id = ownership.getId();
+        this.name = ownership.getName();
+        this.abbreviation = ownership.getAbbreviation();
     }
 }
