@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/colormix")
+@RequestMapping("/api/color-mix")
 public class ColorMixController {
 
     ColorMixService colorMixService;
