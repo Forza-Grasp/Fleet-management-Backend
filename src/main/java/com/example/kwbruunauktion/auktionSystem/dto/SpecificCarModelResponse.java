@@ -23,6 +23,7 @@ public class SpecificCarModelResponse {
     private String modelYear;
 
     public SpecificCarModelResponse (SpecificCarModel specificCarModel) {
+        this.id = specificCarModel.getId();
         this.brand = specificCarModel.getBrand();
         this.model = specificCarModel.getModel();
         this.modelYear = specificCarModel.getModelYear();

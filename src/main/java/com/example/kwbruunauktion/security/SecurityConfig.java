@@ -1,7 +1,6 @@
 package com.example.kwbruunauktion.security;
 
 
-
 import com.example.kwbruunauktion.security.error.CustomOAuth2AccessDeniedHandler;
 import com.example.kwbruunauktion.security.error.CustomOAuth2AuthenticationEntryPoint;
 import com.nimbusds.jose.JOSEException;
@@ -91,20 +90,38 @@ public class SecurityConfig {
         //Next two lines only required if you plan to do the cookie/session-demo from within this project
         .antMatchers("/session-demo.html").permitAll()
         .antMatchers("/api/cookie/**").permitAll()
-
         //Allow anonymous access to this endpoint
-        //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
+            //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
 
-        //necessary to allow for "nice" JSON Errors
-        .antMatchers("/error").permitAll()
+            //necessary to allow for "nice" JSON Errors
+            .antMatchers("/error").permitAll()
 
-        //.antMatchers("/", "/**").permitAll()
+            //.antMatchers("/", "/**").permitAll()
 
+        .antMatchers(HttpMethod.GET,"/api/color-types").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/color-types/{id}").permitAll()
+        .antMatchers(HttpMethod.DELETE,"/api/color-types/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT,"/api/color-types/{id}").permitAll()
+        .antMatchers(HttpMethod.POST,"/api/color-types/{id}").permitAll()
         .antMatchers(HttpMethod.GET,"/api/cars").hasAnyAuthority("ADMIN","USER")
         .antMatchers(HttpMethod.GET,"/api/cars/all").hasAnyAuthority("ADMIN","USER")
         .antMatchers(HttpMethod.GET,"/api/cars/filter").hasAnyAuthority("ADMIN","USER")
 
+        //SpecificCarModel
+        .antMatchers(HttpMethod.GET, "/api/specificcarmodel").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specificcarmodel/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specificcarmodel/{id}").permitAll()
+        
+        //ColorMix        
+        .antMatchers(HttpMethod.GET, "/api/colormix").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/colormix/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/colormix").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/colormix/{id}").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/colormix/{id}").permitAll()
 
+        .antMatchers(HttpMethod.POST, "/api/specificcarmodel").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/specificcarmodel/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/specificcarmodel/{id}").permitAll()
         // Demonstrates another way to add roles to an endpoint
         // .antMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
         .anyRequest().authenticated());
@@ -156,7 +173,5 @@ public class SecurityConfig {
       throws Exception {
     return authenticationConfiguration.getAuthenticationManager();
   }
-
-
 }
 

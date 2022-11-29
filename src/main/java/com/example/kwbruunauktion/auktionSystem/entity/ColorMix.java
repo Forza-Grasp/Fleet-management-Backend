@@ -1,6 +1,7 @@
 package com.example.kwbruunauktion.auktionSystem.entity;
 
 
+import com.example.kwbruunauktion.auktionSystem.dto.colorMix.ColorMixRequest;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,7 +26,7 @@ public class ColorMix {
   @Column(length = 100, nullable = false)
   private String colorCode;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = CascadeType.MERGE)
   private ColorTypes colorType;
 
   @Column(length = 100, nullable = false)
@@ -39,4 +40,13 @@ public class ColorMix {
 
   @UpdateTimestamp
   private LocalDateTime updated;
+
+
+  public ColorMix(String colorCode, String colorName, ColorTypes colorType){
+    this.colorCode = colorCode;
+    this.colorName = colorName;
+    this.colorType = colorType;
+
+  }
+
 }
