@@ -1,7 +1,6 @@
 package com.example.kwbruunauktion.security;
 
 
-
 import com.example.kwbruunauktion.security.error.CustomOAuth2AccessDeniedHandler;
 import com.example.kwbruunauktion.security.error.CustomOAuth2AuthenticationEntryPoint;
 import com.nimbusds.jose.JOSEException;
@@ -112,6 +111,13 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET, "/api/specificcarmodel").permitAll()
         .antMatchers(HttpMethod.GET, "/api/specificcarmodel/all").permitAll()
         .antMatchers(HttpMethod.GET, "/api/specificcarmodel/{id}").permitAll()
+        
+        //ColorMix        
+        .antMatchers(HttpMethod.GET, "/api/colormix").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/colormix/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/colormix").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/colormix/{id}").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/colormix/{id}").permitAll()
 
         .antMatchers(HttpMethod.POST, "/api/specificcarmodel").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/specificcarmodel/{id}").permitAll()
@@ -167,7 +173,5 @@ public class SecurityConfig {
       throws Exception {
     return authenticationConfiguration.getAuthenticationManager();
   }
-
-
 }
 

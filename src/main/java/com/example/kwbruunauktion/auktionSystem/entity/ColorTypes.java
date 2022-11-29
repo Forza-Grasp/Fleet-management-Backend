@@ -34,4 +34,10 @@ public class ColorTypes {
 
   @UpdateTimestamp
   private LocalDateTime updated;
+
+  public ColorTypes(String type, LocalDateTime created, LocalDateTime updated) {
+    this.type = type;
+    this.created = created;
+    this.updated = updated;
+  }
 }
