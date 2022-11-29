@@ -120,6 +120,20 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.POST, "/api/damageMatrix").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/damageMatrix/{id}").permitAll()
         .antMatchers(HttpMethod.PUT, "/api/damageMatrix").permitAll()
+
+        //SpecificDamage
+        .antMatchers(HttpMethod.GET, "/api/specificDamage").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specificDamage/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specificDamage/{id}").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specificDamage/damageMatrix/{id}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/specificDamage").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/specificDamage/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/specificDamage").permitAll()
+
+
+
+
         //Allow anonymous access to this endpoint
         //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
 

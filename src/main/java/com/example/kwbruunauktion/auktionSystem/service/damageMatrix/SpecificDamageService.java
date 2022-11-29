@@ -17,61 +17,64 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-public class SpecificDamageMatrix {
+public class SpecificDamageService {
 
 
   private final SpecificDamageRepository specificDamageRepository;
   private final DamageMatrixRepository damageMatrixRepository;
 
-  public SpecificDamageMatrix(SpecificDamageRepository specificDamageRepository,
-                              DamageMatrixRepository damageMatrixRepository) {
+  public SpecificDamageService(SpecificDamageRepository specificDamageRepository,
+                               DamageMatrixRepository damageMatrixRepository) {
     this.specificDamageRepository = specificDamageRepository;
     this.damageMatrixRepository = damageMatrixRepository;
   }
 
-  List<SpecificDamageResponse> getAllSpecificDamages() {
+  public List<SpecificDamageResponse> getAllSpecificDamages() {
     List<SpecificDamage> specificDamages = specificDamageRepository.findAll();
     return specificDamages.stream().map(SpecificDamageResponse::new).toList();
   }
 
-  List<SpecificDamageResponse> getAllSpecificDamages(Pageable p) {
+  public List<SpecificDamageResponse> getAllSpecificDamages(Pageable p) {
     Page<SpecificDamage> specificDamages = specificDamageRepository.findAll(p);
     return specificDamages.stream().map(SpecificDamageResponse::new).toList();
   }
 
-  SpecificDamageResponse getSpecificDamageById(@PathVariable long id) {
+  public SpecificDamageResponse getSpecificDamageById(@PathVariable long id) {
     SpecificDamage specificDamage = specificDamageRepository.findById(id).orElseThrow();
     return new SpecificDamageResponse(specificDamage);
   }
 
-  List<SpecificDamageResponse> getAllSpecificDamagesByDamageMatrixId(@PathVariable long id) {
+  public List<SpecificDamageResponse> getAllSpecificDamagesByDamageMatrixId(@PathVariable long id) {
     List<SpecificDamage> specificDamages = specificDamageRepository.findAllByDamageMatrixId(id);
     return specificDamages.stream().map(SpecificDamageResponse::new).toList();
   }
 
   public void addSpecificDamage(SpecificDamageRequest specificDamageRequest) {
-    if (specificDamageRepository.existsById(specificDamageRequest.getId())){
+    if (specificDamageRepository.existsById(specificDamageRequest.getId())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ("SpecificDamage already exists"));
     }
     DamageMatrix damageMatrix = damageMatrixRepository.findById(specificDamageRequest.getMatrixId()).orElseThrow();
-    SpecificDamage specificDamage = SpecificDamageRequest.getSpecificDamageEntity(specificDamageRequest);
-    specificDamage.setDamageMatrix(damageMatrix);
-    specificDamage = specificDamageRepository.save(specificDamage);
-   new SpecificDamageResponse(specificDamage);
+    SpecificDamage specificDamage = SpecificDamage.builder()
+        .damage(specificDamageRequest.getDamage())
+        .price(specificDamageRequest.getPrice())
+        .damageMatrix(damageMatrix)
+        .build();
+    specificDamageRepository.save(specificDamage);
+
   }
 
   public void deleteSpecificDamage(@PathVariable long id) {
-    if (!specificDamageRepository.existsById(id)){
+    if (!specificDamageRepository.existsById(id)) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ("SpecificDamage does not exist"));
     }
     specificDamageRepository.deleteById(id);
   }
 
   public void updateSpecificDamage(SpecificDamageRequest specificDamageRequest) {
-    if (!specificDamageRepository.existsById(specificDamageRequest.getId())){
+    if (!specificDamageRepository.existsById(specificDamageRequest.getId())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ("SpecificDamage does not exist"));
     }
-    if (!damageMatrixRepository.existsById(specificDamageRequest.getMatrixId())){
+    if (!damageMatrixRepository.existsById(specificDamageRequest.getMatrixId())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ("DamageMatrix does not exist"));
     }
     SpecificDamage specificDamage = specificDamageRepository.findById(specificDamageRequest.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Specific Damage not found"));

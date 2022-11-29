@@ -23,6 +23,8 @@ public class SpecificDamageResponse {
 
   private Long matrixId;
 
+  private DamageMatrix damageMatrix;
+
   public SpecificDamageResponse(SpecificDamage s) {
     this.id = s.getId();
     this.damages = s.getDamage();

@@ -101,14 +101,14 @@ class DamageMatrixServiceTest {
   }
 
   @BeforeEach
-  public void setDamageMatrixService() {
+  public void setService() {
     damageMatrixService = new DamageMatrixService(damageMatrixRepository, userBuyerRepository);
   }
 
   @Test
   void getAllDamageMatrix() {
     List<DamageMatrixResponse> damageMatrixResponseList = damageMatrixService.getAllDamageMatrix();
-    assertEquals(3, damageMatrixResponseList.size());
+    assertEquals(3, damageMatrixRepository.count());
   }
 
   @Test

@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SpecificDamageRequest {
@@ -36,6 +38,7 @@ public class SpecificDamageRequest {
     this.damage = specificDamage.getDamage();
     this.price = specificDamage.getPrice();
     this.matrixId = specificDamage.getDamageMatrix().getId();
+    this.damageMatrix = specificDamage.getDamageMatrix();
   }
 
 }
