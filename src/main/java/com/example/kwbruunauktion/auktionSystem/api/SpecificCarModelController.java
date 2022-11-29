@@ -24,7 +24,7 @@ public class SpecificCarModelController {
         return specificCarModelService.getSpecificCarModelById(id);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     List<SpecificCarModelResponse> getAllSpecificCarModels() {return specificCarModelService.getSpecificCarModels();}
 
 

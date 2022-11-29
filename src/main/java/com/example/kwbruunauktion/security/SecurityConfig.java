@@ -106,12 +106,12 @@ public class SecurityConfig {
 
         //SpecificCarModel
         .antMatchers(HttpMethod.GET, "/api/specificcarmodel").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/users/admin/all").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/users/admin/{id}").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specificcarmodel/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specificcarmodel/{id}").permitAll()
 
-        .antMatchers(HttpMethod.POST, "/api/users/admin").permitAll()
-        .antMatchers(HttpMethod.DELETE, "/api/users/admin/{id}").permitAll()
-        .antMatchers(HttpMethod.PUT, "/api/users/admin").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/specificcarmodel").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/specificcarmodel/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/specificcarmodel/{id}").permitAll()
         // Demonstrates another way to add roles to an endpoint
         // .antMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
         .anyRequest().authenticated());
