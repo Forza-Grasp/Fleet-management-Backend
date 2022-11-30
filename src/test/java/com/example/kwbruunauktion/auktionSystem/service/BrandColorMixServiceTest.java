@@ -183,6 +183,29 @@ class BrandColorMixServiceTest {
 
     @Test
     void editBrandColorMix() {
+        List<BrandColorMixResponse> listOfBrandColorMix = brandColorMixService.getAllBrandColorMix();
+        assertEquals(3, listOfBrandColorMix.size());
+        assertEquals("Ford Fiesta", listOfBrandColorMix.get(0).getSpecificCarModel().getBrand());
+        assertEquals("Metallic", listOfBrandColorMix.get(0).getColorMix().getColorType().getType());
+
+        SpecificCarModel specificCarModel3 = SpecificCarModel.builder()
+                .id(3L)
+                .brand("Mercedes")
+                .model("G2A")
+                .modelYear("2022")
+                .build();
+        ColorTypes colorType2 = ColorTypes.builder()
+                .id(2L)
+                .type("Mat")
+                .build();
+
+
+
+        BrandColorMix brandColorMix = BrandColorMix.builder()
+                .id(1L)
+
+                .build();
+        //brandColorMixService.editBrandColorMix();
     }
 
     @Test
