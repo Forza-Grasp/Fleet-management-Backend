@@ -45,7 +45,9 @@ class SpecificCarModelServiceTest {
     }
 
     @BeforeEach
-    public void setSpecificCarModelServiceUp(){specificCarModelService = new SpecificCarModelService(specificCarModelRepository);}
+    public void setSpecificCarModelServiceUp(){
+        specificCarModelService = new SpecificCarModelService(specificCarModelRepository);
+    }
 
     @Test
     void getSpecificCarModelById() {

@@ -1,6 +1,7 @@
 package com.example.kwbruunauktion.security;
 
 
+
 import com.example.kwbruunauktion.security.error.CustomOAuth2AccessDeniedHandler;
 import com.example.kwbruunauktion.security.error.CustomOAuth2AuthenticationEntryPoint;
 import com.nimbusds.jose.JOSEException;
@@ -179,6 +180,17 @@ public class SecurityConfig {
 
 
         // Demonstrates another way to add roles to an endpoint
+        //Ownership
+        .antMatchers(HttpMethod.GET,"/api/ownership").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/ownership/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT,"/api/ownership/{id}").permitAll()
+        .antMatchers(HttpMethod.DELETE,"/api/ownership/{id}").permitAll()
+        .antMatchers(HttpMethod.POST,"/api/ownership").permitAll()
+
+
+
+
+            // Demonstrates another way to add roles to an endpoint
         // .antMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
         .anyRequest().authenticated());
 
@@ -229,5 +241,7 @@ public class SecurityConfig {
       throws Exception {
     return authenticationConfiguration.getAuthenticationManager();
   }
+
+
 }
 

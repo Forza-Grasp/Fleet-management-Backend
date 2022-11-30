@@ -37,7 +37,6 @@ public class Ownership {
     @OneToOne(mappedBy = "ownership")
     private UserLeaser userLeaser;
 
-
     @OneToOne(mappedBy = "ownership")
     private UserBuyer userBuyer;
 
