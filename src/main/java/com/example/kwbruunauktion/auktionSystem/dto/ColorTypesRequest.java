@@ -12,15 +12,18 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class ColorTypesRequest {
+    private Long id;
     private String type;
 
     public static ColorTypes getColorTypesEntity(ColorTypesRequest colorTypesRequest){
         return ColorTypes.builder()
+                .id(colorTypesRequest.getId())
                 .type(colorTypesRequest.type)
                 .build();
     }
 
     public ColorTypesRequest(ColorTypes colorType) {
+        this.id = colorType.getId();
         this.type = colorType.getType();
     }
 }

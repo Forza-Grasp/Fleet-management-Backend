@@ -101,7 +101,7 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET,"/api/color-types").permitAll()
         .antMatchers(HttpMethod.GET,"/api/color-types/{id}").permitAll()
         .antMatchers(HttpMethod.DELETE,"/api/color-types/{id}").permitAll()
-        .antMatchers(HttpMethod.PUT,"/api/color-types/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT,"/api/color-types").permitAll()
         .antMatchers(HttpMethod.POST,"/api/color-types/{id}").permitAll()
         .antMatchers(HttpMethod.GET,"/api/cars").hasAnyAuthority("ADMIN","USER")
         .antMatchers(HttpMethod.GET,"/api/cars/all").hasAnyAuthority("ADMIN","USER")
