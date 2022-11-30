@@ -1,18 +1,12 @@
 package com.example.kwbruunauktion.auktionSystem.dto;
 
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
-import com.example.kwbruunauktion.auktionSystem.entity.UserAdmin;
-import com.example.kwbruunauktion.auktionSystem.entity.UserEconomy;
-import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
-import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
