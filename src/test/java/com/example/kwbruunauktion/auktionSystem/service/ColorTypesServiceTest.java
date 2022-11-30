@@ -105,11 +105,12 @@ class ColorTypesServiceTest {
     void editColorType() {
         ColorTypesRequest colorTypesRequest = new ColorTypesRequest(
                 ColorTypes.builder()
+                .id(1L)
                 .type("Matte")
                 .build()
                 );
 
-        colorTypesService.editColorType(colorTypesRequest,1L);
+        colorTypesService.editColorType(colorTypesRequest);
         assertNotEquals(colorTypesService.getColorTypeById(1L).getType(),"Metallic");
         assertEquals(colorTypesService.getColorTypeById(1L).getType(),"Matte");
 
