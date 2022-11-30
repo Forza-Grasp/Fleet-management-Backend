@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.api.users;
 
+import com.example.kwbruunauktion.auktionSystem.dto.users.request.AddCarBrandToUserRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.request.UserBuyerRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserBuyerResponse;
 import com.example.kwbruunauktion.auktionSystem.service.users.UserBuyerService;
@@ -44,5 +45,9 @@ public class UserBuyerController {
     userBuyerService.deleteUserBuyer(id);
   }
 
+  @PostMapping(value = "/addCarBrand",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public UserBuyerResponse addCarBrandToUserBuyer(@RequestBody AddCarBrandToUserRequest addCarBrandToUserRequest) {
+    return userBuyerService.addCarBrandToUserBuyer(addCarBrandToUserRequest);
+  }
 
 }

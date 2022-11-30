@@ -3,6 +3,7 @@ package com.example.kwbruunauktion.auktionSystem.service.users;
 import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserLeaserResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
+import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.users.UserLeaserRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,12 +22,15 @@ class UserLeaserServiceTest {
     UserLeaserService userLeaserService;
 
     public static UserLeaserRepository userLeaserRepository;
+    public static SpecificCarModelRepository specificCarModelRepository;
 
     static int userLeaserSize;
 
     @BeforeAll
-    public static void setupData(@Autowired UserLeaserRepository userLeaser_Repository) {
+    public static void setupData(@Autowired UserLeaserRepository userLeaser_Repository,
+                                 @Autowired SpecificCarModelRepository specificCarModel_Repository) {
         userLeaserRepository = userLeaser_Repository;
+        specificCarModelRepository = specificCarModel_Repository;
         List<UserLeaser> userLeaserList = List.of(
                 UserLeaser.userLeaserBuilder()
                         .id(1L)
@@ -99,7 +103,7 @@ class UserLeaserServiceTest {
 
     @BeforeEach
     public void setUserLeaserServiceUp() {
-        userLeaserService = new UserLeaserService(userLeaserRepository);
+        userLeaserService = new UserLeaserService(userLeaserRepository, specificCarModelRepository);
     }
 
     @Test

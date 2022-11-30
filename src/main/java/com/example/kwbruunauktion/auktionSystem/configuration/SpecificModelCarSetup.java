@@ -86,10 +86,11 @@ public class SpecificModelCarSetup implements ApplicationRunner {
 
         List<SpecificCarModel> specificCarModelList = Collections.singletonList(specificCarModel1);
         buyer1.setViewableCarBrands(specificCarModelList);
-
+        leaser1.setViewableCarBrands(specificCarModelList);
         specificCarModelRepository.save(specificCarModel1);
         specificCarModelRepository.save(specificCarModel2);
         userBuyerRepository.save(buyer1);
+        userLeaserRepository.save(leaser1);
 
 
     }

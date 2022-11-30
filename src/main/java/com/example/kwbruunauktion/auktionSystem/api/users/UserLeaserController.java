@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.api.users;
 
+import com.example.kwbruunauktion.auktionSystem.dto.users.request.AddCarBrandToUserRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.request.UserLeaserRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserLeaserResponse;
 import com.example.kwbruunauktion.auktionSystem.service.users.UserLeaserService;
@@ -42,5 +43,10 @@ public class UserLeaserController {
   @DeleteMapping("/{id}")
   public void deleteUserLeaser(@PathVariable Long id) {
     userLeaserService.deleteUserLeaser(id);
+  }
+
+  @PostMapping(value = "/addCarBrand",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public UserLeaserResponse addCarBrandToUserLeaser(@RequestBody AddCarBrandToUserRequest addCarBrandToUserRequest) {
+    return userLeaserService.addCarBrandToUserLeaser(addCarBrandToUserRequest);
   }
 }

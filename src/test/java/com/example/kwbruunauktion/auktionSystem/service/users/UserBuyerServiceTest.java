@@ -4,6 +4,7 @@ import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserBuyerResp
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
+import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.users.UserBuyerRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.users.UserLeaserRepository;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,12 +24,15 @@ class UserBuyerServiceTest {
     UserBuyerService userBuyerService;
 
     public static UserBuyerRepository userBuyerRepository;
+    public static SpecificCarModelRepository specificCarModelRepository;
 
     static int userBuyerSize;
 
     @BeforeAll
-    public static void setupData(@Autowired UserBuyerRepository userBuyer_Repository) {
+    public static void setupData(@Autowired UserBuyerRepository userBuyer_Repository,
+                                 @Autowired SpecificCarModelRepository specificCarModel_Repository) {
         userBuyerRepository = userBuyer_Repository;
+        specificCarModelRepository = specificCarModel_Repository;
         List<UserBuyer> userBuyerList = List.of(
                 UserBuyer.userBuyerBuilder()
                         .id(1L)
@@ -101,7 +105,7 @@ class UserBuyerServiceTest {
 
     @BeforeEach
     public void setUserBuyerService(){
-        userBuyerService = new UserBuyerService(userBuyerRepository);
+        userBuyerService = new UserBuyerService(userBuyerRepository,specificCarModelRepository);
     }
 
     @Test

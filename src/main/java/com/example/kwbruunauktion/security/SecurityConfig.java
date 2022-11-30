@@ -104,6 +104,7 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET, "/api/users/leaser").permitAll()
         .antMatchers(HttpMethod.GET, "/api/users/leaser/{id}").permitAll()
 
+        .antMatchers(HttpMethod.POST, "/api/users/leaser/addCarBrand").permitAll()
         .antMatchers(HttpMethod.POST, "/api/users/leaser").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/users/leaser/{id}").permitAll()
         .antMatchers(HttpMethod.PUT, "/api/users/leaser").permitAll()
@@ -113,6 +114,7 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET, "/api/users/buyer/{id}").permitAll()
 
         .antMatchers(HttpMethod.POST, "/api/users/buyer").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/users/buyer/addCarBrand").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/users/buyer/{id}").permitAll()
         .antMatchers(HttpMethod.PUT, "/api/users/buyer").permitAll()
 

@@ -52,7 +52,9 @@ public class UserLeaserResponse {
         this.city = userLeaser.getCity();
         this.zipCode = userLeaser.getZipCode();
         this.country = userLeaser.getCountry();
-        this.viewableCarBrands = userLeaser.getViewableCarBrands().stream().map(SpecificCarModelResponse::new).collect(Collectors.toList());
+        if (userLeaser.getViewableCarBrands() != null) {
+            this.viewableCarBrands = userLeaser.getViewableCarBrands().stream().map(SpecificCarModelResponse::new).toList();
+        }
         this.ownership = userLeaser.getOwnership();
 
     }
