@@ -108,16 +108,16 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET,"/api/cars/filter").hasAnyAuthority("ADMIN","USER")
 
         //SpecificCarModel
-        .antMatchers(HttpMethod.GET, "/api/specificcarmodel").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/specificcarmodel/all").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/specificcarmodel/{id}").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specific-car-model").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specific-car-model/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specific-car-model/{id}").permitAll()
         
         //ColorMix        
-        .antMatchers(HttpMethod.GET, "/api/colormix").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/colormix/{id}").permitAll()
-        .antMatchers(HttpMethod.POST, "/api/colormix").permitAll()
-        .antMatchers(HttpMethod.PUT, "/api/colormix").permitAll()
-        .antMatchers(HttpMethod.DELETE, "/api/colormix/{id}").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/color-mix").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/color-mix/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/color-mix").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/color-mix").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/color-mix/{id}").permitAll()
 
         .antMatchers(HttpMethod.POST, "/api/specificcarmodel").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/specificcarmodel/{id}").permitAll()
