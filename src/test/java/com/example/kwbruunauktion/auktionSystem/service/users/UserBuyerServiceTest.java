@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.service.users;
 
+import com.example.kwbruunauktion.auktionSystem.dto.users.request.UserBuyerRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserBuyerResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
@@ -98,21 +99,26 @@ class UserBuyerServiceTest {
                                 .build())
                         .build());
 
+
         userBuyerRepository.saveAll(userBuyerList);
         userBuyerSize = userBuyerRepository.findAll().size();
 
     }
 
     @BeforeEach
-    public void setUserBuyerService(){
-        userBuyerService = new UserBuyerService(userBuyerRepository,specificCarModelRepository);
+    public void setUserBuyerService() {
+        userBuyerService = new UserBuyerService(userBuyerRepository, specificCarModelRepository);
     }
 
     @Test
     void getAllUserBuyers() {
         int actualResult = userBuyerRepository.findAll().size();
         int expectedResult = userBuyerSize;
+
+        int actualResultService = userBuyerService.getAllUserBuyers().size();
+
         assertEquals(expectedResult, actualResult);
+        assertEquals(expectedResult, actualResultService);
     }
 
     @Test
@@ -153,8 +159,14 @@ class UserBuyerServiceTest {
         int expectedResult = userBuyerSize + 1;
         String actualFirstName = addedUserBuyer.getFirstName();
 
+        int actualResultService = userBuyerService.getAllUserBuyers().size();
+        String actualFirstNameService = userBuyerService.getUserBuyerById(4L).getFirstName();
+
+
         assertEquals(expectedResult, actualResult);
         assertEquals(expectedFirstName, actualFirstName);
+        assertEquals(expectedResult, actualResultService);
+        assertEquals(expectedFirstName, actualFirstNameService);
     }
 
     @Test
@@ -164,25 +176,26 @@ class UserBuyerServiceTest {
         String newFirstName = "Karl";
         Optional<UserBuyer> userBuyerToEdit = userBuyerRepository.findById(1L);
 
+
         if (userBuyerToEdit.isPresent()) {
             UserBuyer userBuyer = userBuyerToEdit.get();
 
             userBuyer.setFirstName(newFirstName);
-            userBuyerRepository.save(userBuyer);
+            UserBuyerRequest userBuyerRequest = new UserBuyerRequest(userBuyer);
+            userBuyerService.editUserBuyer(userBuyerRequest);
         }
 
-        String firstNameAfter = userBuyerRepository.findAll().get(0).getFirstName();
+        String firstNameAfter = userBuyerRepository.findById(1L).get().getFirstName();
         assertNotEquals(firstNameBefore, firstNameAfter);
         assertEquals(newFirstName, firstNameAfter);
     }
 
     @Test
     void deleteUserBuyer() {
-        UserBuyer findUserBuyer = userBuyerRepository.findAll().get(0);
-        Long id = findUserBuyer.getId();
-        userBuyerRepository.deleteById(id);
+        userBuyerService.deleteUserBuyer(1L);
         int actualResult = userBuyerRepository.findAll().size();
         int expectedResult = userBuyerSize - 1;
         assertEquals(expectedResult, actualResult);
+
     }
 }
