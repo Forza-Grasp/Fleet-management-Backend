@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.service.users;
 
+import com.example.kwbruunauktion.auktionSystem.dto.users.request.ResetPasswordRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.request.UserAdminRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserAdminResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.List;
 
@@ -128,10 +130,6 @@ class UserAdminServiceTest {
     userAdminService.addUserAdmin(userAdminRequest);
     assertEquals(5, userAdminRepository.count());
 
-
-
-
-
   }
 
   @Test
@@ -148,5 +146,16 @@ class UserAdminServiceTest {
     UserAdminRequest userAdminRequest = new UserAdminRequest(foundUserAdmin);
     userAdminService.updateUserAdmin(userAdminRequest);
     assertEquals("Malthe", userAdminRepository.findById(1L).get().getFirstName());
+  }
+  @Test
+  void changePassword(){
+    assertTrue(BCrypt.checkpw("1234", userAdminRepository.findById(1L).get().getPassword()));
+    ResetPasswordRequest request
+        = ResetPasswordRequest.builder()
+        .userName("peter_parker_admin")
+        .newPassword("12345")
+        .build();
+    userAdminService.resetPassword(request);
+    assertTrue(BCrypt.checkpw("12345", userAdminRepository.findById(1L).get().getPassword()));
   }
 }

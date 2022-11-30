@@ -5,6 +5,7 @@ import com.example.kwbruunauktion.auktionSystem.dto.users.request.UserAdminReque
 import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserAdminResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserAdmin;
 import com.example.kwbruunauktion.auktionSystem.repository.users.UserAdminRepository;
+import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import com.example.kwbruunauktion.security.repository.UserWithRolesRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -84,7 +85,9 @@ public class UserAdminService {
   }
 
   public void resetPassword(ResetPasswordRequest resetPasswordRequest) {
-
+    UserWithRoles user = userWithRolesRepository.findByUsername(resetPasswordRequest.getUserName()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    user.setPassword(resetPasswordRequest.getNewPassword());
+    userWithRolesRepository.save(user);
 
   }
 

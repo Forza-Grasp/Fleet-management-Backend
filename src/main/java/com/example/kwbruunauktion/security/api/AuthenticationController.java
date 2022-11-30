@@ -2,6 +2,8 @@ package com.example.kwbruunauktion.security.api;
 
 
 
+import com.example.kwbruunauktion.auktionSystem.dto.users.request.ResetPasswordRequest;
+import com.example.kwbruunauktion.auktionSystem.service.users.UserAdminService;
 import com.example.kwbruunauktion.security.dto.LoginRequest;
 import com.example.kwbruunauktion.security.dto.LoginResponse;
 import com.example.kwbruunauktion.security.entity.UserWithRoles;
@@ -37,12 +39,15 @@ public class AuthenticationController {
   @Value("${app.token-expiration}")
   private long tokenExpiration;
   private final AuthenticationManager authenticationManager;
+  private final UserAdminService userAdminService;
 
   @Autowired
   JwtEncoder encoder;
 
-  public AuthenticationController(AuthenticationManager authenticationManager) {
+  public AuthenticationController(AuthenticationManager authenticationManager,
+                                  UserAdminService userAdminService) {
     this.authenticationManager = authenticationManager;
+    this.userAdminService = userAdminService;
   }
 
   @PostMapping("login")
@@ -80,5 +85,10 @@ public class AuthenticationController {
     }
   }
 
+  @PatchMapping(value = "reset-password")
+  public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
+    userAdminService.resetPassword(resetPasswordRequest);
+    return ResponseEntity.ok().body("Password reset");
+  }
 
 }

@@ -81,6 +81,7 @@ public class SecurityConfig {
     http.authorizeHttpRequests((authorize) -> authorize
         //Obviously we need to be able to login without being logged in :-)
         .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+        .antMatchers(HttpMethod.PATCH, "/api/auth/reset-password").permitAll()
 
         //Required in order to use the h2-console
         .antMatchers("/h2*/**").permitAll()

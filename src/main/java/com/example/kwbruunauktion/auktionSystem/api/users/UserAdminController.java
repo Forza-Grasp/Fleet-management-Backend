@@ -51,10 +51,5 @@ public class UserAdminController {
   public void updateUserAdmin(@RequestBody UserAdminRequest userAdminRequest) {
     userAdminService.updateUserAdmin(userAdminRequest);
   }
-  @PatchMapping(value = "reset-password")
-  public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
-
-    return ResponseEntity.ok().body("Password reset");
-  }
 
 }
