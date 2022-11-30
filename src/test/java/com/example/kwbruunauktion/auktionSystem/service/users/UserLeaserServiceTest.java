@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.service.users;
 
+import com.example.kwbruunauktion.auktionSystem.dto.users.request.UserLeaserRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserLeaserResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
@@ -110,6 +111,10 @@ class UserLeaserServiceTest {
     void getAllUserLeasers() {
         int actualResult = userLeaserRepository.findAll().size();
         int expectedResult = userLeaserSize;
+
+        int actualResultService = userLeaserService.getAllUserLeasers().size();
+
+        assertEquals(expectedResult, actualResultService);
         assertEquals(expectedResult, actualResult);
 
     }
@@ -152,8 +157,13 @@ class UserLeaserServiceTest {
         int expectedResult = userLeaserSize + 1;
         String actualFirstName = addedUserLeaser.getFirstName();
 
+        int actualResultService = userLeaserService.getAllUserLeasers().size();
+        String actualFirstNameService = userLeaserService.getUserLeaserById(4L).getFirstName();
+
         assertEquals(expectedResult, actualResult);
         assertEquals(expectedFirstName, actualFirstName);
+        assertEquals(expectedResult, actualResultService);
+        assertEquals(expectedFirstName, actualFirstNameService);
 
     }
 
@@ -169,7 +179,8 @@ class UserLeaserServiceTest {
             UserLeaser userLeaser = userLeaserToEdit.get();
 
             userLeaser.setFirstName(newFirstName);
-            userLeaserRepository.save(userLeaser);
+            UserLeaserRequest userLeaserRequest = new UserLeaserRequest(userLeaser);
+            userLeaserService.editUserLeaser(userLeaserRequest);
         }
 
         String firstNameAfter = userLeaserRepository.findAll().get(0).getFirstName();
@@ -180,8 +191,7 @@ class UserLeaserServiceTest {
 
     @Test
     void deleteUserLeaser() {
-        UserLeaser userLeaserToDelete = userLeaserRepository.findAll().get(0);
-        userLeaserRepository.delete(userLeaserToDelete);
+        userLeaserService.deleteUserLeaser(1L);
         int actualResult = userLeaserRepository.findAll().size();
         int expectedResult = userLeaserSize - 1;
         assertEquals(expectedResult, actualResult);
