@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 
 public class OwnershipRepsonse {
 
-    private long id;
+    private Long id;
 
     private String name;
 
