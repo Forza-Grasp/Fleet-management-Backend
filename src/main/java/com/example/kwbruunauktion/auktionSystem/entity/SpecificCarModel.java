@@ -44,13 +44,4 @@ public class SpecificCarModel {
   @OneToOne(mappedBy = "specificCarModel")
   private BrandColorMix brandColorMix;
 
-
-  public void addUserBuyer(UserBuyer u) {
-    userBuyer.add(u);
-    u.getViewableCarBrands().add(this);
-  }
-  public void addUserLeaser(UserLeaser u) {
-    this.userLeaser.add(u);
-    u.getViewableCarBrands().add(this);
-  }
 }
