@@ -1,9 +1,11 @@
 package com.example.kwbruunauktion.auktionSystem.service.users;
 
+import com.example.kwbruunauktion.auktionSystem.dto.users.request.ResetPasswordRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.request.UserAdminRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserAdminResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserAdmin;
 import com.example.kwbruunauktion.auktionSystem.repository.users.UserAdminRepository;
+import com.example.kwbruunauktion.security.repository.UserWithRolesRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -16,9 +18,11 @@ import java.util.List;
 @Service
 public class UserAdminService {
   private final UserAdminRepository userAdminRepository;
+  private final UserWithRolesRepository userWithRolesRepository;
 
-  public UserAdminService(UserAdminRepository userAdminRepository) {
+  public UserAdminService(UserAdminRepository userAdminRepository, UserWithRolesRepository userWithRolesRepository) {
     this.userAdminRepository = userAdminRepository;
+    this.userWithRolesRepository = userWithRolesRepository;
   }
 
   public List<UserAdminResponse> getAllUserAdmin() {
@@ -38,7 +42,7 @@ public class UserAdminService {
     return new UserAdminResponse(foundUserAdmin);
   }
 
-  public void addUserAdmin(UserAdminRequest userAdminRequest) {
+  public UserAdminResponse addUserAdmin(UserAdminRequest userAdminRequest) {
     if (userAdminRepository.existsById(userAdminRequest.getId())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User with this ID already exist");
     }if (userAdminRepository.existsByUsername(userAdminRequest.getUserName())) {
@@ -46,7 +50,7 @@ public class UserAdminService {
     }
     UserAdmin newUserAdmin = UserAdminRequest.getUserAdminEntity(userAdminRequest);
     newUserAdmin = userAdminRepository.save(newUserAdmin);
-    new UserAdminResponse(newUserAdmin);
+    return new UserAdminResponse(newUserAdmin);
   }
 
   public void deleteUserAdmin(@PathVariable Long id){
@@ -79,6 +83,9 @@ public class UserAdminService {
     userAdminRepository.save(userAdmin);
   }
 
+  public void resetPassword(ResetPasswordRequest resetPasswordRequest) {
 
+
+  }
 
 }

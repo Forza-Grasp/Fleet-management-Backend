@@ -5,6 +5,7 @@ import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserAdminResp
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserAdmin;
 import com.example.kwbruunauktion.auktionSystem.repository.users.UserAdminRepository;
+import com.example.kwbruunauktion.security.repository.UserWithRolesRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,10 +23,13 @@ class UserAdminServiceTest {
   public UserAdminService userAdminService;
 
   public static UserAdminRepository userAdminRepository;
+  public static UserWithRolesRepository userWithRolesRepository;
 
   @BeforeAll
-  public static void setupData(@Autowired UserAdminRepository userAdmin_Repository){
+  public static void setupData(@Autowired UserAdminRepository userAdmin_Repository,
+                               @Autowired UserWithRolesRepository userWithRoles_Repository) {
     userAdminRepository = userAdmin_Repository;
+    userWithRolesRepository = userWithRoles_Repository;
     List<UserAdmin> userAdminList = List.of(
         UserAdmin.userAdminBuilder()
             .id(1L)
@@ -89,7 +93,7 @@ class UserAdminServiceTest {
 
   @BeforeEach
   public void setUserAdminService() {
-    userAdminService = new UserAdminService(userAdminRepository);
+    userAdminService = new UserAdminService(userAdminRepository, userWithRolesRepository);
   }
 
   @Test

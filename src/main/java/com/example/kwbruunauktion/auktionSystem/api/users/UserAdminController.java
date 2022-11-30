@@ -3,8 +3,10 @@ package com.example.kwbruunauktion.auktionSystem.api.users;
 import com.example.kwbruunauktion.auktionSystem.dto.users.request.UserAdminRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserAdminResponse;
 import com.example.kwbruunauktion.auktionSystem.service.users.UserAdminService;
+import com.example.kwbruunauktion.auktionSystem.dto.users.request.ResetPasswordRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,8 +38,8 @@ public class UserAdminController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public void addUserAdmin(@RequestBody UserAdminRequest userAdminRequest) {
-    userAdminService.addUserAdmin(userAdminRequest);
+  public UserAdminResponse addUserAdmin(@RequestBody UserAdminRequest userAdminRequest) {
+    return userAdminService.addUserAdmin(userAdminRequest);
   }
 
   @DeleteMapping("/{id}")
@@ -49,6 +51,10 @@ public class UserAdminController {
   public void updateUserAdmin(@RequestBody UserAdminRequest userAdminRequest) {
     userAdminService.updateUserAdmin(userAdminRequest);
   }
+  @PatchMapping(value = "reset-password")
+  public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
 
+    return ResponseEntity.ok().body("Password reset");
+  }
 
 }
