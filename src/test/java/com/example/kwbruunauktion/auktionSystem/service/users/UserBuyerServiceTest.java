@@ -1,8 +1,10 @@
 package com.example.kwbruunauktion.auktionSystem.service.users;
 
+import com.example.kwbruunauktion.auktionSystem.dto.users.request.AddCarBrandToUserRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.request.UserBuyerRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserBuyerResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
+import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
 import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepository;
@@ -197,5 +199,24 @@ class UserBuyerServiceTest {
         int expectedResult = userBuyerSize - 1;
         assertEquals(expectedResult, actualResult);
 
+    }
+
+    @Test
+    void addCarBrandToUserBuyer(){
+        SpecificCarModel specificCarModel = SpecificCarModel.builder()
+            .id(1L)
+            .model("model1")
+            .brand("brand1")
+            .modelYear("2010")
+            .build();
+        specificCarModelRepository.save(specificCarModel);
+        AddCarBrandToUserRequest request = AddCarBrandToUserRequest.builder()
+            .carBrandId(specificCarModel.getId())
+            .userId(1L)
+            .build();
+        userBuyerService.addCarBrandToUserBuyer(request);
+
+        assertNotEquals(0, userBuyerRepository.findById(1L).get().getViewableCarBrands().size());
+        assertEquals(1, userBuyerRepository.findById(1L).get().getViewableCarBrands().size());
     }
 }
