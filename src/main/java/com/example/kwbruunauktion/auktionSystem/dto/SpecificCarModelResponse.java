@@ -28,7 +28,4 @@ public class SpecificCarModelResponse {
         this.model = specificCarModel.getModel();
         this.modelYear = specificCarModel.getModelYear();
     }
-
-    public SpecificCarModelResponse(Ownership ownership) {
-    }
 }
