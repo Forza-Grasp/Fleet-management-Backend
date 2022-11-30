@@ -48,8 +48,8 @@ public class UserLeaserService {
     }
 
     // edit user leaser
-    public void editUserLeaser(UserLeaserRequest userLeaserRequest, Long id) {
-        UserLeaser userLeaser = userLeaserRepository.findById(id).orElseThrow(() -> new RuntimeException("User leaser with this ID does not exist"));
+    public void editUserLeaser(UserLeaserRequest userLeaserRequest) {
+        UserLeaser userLeaser = userLeaserRepository.findById(userLeaserRequest.getId()).orElseThrow(() -> new RuntimeException("User leaser with this ID does not exist"));
 
         userLeaser.setEmail(userLeaserRequest.getEmail());
         userLeaser.setUsername(userLeaserRequest.getUsername());

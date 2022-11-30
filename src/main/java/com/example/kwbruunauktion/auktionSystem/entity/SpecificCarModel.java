@@ -31,13 +31,13 @@ public class SpecificCarModel {
   @Column(length = 100, nullable = false)
   private String modelYear;
 
-  @JoinTable(name = "specificCarModelMembers", joinColumns = @JoinColumn(name = "specificCarModel_id",columnDefinition = "varchar(255) default 'no value'"), inverseJoinColumns = @JoinColumn(name = "userLeaser_id",columnDefinition = "varchar(255) default 'no value'"))
-  @ManyToMany
+
+
+  @ManyToMany(mappedBy = "viewableCarBrands")
   @ToString.Exclude
   private List<UserBuyer> userBuyer;
 
-  @JoinTable(name = "specificCarModelMembers", joinColumns = @JoinColumn(name = "specificCarModel_id",columnDefinition = "varchar(255) default 'no value'"), inverseJoinColumns = @JoinColumn(name = "userLeaser_id",columnDefinition = "varchar(255) default 'no value'"))
-  @ManyToMany
+  @ManyToMany(mappedBy = "viewableCarBrands")
   @ToString.Exclude
   private List<UserLeaser> userLeaser;
 

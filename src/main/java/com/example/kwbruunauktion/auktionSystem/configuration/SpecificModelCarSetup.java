@@ -13,6 +13,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -37,9 +38,9 @@ public class SpecificModelCarSetup implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         UserBuyer buyer1 = UserBuyer.userBuyerBuilder()
-                .user("buyer1")
+                .user("buyer10")
                 .password("buyer")
-                .email("buyer@one.dk")
+                .email("buyer@ten.dk")
                 .firstName("Mo")
                 .lastName("Adel")
                 .phoneNumber("12345678")
@@ -52,14 +53,11 @@ public class SpecificModelCarSetup implements ApplicationRunner {
                 .companyEuVatNumber("12345678")
                 .country("Denmark")
                 .build();
-        userBuyerRepository.save(buyer1);
-        List<UserBuyer> userBuyerList = new ArrayList<>();
-        userBuyerList.add(buyer1);
 
         UserLeaser leaser1 = UserLeaser.userLeaserBuilder()
-                .user("leaser1")
+                .user("leaser10")
                 .password("buyer")
-                .email("leaser@one.dk")
+                .email("leaser@eleven.dk")
                 .firstName("Simon")
                 .lastName("Igild")
                 .phoneNumber("12345678")
@@ -70,18 +68,14 @@ public class SpecificModelCarSetup implements ApplicationRunner {
                 .addressLine2("Vej 2")
                 .companyName("Mo's Cars")
                 .country("Denmark")
-
                 .build();
         userLeaserRepository.save(leaser1);
-        List<UserLeaser> listOfLeasers = new ArrayList<>();
-        listOfLeasers.add(leaser1);
+        userBuyerRepository.save(buyer1);
 
         SpecificCarModel specificCarModel1 = SpecificCarModel.builder()
                 .brand("Ford Fiesta")
                 .model("S10")
                 .modelYear("2001")
-                .userLeaser(listOfLeasers)
-                .userBuyer(userBuyerList)
                 .build();
 
         SpecificCarModel specificCarModel2 = SpecificCarModel.builder()
@@ -90,8 +84,13 @@ public class SpecificModelCarSetup implements ApplicationRunner {
                 .modelYear("2008")
                 .build();
 
+        List<SpecificCarModel> specificCarModelList = Collections.singletonList(specificCarModel1);
+        buyer1.setViewableCarBrands(specificCarModelList);
+
         specificCarModelRepository.save(specificCarModel1);
         specificCarModelRepository.save(specificCarModel2);
+        userBuyerRepository.save(buyer1);
+
 
     }
 }

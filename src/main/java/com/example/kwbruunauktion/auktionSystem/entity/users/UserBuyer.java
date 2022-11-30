@@ -48,7 +48,9 @@ public class UserBuyer extends UserWithRoles {
   @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'no value'")
   private String country;
 
-  @JoinTable(name = "viewableCarBrands")
+  @JoinTable(name = "viewableCarBrands_userBuyer",
+      joinColumns = @JoinColumn(name = "userBuyer_id"),
+      inverseJoinColumns = @JoinColumn(name = "specificCarModel_id"))
   @ManyToMany(cascade = CascadeType.ALL)
   @ToString.Exclude
   List<SpecificCarModel> viewableCarBrands;
@@ -73,4 +75,5 @@ public class UserBuyer extends UserWithRoles {
     this.ownership = ownership;
     getRoles().add(Role.BUYER);
   }
+
 }

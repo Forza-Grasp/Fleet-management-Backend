@@ -2,7 +2,6 @@ package com.example.kwbruunauktion.auktionSystem.api.damageMatrix;
 
 import com.example.kwbruunauktion.auktionSystem.dto.damageMatrix.request.DamageMatrixRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.damageMatrix.response.DamageMatrixResponse;
-import com.example.kwbruunauktion.auktionSystem.entity.damageMatrix.DamageMatrix;
 import com.example.kwbruunauktion.auktionSystem.service.damageMatrix.DamageMatrixService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;

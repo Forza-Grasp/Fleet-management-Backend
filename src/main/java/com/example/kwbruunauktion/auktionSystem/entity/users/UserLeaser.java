@@ -48,8 +48,10 @@ public class UserLeaser extends UserWithRoles {
     @Column(length = 100, nullable = false,columnDefinition = "varchar(255) default 'no value'")
     private String country;
 
-    @JoinTable(name = "viewableCarBrands")
-    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "viewableCarBrands_userLeaser",
+        joinColumns = @JoinColumn(name = "userLeaser_id"),
+        inverseJoinColumns = @JoinColumn(name = "specificCarModel_id"))
+    @ManyToMany
     @ToString.Exclude
     List<SpecificCarModel> viewableCarBrands;
 

@@ -5,6 +5,7 @@ import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserBuyerResp
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
 import com.example.kwbruunauktion.auktionSystem.repository.users.UserBuyerRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class UserBuyerService {
     }
 
     // View user buyer by id
-    public UserBuyerResponse getUserBuyerById(Long id) {
+    public UserBuyerResponse getUserBuyerById(@PathVariable Long id) {
         if (userBuyerRepository.existsById(id)) {
             return new UserBuyerResponse(userBuyerRepository.findById(id).orElseThrow(() -> new RuntimeException("User buyer not found")));
         } else {
@@ -47,8 +48,8 @@ public class UserBuyerService {
     }
 
     // Edit user buyer
-    public void editUserBuyer(UserBuyerRequest userBuyerRequest, Long id) {
-        UserBuyer userBuyer = userBuyerRepository.findById(id).orElseThrow(() -> new RuntimeException("User buyer with this ID does not exist"));
+    public void editUserBuyer(UserBuyerRequest userBuyerRequest) {
+        UserBuyer userBuyer = userBuyerRepository.findById(userBuyerRequest.getId()).orElseThrow(() -> new RuntimeException("User buyer with this ID does not exist"));
 
         userBuyer.setEmail(userBuyerRequest.getEmail());
         userBuyer.setUsername(userBuyerRequest.getUsername());

@@ -100,6 +100,21 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.DELETE, "/api/users/admin/{id}").permitAll()
         .antMatchers(HttpMethod.PUT, "/api/users/admin").permitAll()
 
+        //userLeaser
+        .antMatchers(HttpMethod.GET, "/api/users/leaser").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/users/leaser/{id}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/users/leaser").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/users/leaser/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/users/leaser").permitAll()
+
+        //userBuyer
+        .antMatchers(HttpMethod.GET, "/api/users/buyer").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/users/buyer/{id}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/users/buyer").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/users/buyer/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/users/buyer").permitAll()
 
         //userEconomy
         .antMatchers(HttpMethod.GET, "/api/users/economy").permitAll()
