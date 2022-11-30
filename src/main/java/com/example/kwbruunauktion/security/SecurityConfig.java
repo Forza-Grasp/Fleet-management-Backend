@@ -116,7 +116,7 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET, "/api/colormix").permitAll()
         .antMatchers(HttpMethod.GET, "/api/colormix/{id}").permitAll()
         .antMatchers(HttpMethod.POST, "/api/colormix").permitAll()
-        .antMatchers(HttpMethod.PUT, "/api/colormix/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/colormix").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/colormix/{id}").permitAll()
 
         .antMatchers(HttpMethod.POST, "/api/specificcarmodel").permitAll()

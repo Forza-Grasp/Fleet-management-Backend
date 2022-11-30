@@ -42,8 +42,9 @@ public class ColorMixService {
         return new ColorMixResponse(tempColorMix);
     }
 
-    public void editColorMix(ColorMixRequest color, Long id) {
-        ColorMix foundColorMix = colorMixRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "ColorMix not found"));
+    public void editColorMix(ColorMixRequest color) {
+        ColorMix foundColorMix = colorMixRepository.findById(color.getId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "ColorMix not found"));
+
         foundColorMix.setColorCode(color.getColorCode());
         foundColorMix.setColorName(color.getColorName());
         foundColorMix.setColorType(colorTypesRepository.getReferenceById(color.getColorTypeId()));

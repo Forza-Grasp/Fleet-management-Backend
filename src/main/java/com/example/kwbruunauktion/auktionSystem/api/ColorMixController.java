@@ -36,9 +36,9 @@ public class ColorMixController {
         return colorMixService.addColorMix(colorMix);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Boolean> editColorMix(@RequestBody ColorMixRequest color, @PathVariable Long id){
-        colorMixService.editColorMix(color, id);
+    @PutMapping
+    public ResponseEntity<Boolean> editColorMix(@RequestBody ColorMixRequest color){
+        colorMixService.editColorMix(color);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 

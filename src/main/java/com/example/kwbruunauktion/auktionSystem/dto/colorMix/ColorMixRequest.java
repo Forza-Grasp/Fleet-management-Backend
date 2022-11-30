@@ -22,6 +22,7 @@ public class ColorMixRequest {
 
     public static ColorMix getColorMixEntity(ColorMixRequest colorMix) {
         return ColorMix.builder()
+                .id(colorMix.getId())
                 .colorCode(colorMix.getColorCode())
                 .colorName(colorMix.getColorName())
                 .colorType(ColorTypes.builder().id(colorMix.getColorTypeId()).build())
@@ -30,6 +31,7 @@ public class ColorMixRequest {
     }
 
     public ColorMixRequest(ColorMix colorMix){
+        this.id = colorMix.getId();
         this.colorCode = colorMix.getColorCode();
         this.colorTypeId = colorMix.getColorType().getId();
         this.colorName = colorMix.getColorName();
