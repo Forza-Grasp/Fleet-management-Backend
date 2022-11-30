@@ -39,12 +39,14 @@ public class ColorTypesService {
         );
     }
 
-    public ColorTypesResponse editColorType(ColorTypesRequest colorTypesRequest, Long id){
+    public ColorTypesResponse editColorType(ColorTypesRequest colorTypesRequest){
         ColorTypes foundColorType = colorTypesRepository.
-                findById(id).
-                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Color type with id: "+id+" could not be found"));
+                findById(colorTypesRequest.getId()).
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Color type with id: " + colorTypesRequest.getId() + " could not be found"));
 
-        foundColorType.setType(colorTypesRequest.getType());
+        if (colorTypesRequest.getType() != null) {
+            foundColorType.setType(colorTypesRequest.getType());
+        }
         foundColorType.setUpdated(LocalDateTime.now());
         colorTypesRepository.save(foundColorType);
         return new ColorTypesResponse(foundColorType);
