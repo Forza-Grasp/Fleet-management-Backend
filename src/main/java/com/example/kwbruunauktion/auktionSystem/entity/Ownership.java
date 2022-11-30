@@ -1,6 +1,8 @@
 package com.example.kwbruunauktion.auktionSystem.entity;
 
+import com.example.kwbruunauktion.auktionSystem.entity.users.UserAdmin;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
+import com.example.kwbruunauktion.auktionSystem.entity.users.UserEconomy;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
 import lombok.*;
 

@@ -42,6 +42,7 @@ public class Campaign {
     private List<LcdvCodes> lcdvCodes;
 
     @OneToMany(mappedBy = "campaign")
+    @ToString.Exclude
     private List<CampaignBid> campaignBids;
 
     @OneToMany(cascade = CascadeType.ALL)
