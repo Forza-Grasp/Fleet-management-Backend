@@ -13,6 +13,9 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
+import java.util.Collections;
+import java.util.List;
+
 @Controller
 public class BrandColorMixSetup implements ApplicationRunner {
 
@@ -38,19 +41,16 @@ public class BrandColorMixSetup implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         SpecificCarModel specificCarModel1 = SpecificCarModel.builder()
-                .id(1L)
                 .brand("Ford Fiesta")
                 .model("S10")
                 .modelYear("2008")
                 .build();
         SpecificCarModel specificCarModel2 = SpecificCarModel.builder()
-                .id(2L)
                 .brand("Mazda")
                 .model("F5")
                 .modelYear("2015")
                 .build();
         SpecificCarModel specificCarModel3 = SpecificCarModel.builder()
-                .id(3L)
                 .brand("Mercedes")
                 .model("G2A")
                 .modelYear("2022")
@@ -61,15 +61,12 @@ public class BrandColorMixSetup implements ApplicationRunner {
         specificCarModelRepository.save(specificCarModel3);
 
         ColorTypes colorType1 = ColorTypes.builder()
-                .id(1L)
                 .type("Metallic")
                 .build();
         ColorTypes colorType2 = ColorTypes.builder()
-                .id(2L)
                 .type("Mat")
                 .build();
         ColorTypes colorType3 = ColorTypes.builder()
-                .id(3L)
                 .type("Shiny")
                 .build();
         colorTypesRepository.save(colorType1);
@@ -91,28 +88,28 @@ public class BrandColorMixSetup implements ApplicationRunner {
                 .colorName("Burgundy 1998 Opel")
                 .colorType(colorType2)
                 .build();
+
         colorMixRepository.save(colorMix1);
         colorMixRepository.save(colorMix2);
         colorMixRepository.save(colorMix3);
 
+
         BrandColorMix brandColorMix1 = BrandColorMix.builder()
-                .id(1L)
                 .specificCarModel(specificCarModel1)
                 .colorMix(colorMix1)
                 .build();
         BrandColorMix brandColorMix2 = BrandColorMix.builder()
-                .id(2L)
-                .specificCarModel(specificCarModel2)
                 .colorMix(colorMix2)
                 .build();
         BrandColorMix brandColorMix3 = BrandColorMix.builder()
-                .id(3L)
-                .specificCarModel(specificCarModel3)
                 .colorMix(colorMix3)
+                .specificCarModel(specificCarModel1)
                 .build();
+
+        System.out.println("\n" + brandColorMix1 + "\n");
         brandColorMixRepository.save(brandColorMix1);
-        brandColorMixRepository.save(brandColorMix2);
-        brandColorMixRepository.save(brandColorMix3);
+
+
     }
 
 }

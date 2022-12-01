@@ -43,7 +43,6 @@ public class SpecificCarModel {
   @UpdateTimestamp
   private LocalDateTime updated;
 
-  @JoinTable(name = "specificCarModelMembers")
   @ManyToMany(mappedBy = "viewableCarBrands")
   @ToString.Exclude
   private List<UserBuyer> userBuyer;
@@ -52,7 +51,7 @@ public class SpecificCarModel {
   @ToString.Exclude
   private List<UserLeaser> userLeaser;
   
-  @OneToOne(mappedBy = "specificCarModel")
-  private BrandColorMix brandColorMix;
+  @OneToMany(mappedBy = "specificCarModel")
+  private List<BrandColorMix> brandColorMix;
 
 }
