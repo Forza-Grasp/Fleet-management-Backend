@@ -5,7 +5,6 @@ import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -30,8 +29,6 @@ public class SpecificCarModel {
 
   @Column(length = 100, nullable = false)
   private String modelYear;
-
-
 
   @ManyToMany(mappedBy = "viewableCarBrands")
   @ToString.Exclude

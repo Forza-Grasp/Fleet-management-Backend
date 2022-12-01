@@ -80,7 +80,7 @@ public class SecurityConfig {
         .jwtAuthenticationConverter(authenticationConverter());
 
     http.authorizeHttpRequests((authorize) -> authorize
-        //Obviously we need to be able to login without being logged in :-)
+
         .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
         .antMatchers(HttpMethod.PATCH, "/api/auth/reset-password").permitAll()
 
