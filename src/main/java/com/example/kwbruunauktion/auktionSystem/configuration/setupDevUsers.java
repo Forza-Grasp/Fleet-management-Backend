@@ -30,7 +30,6 @@ public class setupDevUsers implements ApplicationRunner {
     UserEconomyRepository userEconomyRepository;
     UserLeaserRepository userLeaserRepository;
     UserBuyerRepository userBuyerRepository;
-    SpecificCarModelRepository specificCarModelRepository;
     DamageMatrixRepository damageMatrixRepository;
     SpecificDamageRepository specificDamageRepository;
 
@@ -48,7 +47,7 @@ public class setupDevUsers implements ApplicationRunner {
     this.specificDamageRepository = specificDamageRepository;
   }
 
-    @SneakyThrows
+  @SneakyThrows
   @Override
   public void run(ApplicationArguments args) {
 
