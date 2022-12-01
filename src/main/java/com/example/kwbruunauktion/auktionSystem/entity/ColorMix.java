@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,8 +33,8 @@ public class ColorMix {
   @Column(length = 100, nullable = false)
   private String colorName;
 
-  @OneToOne(mappedBy = "colorMix")
-  private BrandColorMix brandColorMix;
+  @OneToMany(mappedBy = "colorMix")
+  private List<BrandColorMix> brandColorMix;
 
   @CreationTimestamp
   private LocalDateTime created;

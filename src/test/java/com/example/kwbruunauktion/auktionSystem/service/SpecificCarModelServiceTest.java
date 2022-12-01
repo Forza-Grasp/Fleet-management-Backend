@@ -134,7 +134,7 @@ class SpecificCarModelServiceTest {
                 .modelYear("1999")
                 .build();
         SpecificCarModelRequest specificCarModelRequest = new SpecificCarModelRequest(specificCarModel);
-        specificCarModelService.editSpecificCarModel(specificCarModelRequest, 1L);
+        specificCarModelService.editSpecificCarModel(specificCarModelRequest);
 
         List<SpecificCarModelResponse> listOfSpecificCarModels2 = specificCarModelService.getSpecificCarModels();
         assertEquals(2, listOfSpecificCarModels2.size());

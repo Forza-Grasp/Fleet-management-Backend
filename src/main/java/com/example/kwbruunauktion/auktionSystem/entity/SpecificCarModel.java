@@ -2,10 +2,16 @@ package com.example.kwbruunauktion.auktionSystem.entity;
 
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+
+import java.time.LocalDateTime;
+
+
 import java.util.List;
 
 @Getter
@@ -31,7 +37,11 @@ public class SpecificCarModel {
   @Column(length = 100, nullable = false)
   private String modelYear;
 
+  @CreationTimestamp
+  private LocalDateTime created;
 
+  @UpdateTimestamp
+  private LocalDateTime updated;
 
   @ManyToMany(mappedBy = "viewableCarBrands")
   @ToString.Exclude
@@ -40,8 +50,8 @@ public class SpecificCarModel {
   @ManyToMany(mappedBy = "viewableCarBrands")
   @ToString.Exclude
   private List<UserLeaser> userLeaser;
-
-  @OneToOne(mappedBy = "specificCarModel")
-  private BrandColorMix brandColorMix;
+  
+  @OneToMany(mappedBy = "specificCarModel")
+  private List<BrandColorMix> brandColorMix;
 
 }

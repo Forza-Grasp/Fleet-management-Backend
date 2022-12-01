@@ -42,9 +42,7 @@ public class ConfigurationColormix implements ApplicationRunner {
 
                 .build();
         colorMixRepository.save(colorMix);
-
-
-
+        System.out.println("\n" + colorMix + "\n");
 
     }
 
