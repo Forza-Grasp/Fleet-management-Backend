@@ -4,10 +4,7 @@ import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -18,15 +15,17 @@ public class BrandColorMixRequest {
 
     private Long id;
 
-    private SpecificCarModel specificCarModel;
+    private Long specificCarModelId;
 
-    private ColorMix colorMix;
+    private Long colorMixId;
 
-    public BrandColorMixRequest(BrandColorMix brandColorMix) {
-        this.id = brandColorMix.getId();
-        this.specificCarModel = brandColorMix.getSpecificCarModel();
-        this.colorMix = brandColorMix.getColorMix();
-    }
+
+
+
+
+
+
+
 
 
 

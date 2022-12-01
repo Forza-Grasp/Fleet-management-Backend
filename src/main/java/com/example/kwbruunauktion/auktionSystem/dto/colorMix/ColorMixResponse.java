@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.dto.colorMix;
 
+import com.example.kwbruunauktion.auktionSystem.dto.ColorTypesResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -15,13 +16,13 @@ public class ColorMixResponse {
 
     private Long id;
     private String colorCode;
-    private Long colorTypeId;
+    private ColorTypesResponse colorTypesResponse;
     private String colorName;
 
     public ColorMixResponse(ColorMix colorMix){
         this.id = colorMix.getId();
         this.colorCode = colorMix.getColorCode();
-        this.colorTypeId = colorMix.getColorType().getId();
+        this.colorTypesResponse = new ColorTypesResponse(colorMix.getColorType());
         this.colorName = colorMix.getColorName();
     }
 

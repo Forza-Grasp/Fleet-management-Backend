@@ -27,10 +27,9 @@ class BrandColorMixServiceTest {
     public static BrandColorMixRepository brandColorMixRepository;
     public static BrandColorMixService brandColorMixService;
     public static SpecificCarModelRepository specificCarModelRepository;
-    public static SpecificCarModelService specificCarModelService;
     public static ColorMixRepository colorMixRepository;
-    public static ColorMixService colorMixService;
     public static ColorTypesRepository colorTypesRepository;
+
     public static ColorTypesService colorTypesService;
 
     @BeforeAll
@@ -123,7 +122,8 @@ class BrandColorMixServiceTest {
     }
 
     @BeforeEach
-    public void setUpService() {brandColorMixService = new BrandColorMixService(brandColorMixRepository, specificCarModelRepository, colorMixRepository);}
+    public void setUpService() {brandColorMixService = new BrandColorMixService(brandColorMixRepository, specificCarModelRepository, colorMixRepository);
+    colorTypesService = new ColorTypesService(colorTypesRepository);}
 
     @Test
     void getBrandColorMixById() {
@@ -134,7 +134,7 @@ class BrandColorMixServiceTest {
 
         assertEquals("Silver 2012 grade A", brandColorMixResponse.getColorMix().getColorName());
         assertEquals("S12A", brandColorMixResponse.getColorMix().getColorCode());
-        assertEquals("Metallic", brandColorMixResponse.getColorMix().getColorType().getType());
+        assertEquals("Metallic", brandColorMixResponse.getColorMix().getColorTypesResponse().getType());
 
 
     }
@@ -146,15 +146,15 @@ class BrandColorMixServiceTest {
         assertEquals(3, listOfBrandColorMix.size());
         assertEquals("Ford Fiesta", listOfBrandColorMix.get(0).getSpecificCarModel().getBrand());
         assertEquals("Silver 2012 grade A", listOfBrandColorMix.get(0).getColorMix().getColorName());
-        assertEquals("Metallic", listOfBrandColorMix.get(0).getColorMix().getColorType().getType());
+        assertEquals("Metallic", listOfBrandColorMix.get(0).getColorMix().getColorTypesResponse().getType());
 
         assertEquals("Mazda", listOfBrandColorMix.get(1).getSpecificCarModel().getBrand());
         assertEquals("Silver 2012 grade A", listOfBrandColorMix.get(0).getColorMix().getColorName());
-        assertEquals("Metallic", listOfBrandColorMix.get(0).getColorMix().getColorType().getType());
+        assertEquals("Metallic", listOfBrandColorMix.get(0).getColorMix().getColorTypesResponse().getType());
 
         assertEquals("Mercedes", listOfBrandColorMix.get(2).getSpecificCarModel().getBrand());
         assertEquals("Silver 2012 grade A", listOfBrandColorMix.get(0).getColorMix().getColorName());
-        assertEquals("Metallic", listOfBrandColorMix.get(0).getColorMix().getColorType().getType());
+        assertEquals("Metallic", listOfBrandColorMix.get(0).getColorMix().getColorTypesResponse().getType());
     }
 
     @Test
@@ -165,8 +165,8 @@ class BrandColorMixServiceTest {
         BrandColorMix brandColorMix = BrandColorMix.builder()
                 .id(4L)
                 .build();
-        BrandColorMixRequest brandColorMixRequest = new BrandColorMixRequest(brandColorMix);
-        brandColorMixService.addBrandColorMix(brandColorMixRequest, 2L, 2L);
+        BrandColorMixRequest brandColorMixRequest = new BrandColorMixRequest(4L, 2L, 2L);
+        brandColorMixService.addBrandColorMix(brandColorMixRequest);
 
         List<BrandColorMixResponse> listOfBrandColorMixAfterAdd = brandColorMixService.getAllBrandColorMix();
         assertEquals(4, listOfBrandColorMixAfterAdd.size());
@@ -177,7 +177,7 @@ class BrandColorMixServiceTest {
 
         assertEquals("Red Shiny", listOfBrandColorMixAfterAdd.get(3).getColorMix().getColorName());
         assertEquals("RS", listOfBrandColorMixAfterAdd.get(3).getColorMix().getColorCode());
-        assertEquals("Shiny", listOfBrandColorMixAfterAdd.get(3).getColorMix().getColorType().getType());
+        assertEquals("Shiny", listOfBrandColorMixAfterAdd.get(3).getColorMix().getColorTypesResponse().getType());
 
     }
 
@@ -186,26 +186,15 @@ class BrandColorMixServiceTest {
         List<BrandColorMixResponse> listOfBrandColorMix = brandColorMixService.getAllBrandColorMix();
         assertEquals(3, listOfBrandColorMix.size());
         assertEquals("Ford Fiesta", listOfBrandColorMix.get(0).getSpecificCarModel().getBrand());
-        assertEquals("Metallic", listOfBrandColorMix.get(0).getColorMix().getColorType().getType());
+        assertEquals("Metallic", listOfBrandColorMix.get(0).getColorMix().getColorTypesResponse().getType());
 
-        SpecificCarModel specificCarModel3 = SpecificCarModel.builder()
-                .id(3L)
-                .brand("Mercedes")
-                .model("G2A")
-                .modelYear("2022")
-                .build();
-        ColorTypes colorType2 = ColorTypes.builder()
-                .id(2L)
-                .type("Mat")
-                .build();
+        BrandColorMixRequest brandColorMixRequest = new BrandColorMixRequest(1L, 3L, 2L);
+        brandColorMixService.editBrandColorMix(brandColorMixRequest);
 
-
-
-        BrandColorMix brandColorMix = BrandColorMix.builder()
-                .id(1L)
-
-                .build();
-        //brandColorMixService.editBrandColorMix();
+        List<BrandColorMixResponse> listOfBrandColorMixModified = brandColorMixService.getAllBrandColorMix();
+        assertEquals(3, listOfBrandColorMixModified.size());
+        assertEquals("Mercedes", listOfBrandColorMixModified.get(0).getSpecificCarModel().getBrand());
+        assertEquals("Red Shiny", listOfBrandColorMixModified.get(0).getColorMix().getColorName());
     }
 
     @Test

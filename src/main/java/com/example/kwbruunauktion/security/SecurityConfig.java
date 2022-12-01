@@ -108,10 +108,13 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET,"/api/cars/filter").hasAnyAuthority("ADMIN","USER")
 
         //SpecificCarModel
-        .antMatchers(HttpMethod.GET, "/api/specificcarmodel").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/specificcarmodel/all").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/specificcarmodel/{id}").permitAll()
-        
+        .antMatchers(HttpMethod.GET, "/api/specific-car-model").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specific-car-model/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specific-car-model/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/specific-car-model").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/specific-car-model/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/specific-car-model/{id}").permitAll()
+
         //ColorMix        
         .antMatchers(HttpMethod.GET, "/api/colormix").permitAll()
         .antMatchers(HttpMethod.GET, "/api/colormix/{id}").permitAll()
@@ -119,9 +122,15 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.PUT, "/api/colormix/{id}").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/colormix/{id}").permitAll()
 
-        .antMatchers(HttpMethod.POST, "/api/specificcarmodel").permitAll()
-        .antMatchers(HttpMethod.DELETE, "/api/specificcarmodel/{id}").permitAll()
-        .antMatchers(HttpMethod.PUT, "/api/specificcarmodel/{id}").permitAll()
+        //BrandColorMix
+        .antMatchers(HttpMethod.GET, "/api/brand-color-mix").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/brand-color-mix/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/brand-color-mix/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/brand-color-mix").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/brand-color-mix").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/brand-color-mix").permitAll()
+
+
         // Demonstrates another way to add roles to an endpoint
         // .antMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
         .anyRequest().authenticated());

@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/specificcarmodel")
+@RequestMapping("/api/specific-car-model")
 public class SpecificCarModelController {
 
     private final SpecificCarModelService specificCarModelService;

@@ -2,6 +2,7 @@ package com.example.kwbruunauktion.auktionSystem.entity;
 
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -48,7 +49,7 @@ public class SpecificCarModel {
   @ManyToMany
   @ToString.Exclude
   private List<UserLeaser> userLeaser;
-
+  
   @OneToOne(mappedBy = "specificCarModel")
   private BrandColorMix brandColorMix;
 }

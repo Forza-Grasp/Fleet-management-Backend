@@ -6,6 +6,7 @@ import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
+import com.example.kwbruunauktion.auktionSystem.entity.ColorTypes;
 import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import com.example.kwbruunauktion.auktionSystem.repository.BrandColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;
@@ -42,34 +43,32 @@ public class BrandColorMixService {
         return brandColorMixes.stream().map(brandColorMix -> new BrandColorMixResponse(brandColorMix)).toList();
     }
 
-    public  BrandColorMixResponse addBrandColorMix(BrandColorMixRequest brandColorMixRequest, Long specificCarModelId, Long colorMixId) {
-        if(brandColorMixRepository.existsById(brandColorMixRequest.getId())) {
-            throw new RuntimeException("BrandColorMix with this ID already exist");
-        }
-        if(!specificCarModelRepository.existsById(specificCarModelId)) {
+    public  BrandColorMixResponse addBrandColorMix(BrandColorMixRequest brandColorMixRequest) {
+        if(!specificCarModelRepository.existsById(brandColorMixRequest.getSpecificCarModelId())) {
             throw new RuntimeException("SpecificCarModel with this ID doesnt exist");
         }
-        if(!colorMixRepository.existsById(colorMixId)) {
+        if(!colorMixRepository.existsById(brandColorMixRequest.getColorMixId())) {
             throw new RuntimeException("ColorMix with this ID doesnt exist");
         }
-        SpecificCarModel existingSpecificCarModel = specificCarModelRepository.findSpecificCarModelById(specificCarModelId);
-        ColorMix existingColorMix = colorMixRepository.findColorMixById(colorMixId);
-        BrandColorMix createdBrandColorMix = BrandColorMix.builder()
-                .specificCarModel(existingSpecificCarModel)
-                .colorMix(existingColorMix)
-                .build();
-
+        BrandColorMix createdBrandColorMix = convertToBrandColorMix(brandColorMixRequest);
         brandColorMixRepository.save(createdBrandColorMix);
         return new BrandColorMixResponse(createdBrandColorMix);
     }
 
-    public void editBrandColorMix(BrandColorMixRequest brandColorMixRequest, Long id, Long specificCarModelId, Long colorMixId) {
-        BrandColorMix brandColorMix = brandColorMixRepository.findById(id).orElseThrow(() -> new RuntimeException("BrandColorMix with this ID does not exist"));
+    public void editBrandColorMix(BrandColorMixRequest brandColorMixRequest) {
+        BrandColorMix brandColorMix = brandColorMixRepository.findById(brandColorMixRequest.getId()).orElseThrow(() -> new RuntimeException("BrandColorMix with this ID does not exist"));
 
-        SpecificCarModel specificCarModel = specificCarModelRepository.findSpecificCarModelById(specificCarModelId);
-        ColorMix colorMix = colorMixRepository.findColorMixById(colorMixId);
-        brandColorMix.setSpecificCarModel(specificCarModel);
-        brandColorMix.setColorMix(colorMix);
+        if(!specificCarModelRepository.existsById(brandColorMixRequest.getSpecificCarModelId())) {
+            throw new RuntimeException("SpecificCarModel with this ID doesnt exist");
+        }
+        if(!colorMixRepository.existsById(brandColorMixRequest.getColorMixId())) {
+            throw new RuntimeException("ColorMix with this ID doesnt exist");
+        }
+
+        BrandColorMix tempBrandColorMix = convertToBrandColorMix(brandColorMixRequest);
+        brandColorMix.setSpecificCarModel(tempBrandColorMix.getSpecificCarModel());
+
+        brandColorMix.setColorMix(tempBrandColorMix.getColorMix());
 
         brandColorMixRepository.save(brandColorMix);
     }
@@ -77,5 +76,16 @@ public class BrandColorMixService {
     public void deleteBrandColorMix(@PathVariable Long id) {
         BrandColorMix brandColorMix = brandColorMixRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"BrandColorMix with this ID does not exist"));
         brandColorMixRepository.delete(brandColorMix);
+    }
+
+    public BrandColorMix convertToBrandColorMix(BrandColorMixRequest tempBrandColorMix) {
+        SpecificCarModel tempSpecificCarModel = specificCarModelRepository.findSpecificCarModelById(tempBrandColorMix.getSpecificCarModelId());
+        ColorMix tempColorMix = colorMixRepository.findColorMixById(tempBrandColorMix.getColorMixId());
+        BrandColorMix convertedBrandColor = BrandColorMix.builder()
+                .id(tempBrandColorMix.getId())
+                .specificCarModel(tempSpecificCarModel)
+                .colorMix(tempColorMix)
+                .build();
+        return convertedBrandColor;
     }
 }
