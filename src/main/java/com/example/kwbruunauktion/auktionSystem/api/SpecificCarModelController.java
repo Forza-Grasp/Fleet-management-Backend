@@ -24,9 +24,8 @@ public class SpecificCarModelController {
         return specificCarModelService.getSpecificCarModelById(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     List<SpecificCarModelResponse> getAllSpecificCarModels() {return specificCarModelService.getSpecificCarModels();}
-
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     SpecificCarModelResponse addSpecificCarModel(@RequestBody SpecificCarModelRequest body) {

@@ -33,9 +33,9 @@ public class ColorTypesController {
         return colorTypesService.getColorTypeById(id);
     }
 
-    @PutMapping("/{id}")
-    ColorTypesResponse editColorTypeId(@PathVariable Long id, @RequestBody ColorTypesRequest colorTypesRequest){
-        return colorTypesService.editColorType(colorTypesRequest, id);
+    @PutMapping
+    ColorTypesResponse editColorTypeId(@RequestBody ColorTypesRequest colorTypesRequest){
+        return colorTypesService.editColorType(colorTypesRequest);
     }
 
     @DeleteMapping("/{id}")

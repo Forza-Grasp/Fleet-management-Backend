@@ -30,9 +30,6 @@ public class SpecificCarModelService {
     }
 
     public SpecificCarModelResponse addSpecificCarModel(SpecificCarModelRequest specificCarModelRequest) {
-        if(specificCarModelRepository.existsById(specificCarModelRequest.getId())) {
-            throw new RuntimeException("SpecificCarModel with this ID already exist");
-        }
         SpecificCarModel createdSpecificCarModel = SpecificCarModel.builder()
                 .brand(specificCarModelRequest.getBrand())
                 .model(specificCarModelRequest.getModel())

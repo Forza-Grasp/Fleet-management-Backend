@@ -1,6 +1,7 @@
 package com.example.kwbruunauktion.security;
 
 
+
 import com.example.kwbruunauktion.security.error.CustomOAuth2AccessDeniedHandler;
 import com.example.kwbruunauktion.security.error.CustomOAuth2AuthenticationEntryPoint;
 import com.nimbusds.jose.JOSEException;
@@ -81,6 +82,7 @@ public class SecurityConfig {
     http.authorizeHttpRequests((authorize) -> authorize
         //Obviously we need to be able to login without being logged in :-)
         .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+        .antMatchers(HttpMethod.PATCH, "/api/auth/reset-password").permitAll()
 
         //Required in order to use the h2-console
         .antMatchers("/h2*/**").permitAll()
@@ -90,22 +92,78 @@ public class SecurityConfig {
         //Next two lines only required if you plan to do the cookie/session-demo from within this project
         .antMatchers("/session-demo.html").permitAll()
         .antMatchers("/api/cookie/**").permitAll()
-        //Allow anonymous access to this endpoint
-            //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
 
-            //necessary to allow for "nice" JSON Errors
-            .antMatchers("/error").permitAll()
+        //userAdmin
+        .antMatchers(HttpMethod.GET, "/api/users/admin").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/users/admin/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/users/admin/{id}").permitAll()
 
-            //.antMatchers("/", "/**").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/users/admin").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/users/admin/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/users/admin").permitAll()
 
+        //userLeaser
+        .antMatchers(HttpMethod.GET, "/api/users/leaser").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/users/leaser/{id}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/users/leaser/addCarBrand").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/users/leaser").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/users/leaser/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/users/leaser").permitAll()
+
+        //userBuyer
+        .antMatchers(HttpMethod.GET, "/api/users/buyer").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/users/buyer/{id}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/users/buyer").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/users/buyer/addCarBrand").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/users/buyer/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/users/buyer").permitAll()
+
+        //userEconomy
+        .antMatchers(HttpMethod.GET, "/api/users/economy").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/users/economy/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/users/economy/{id}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/users/economy").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/users/economy/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/users/economy").permitAll()
+
+        //DamageMatrix
+        .antMatchers(HttpMethod.GET, "/api/damageMatrix").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/damageMatrix/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/damageMatrix/{id}").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/damageMatrix/user/{id}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/damageMatrix").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/damageMatrix/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/damageMatrix").permitAll()
+
+        //SpecificDamage
+        .antMatchers(HttpMethod.GET, "/api/specificDamage").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specificDamage/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specificDamage/{id}").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specificDamage/damageMatrix/{id}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/specificDamage").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/specificDamage/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/specificDamage").permitAll()
+
+        //ColorType
         .antMatchers(HttpMethod.GET,"/api/color-types").permitAll()
         .antMatchers(HttpMethod.GET,"/api/color-types/{id}").permitAll()
         .antMatchers(HttpMethod.DELETE,"/api/color-types/{id}").permitAll()
-        .antMatchers(HttpMethod.PUT,"/api/color-types/{id}").permitAll()
-        .antMatchers(HttpMethod.POST,"/api/color-types/{id}").permitAll()
-        .antMatchers(HttpMethod.GET,"/api/cars").hasAnyAuthority("ADMIN","USER")
-        .antMatchers(HttpMethod.GET,"/api/cars/all").hasAnyAuthority("ADMIN","USER")
-        .antMatchers(HttpMethod.GET,"/api/cars/filter").hasAnyAuthority("ADMIN","USER")
+        .antMatchers(HttpMethod.PUT,"/api/color-types").permitAll()
+        .antMatchers(HttpMethod.POST,"/api/color-types").permitAll()
+
+
+
+        //Allow anonymous access to this endpoint
+            //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
+
+        //necessary to allow for "nice" JSON Errors
+        .antMatchers("/error").permitAll()
+        //.antMatchers("/", "/**").permitAll()
 
         //SpecificCarModel
         .antMatchers(HttpMethod.GET, "/api/specific-car-model").permitAll()
@@ -115,12 +173,18 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.DELETE, "/api/specific-car-model/{id}").permitAll()
         .antMatchers(HttpMethod.PUT, "/api/specific-car-model/{id}").permitAll()
 
-        //ColorMix        
-        .antMatchers(HttpMethod.GET, "/api/colormix").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/colormix/{id}").permitAll()
-        .antMatchers(HttpMethod.POST, "/api/colormix").permitAll()
-        .antMatchers(HttpMethod.PUT, "/api/colormix/{id}").permitAll()
-        .antMatchers(HttpMethod.DELETE, "/api/colormix/{id}").permitAll()
+        //ColorMix
+        .antMatchers(HttpMethod.GET, "/api/color-mix").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/color-mix/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/color-mix").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/color-mix").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/color-mix/{id}").permitAll()
+        
+        .antMatchers(HttpMethod.GET,"/api/cars").hasAnyAuthority("ADMIN","USER")
+        .antMatchers(HttpMethod.GET,"/api/cars/all").hasAnyAuthority("ADMIN","USER")
+        .antMatchers(HttpMethod.GET,"/api/cars/filter").hasAnyAuthority("ADMIN","USER")
+
+
 
         //BrandColorMix
         .antMatchers(HttpMethod.GET, "/api/brand-color-mix").permitAll()
@@ -131,7 +195,19 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.DELETE, "/api/brand-color-mix").permitAll()
 
 
+
         // Demonstrates another way to add roles to an endpoint
+        //Ownership
+        .antMatchers(HttpMethod.GET,"/api/ownership").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/ownership/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT,"/api/ownership/{id}").permitAll()
+        .antMatchers(HttpMethod.DELETE,"/api/ownership/{id}").permitAll()
+        .antMatchers(HttpMethod.POST,"/api/ownership").permitAll()
+
+
+
+
+            // Demonstrates another way to add roles to an endpoint
         // .antMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
         .anyRequest().authenticated());
 
@@ -182,5 +258,7 @@ public class SecurityConfig {
       throws Exception {
     return authenticationConfiguration.getAuthenticationManager();
   }
+
+
 }
 

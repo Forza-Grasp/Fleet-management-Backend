@@ -2,7 +2,7 @@ package com.example.kwbruunauktion.security.entity;
 
 
 import com.example.kwbruunauktion.auktionSystem.entity.CampaignBid;
-import com.example.kwbruunauktion.auktionSystem.entity.DamageMatrix;
+import com.example.kwbruunauktion.auktionSystem.entity.damageMatrix.DamageMatrix;
 import com.example.kwbruunauktion.security.dto.UserWithRolesRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,9 +28,9 @@ import java.util.stream.Collectors;
 @Setter
 @ToString
 @AllArgsConstructor
-@Entity(name = "members")
+@Entity(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "DISCRIMINATOR_TYPE")
+@DiscriminatorColumn(name = "user_type")
 @SuperBuilder
 public class UserWithRoles implements UserDetails {
 
@@ -65,10 +65,10 @@ public class UserWithRoles implements UserDetails {
   @CollectionTable(name = "security_role")
   List<Role> roles = new ArrayList<>();
 
-  @OneToOne()
+  @OneToOne(mappedBy = "userWithRoles")
   private CampaignBid campaignBid;
 
-  @OneToOne()
+  @OneToOne(mappedBy = "userWithRoles")
   private DamageMatrix damageMatrix;
 
   public UserWithRoles() {
@@ -83,6 +83,13 @@ public class UserWithRoles implements UserDetails {
   }
 
   public UserWithRoles(String user, String password, String email) {
+    this.username = user;
+    setPassword(password);
+    this.email = email;
+  }
+
+  public UserWithRoles(Long id, String user, String password, String email) {
+    this.id = id;
     this.username = user;
     setPassword(password);
     this.email = email;

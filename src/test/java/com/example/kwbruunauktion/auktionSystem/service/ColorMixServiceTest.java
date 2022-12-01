@@ -136,13 +136,14 @@ class ColorMixServiceTest {
                 .build();
 
         ColorMix colorMix1 = ColorMix.builder()
+                .id(2L)
                 .colorCode("BNS")
                 .colorName("Blue NOT shiny")
                 .colorType(colorType1)
                 .build();
 
         ColorMixRequest colorMixRequest = new ColorMixRequest(colorMix1);
-        colorMixService.editColorMix(colorMixRequest, 2L);
+        colorMixService.editColorMix(colorMixRequest);
 
 
         ColorMixResponse newColorMixResponse = colorMixService.getSpecificById(2L);

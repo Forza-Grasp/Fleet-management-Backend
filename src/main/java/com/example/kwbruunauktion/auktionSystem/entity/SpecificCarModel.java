@@ -8,7 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+
 import java.time.LocalDateTime;
+
+
 import java.util.List;
 
 @Getter
@@ -41,15 +44,15 @@ public class SpecificCarModel {
   private LocalDateTime updated;
 
   @JoinTable(name = "specificCarModelMembers")
-  @ManyToMany
+  @ManyToMany(mappedBy = "viewableCarBrands")
   @ToString.Exclude
   private List<UserBuyer> userBuyer;
 
-  @JoinTable(name = "specificCarModelMembers")
-  @ManyToMany
+  @ManyToMany(mappedBy = "viewableCarBrands")
   @ToString.Exclude
   private List<UserLeaser> userLeaser;
   
   @OneToOne(mappedBy = "specificCarModel")
   private BrandColorMix brandColorMix;
+
 }
