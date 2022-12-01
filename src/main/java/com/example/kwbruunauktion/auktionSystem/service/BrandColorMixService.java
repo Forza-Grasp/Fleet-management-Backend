@@ -4,6 +4,8 @@ import com.example.kwbruunauktion.auktionSystem.dto.BrandColorMixRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.BrandColorMixResponse;
 import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelResponse;
+import com.example.kwbruunauktion.auktionSystem.dto.colorMix.ColorMixRequest;
+import com.example.kwbruunauktion.auktionSystem.dto.colorMix.ColorMixResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorTypes;
@@ -50,10 +52,13 @@ public class BrandColorMixService {
         if(!colorMixRepository.existsById(brandColorMixRequest.getColorMixId())) {
             throw new RuntimeException("ColorMix with this ID doesnt exist");
         }
-        BrandColorMix createdBrandColorMix = convertToBrandColorMix(brandColorMixRequest);
+        BrandColorMix createdBrandColorMix = BrandColorMixRequest.getBrandColorMixEntity(brandColorMixRequest);
         brandColorMixRepository.save(createdBrandColorMix);
         return new BrandColorMixResponse(createdBrandColorMix);
     }
+
+
+
 
     public void editBrandColorMix(BrandColorMixRequest brandColorMixRequest) {
         BrandColorMix brandColorMix = brandColorMixRepository.findById(brandColorMixRequest.getId()).orElseThrow(() -> new RuntimeException("BrandColorMix with this ID does not exist"));
@@ -65,7 +70,7 @@ public class BrandColorMixService {
             throw new RuntimeException("ColorMix with this ID doesnt exist");
         }
 
-        BrandColorMix tempBrandColorMix = convertToBrandColorMix(brandColorMixRequest);
+        BrandColorMix tempBrandColorMix = BrandColorMixRequest.getBrandColorMixEntity(brandColorMixRequest);
         brandColorMix.setSpecificCarModel(tempBrandColorMix.getSpecificCarModel());
 
         brandColorMix.setColorMix(tempBrandColorMix.getColorMix());
@@ -78,14 +83,4 @@ public class BrandColorMixService {
         brandColorMixRepository.delete(brandColorMix);
     }
 
-    public BrandColorMix convertToBrandColorMix(BrandColorMixRequest tempBrandColorMix) {
-        SpecificCarModel tempSpecificCarModel = specificCarModelRepository.findSpecificCarModelById(tempBrandColorMix.getSpecificCarModelId());
-        ColorMix tempColorMix = colorMixRepository.findColorMixById(tempBrandColorMix.getColorMixId());
-        BrandColorMix convertedBrandColor = BrandColorMix.builder()
-                .id(tempBrandColorMix.getId())
-                .specificCarModel(tempSpecificCarModel)
-                .colorMix(tempColorMix)
-                .build();
-        return convertedBrandColor;
-    }
 }
