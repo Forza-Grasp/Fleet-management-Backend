@@ -40,8 +40,8 @@ public class SpecificCarModelService {
         return new SpecificCarModelResponse(createdSpecificCarModel);
     }
 
-    public void editSpecificCarModel(SpecificCarModelRequest specificCarModelRequest, Long id) {
-        SpecificCarModel specificCarModel = specificCarModelRepository.findById(id).orElseThrow(() -> new RuntimeException("SpecificCarModel with this ID does not exist"));
+    public void editSpecificCarModel(SpecificCarModelRequest specificCarModelRequest) {
+        SpecificCarModel specificCarModel = specificCarModelRepository.findById(specificCarModelRequest.getId()).orElseThrow(() -> new RuntimeException("SpecificCarModel with this ID does not exist"));
 
         specificCarModel.setBrand(specificCarModelRequest.getBrand());
         specificCarModel.setModel(specificCarModelRequest.getModel());

@@ -165,11 +165,13 @@ public class SecurityConfig {
         .antMatchers("/error").permitAll()
         //.antMatchers("/", "/**").permitAll()
 
+        //SpecificCarModel
         .antMatchers(HttpMethod.GET, "/api/specific-car-model").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specific-car-model/all").permitAll()
         .antMatchers(HttpMethod.GET, "/api/specific-car-model/{id}").permitAll()
         .antMatchers(HttpMethod.POST, "/api/specific-car-model").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/specific-car-model/{id}").permitAll()
-        .antMatchers(HttpMethod.PUT, "/api/specific-car-model/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/specific-car-model").permitAll()
 
         //ColorMix
         .antMatchers(HttpMethod.GET, "/api/color-mix").permitAll()
@@ -177,6 +179,21 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.POST, "/api/color-mix").permitAll()
         .antMatchers(HttpMethod.PUT, "/api/color-mix").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/color-mix/{id}").permitAll()
+        
+        .antMatchers(HttpMethod.GET,"/api/cars").hasAnyAuthority("ADMIN","USER")
+        .antMatchers(HttpMethod.GET,"/api/cars/all").hasAnyAuthority("ADMIN","USER")
+        .antMatchers(HttpMethod.GET,"/api/cars/filter").hasAnyAuthority("ADMIN","USER")
+
+
+
+        //BrandColorMix
+        .antMatchers(HttpMethod.GET, "/api/brand-color-mix").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/brand-color-mix/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/brand-color-mix/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/brand-color-mix").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/brand-color-mix").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/brand-color-mix").permitAll()
+
 
 
         // Demonstrates another way to add roles to an endpoint
