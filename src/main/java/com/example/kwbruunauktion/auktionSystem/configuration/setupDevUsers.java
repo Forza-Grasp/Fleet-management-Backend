@@ -51,7 +51,7 @@ public class setupDevUsers implements ApplicationRunner {
     @SneakyThrows
   @Override
   public void run(ApplicationArguments args) {
-
+    /*
         UserAdmin admin1 = UserAdmin.userAdminBuilder()
         .user("admin1")
         .password("admin1")
@@ -147,6 +147,8 @@ public class setupDevUsers implements ApplicationRunner {
             .build()
     );
     specificDamageRepository.saveAll(damages);
+
+     */
 
 
   }

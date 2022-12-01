@@ -36,7 +36,7 @@ public class SpecificModelCarSetup implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-
+/*
         UserBuyer buyer1 = UserBuyer.userBuyerBuilder()
                 .user("buyer10")
                 .password("buyer")
@@ -91,6 +91,8 @@ public class SpecificModelCarSetup implements ApplicationRunner {
         specificCarModelRepository.save(specificCarModel2);
         userBuyerRepository.save(buyer1);
         userLeaserRepository.save(leaser1);
+
+ */
 
 
     }

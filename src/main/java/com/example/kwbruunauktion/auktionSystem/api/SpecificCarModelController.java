@@ -33,9 +33,9 @@ public class SpecificCarModelController {
         return specificCarModelService.addSpecificCarModel(body);
     }
 
-    @PutMapping(path = "/{id}")
-    ResponseEntity<Boolean> editSpecificCarModel(@RequestBody SpecificCarModelRequest specificCarModelRequest, @PathVariable Long id){
-        specificCarModelService.editSpecificCarModel(specificCarModelRequest, id);
+    @PutMapping
+    ResponseEntity<Boolean> editSpecificCarModel(@RequestBody SpecificCarModelRequest specificCarModelRequest){
+        specificCarModelService.editSpecificCarModel(specificCarModelRequest);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
