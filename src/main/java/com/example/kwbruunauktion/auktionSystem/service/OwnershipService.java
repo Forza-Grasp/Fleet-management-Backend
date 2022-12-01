@@ -1,11 +1,8 @@
 package com.example.kwbruunauktion.auktionSystem.service;
 
-import com.example.kwbruunauktion.auktionSystem.dto.OwnershipRepsonse;
+import com.example.kwbruunauktion.auktionSystem.dto.OwnershipResponse;
 import com.example.kwbruunauktion.auktionSystem.dto.OwnershipRequest;
-import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelRequest;
-import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
-import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import com.example.kwbruunauktion.auktionSystem.repository.OwnershipRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,15 +19,15 @@ public class OwnershipService {
         this.ownershipRepository = ownershipRepository;
     }
 
-    public OwnershipRepsonse getOwnershipById(@PathVariable Long id) {
-        return new OwnershipRepsonse(ownershipRepository.findById(id).orElseThrow(() -> new RuntimeException("OwnershiID not found")));
+    public OwnershipResponse getOwnershipById(@PathVariable Long id) {
+        return new OwnershipResponse(ownershipRepository.findById(id).orElseThrow(() -> new RuntimeException("OwnershiID not found")));
     }
 
-    public List<OwnershipRepsonse> getOwnerships(){
+    public List<OwnershipResponse> getOwnerships(){
         List<Ownership> ownerships = ownershipRepository.findAll();
-        return ownerships.stream().map(o->new OwnershipRepsonse(o)).collect(Collectors.toList());
+        return ownerships.stream().map(o->new OwnershipResponse(o)).collect(Collectors.toList());
     }
-    public OwnershipRepsonse addOwnership(OwnershipRequest ownershipRequest) {
+    public OwnershipResponse addOwnership(OwnershipRequest ownershipRequest) {
         if(ownershipRepository.existsById(ownershipRequest.getId())) {
             throw new RuntimeException("Ownership with this ID already exist");
         }
@@ -41,7 +38,7 @@ public class OwnershipService {
                 .build();
 
         ownershipRepository.save(ownership);
-        return new OwnershipRepsonse(ownership);
+        return new OwnershipResponse(ownership);
     }
 
     public void editOwnership(OwnershipRequest ownershipRequest, Long id) {

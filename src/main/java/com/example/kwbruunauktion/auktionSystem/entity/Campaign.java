@@ -54,4 +54,5 @@ public class Campaign {
 
     @UpdateTimestamp
     private LocalDateTime updated;
+
 }

@@ -1,11 +1,8 @@
 package com.example.kwbruunauktion.auktionSystem.service;
 
-import com.example.kwbruunauktion.auktionSystem.dto.OwnershipRepsonse;
+import com.example.kwbruunauktion.auktionSystem.dto.OwnershipResponse;
 import com.example.kwbruunauktion.auktionSystem.dto.OwnershipRequest;
-import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelRequest;
-import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
-import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import com.example.kwbruunauktion.auktionSystem.repository.OwnershipRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,7 +49,7 @@ class OwnershipServiceTest {
 
     @Test
     void addOwnership() {
-        List<OwnershipRepsonse> ownerships = ownershipService.getOwnerships();
+        List<OwnershipResponse> ownerships = ownershipService.getOwnerships();
         assertEquals(2,ownerships.size());
 
         Ownership ownership = Ownership.builder()
@@ -73,7 +70,7 @@ class OwnershipServiceTest {
         ownershipService.addOwnership(ownershipRequest);
         ownershipService.addOwnership(ownershipRequest2);
 
-        List<OwnershipRepsonse> updatedListOfownerships = ownershipService.getOwnerships();
+        List<OwnershipResponse> updatedListOfownerships = ownershipService.getOwnerships();
 
         assertEquals(4, updatedListOfownerships.size());
 
@@ -89,7 +86,7 @@ class OwnershipServiceTest {
     }
     @Test
     void getOwnership() {
-        List<OwnershipRepsonse> listOfOwnerships = ownershipService.getOwnerships();
+        List<OwnershipResponse> listOfOwnerships = ownershipService.getOwnerships();
 
         assertEquals(2, listOfOwnerships.size());
         assertEquals("Ford", listOfOwnerships.get(1).getName());
@@ -101,7 +98,7 @@ class OwnershipServiceTest {
     }
     @Test
     void editOwnership() {
-        List<OwnershipRepsonse> listOfOwnerships = ownershipService.getOwnerships();
+        List<OwnershipResponse> listOfOwnerships = ownershipService.getOwnerships();
         assertEquals(2, listOfOwnerships.size());
         assertEquals("Ford", listOfOwnerships.get(0).getName());
 
@@ -113,7 +110,7 @@ class OwnershipServiceTest {
         OwnershipRequest ownershipRequest = new OwnershipRequest(ownership);
         ownershipService.editOwnership(ownershipRequest, 1L);
 
-        List<OwnershipRepsonse> listOfOwnershipNew = ownershipService.getOwnerships();
+        List<OwnershipResponse> listOfOwnershipNew = ownershipService.getOwnerships();
         assertEquals(2, listOfOwnershipNew.size());
         assertNotEquals("Ford", listOfOwnershipNew.get(0).getName());
         assertEquals("C500", listOfOwnershipNew.get(0).getAbbreviation());
@@ -121,13 +118,13 @@ class OwnershipServiceTest {
     }
     @Test
     void deleteOwnership() {
-        List<OwnershipRepsonse> listOfOwnerships = ownershipService.getOwnerships();
+        List<OwnershipResponse> listOfOwnerships = ownershipService.getOwnerships();
         assertEquals(2, listOfOwnerships.size());
         assertEquals("Ford", listOfOwnerships.get(0).getName());
 
         ownershipService.deleteOwnership(1L);
 
-        List<OwnershipRepsonse> listOfOwnershipsNew = ownershipService.getOwnerships();
+        List<OwnershipResponse> listOfOwnershipsNew = ownershipService.getOwnerships();
         assertEquals(1, listOfOwnershipsNew.size());
         assertEquals("Ford", listOfOwnershipsNew.get(0).getName());
         assertEquals("Fiesta med alu fælge",listOfOwnershipsNew.get(0).getAbbreviation());

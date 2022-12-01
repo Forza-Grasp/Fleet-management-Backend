@@ -187,6 +187,13 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.DELETE,"/api/ownership/{id}").permitAll()
         .antMatchers(HttpMethod.POST,"/api/ownership").permitAll()
 
+            //Campaign
+        .antMatchers(HttpMethod.GET,"/api/campaign").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/campaign/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT,"/api/campaign/{id}").permitAll()
+        .antMatchers(HttpMethod.DELETE,"/api/campaign/{id}").permitAll()
+        .antMatchers(HttpMethod.POST,"/api/campaign").permitAll()
+
 
 
 
