@@ -32,14 +32,11 @@ public class UserBuyerRequest {
     private String city;
     private String zipCode;
     private String country;
-
-
     private Ownership ownership;
 
 
     public static UserBuyer getUserBuyerEntity(UserBuyerRequest userBuyerRequest) {
         return UserBuyer.userBuyerBuilder()
-                .id(userBuyerRequest.getId())
                 .user(userBuyerRequest.getUsername())
                 .email(userBuyerRequest.getEmail())
                 .password(userBuyerRequest.getPassword())
