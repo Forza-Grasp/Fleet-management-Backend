@@ -40,6 +40,7 @@ public class ColorTypesController {
 
     @DeleteMapping("/{id}")
     ColorTypesResponse deleteColorById(@PathVariable Long id){
+        System.out.println("in deletemapping in controller");
         return colorTypesService.deleteColorTypeById(id);
     }
 }

@@ -2,7 +2,9 @@ package com.example.kwbruunauktion.auktionSystem.service;
 
 import com.example.kwbruunauktion.auktionSystem.dto.ColorTypesRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.ColorTypesResponse;
+import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorTypes;
+import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorTypesRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,9 +20,13 @@ import java.util.stream.Collectors;
 public class ColorTypesService {
 
     ColorTypesRepository colorTypesRepository;
+    ColorMixRepository colorMixRepository;
 
-    public ColorTypesService(ColorTypesRepository colorTypesRepository) {
+
+
+    public ColorTypesService(ColorTypesRepository colorTypesRepository, ColorMixRepository colorMixRepository) {
         this.colorTypesRepository = colorTypesRepository;
+        this.colorMixRepository = colorMixRepository;
     }
 
     public ColorTypesResponse addColorType(ColorTypesRequest colorTypesRequest){
@@ -53,13 +60,18 @@ public class ColorTypesService {
         return new ColorTypesResponse(foundColorType);
     }
 
-    @Transactional
+
     public ColorTypesResponse deleteColorTypeById(Long id){
+        System.out.println("in service");
         ColorTypes foundColorType = colorTypesRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Color type with id: "+id+" could not be found"));
 
+        List<ColorMix> colorMixes = colorMixRepository.findAllByColorTypeId(id);
+        System.out.println(colorMixes.size());
         colorTypesRepository.deleteById(id);
+
+
         return new ColorTypesResponse(foundColorType);
     }
 }
