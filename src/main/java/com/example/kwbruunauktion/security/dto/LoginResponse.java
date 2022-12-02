@@ -11,13 +11,17 @@ import java.util.List;
 @NoArgsConstructor
 public class LoginResponse {
 
+  private Long userId;
   private String username;
   private String token;
   private List<String> roles;
+  private String eMail;
 
-  public LoginResponse(String userName, String token, List<String> roles) {
+  public LoginResponse(String userName, String token, List<String> roles, Long userId, String eMail) {
     this.username = userName;
     this.token = token;
     this.roles = roles;
+    this.userId = userId;
+    this.eMail = eMail;
   }
 }

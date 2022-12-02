@@ -25,6 +25,7 @@ public class SpecificCarModelRequest {
 
 
     public SpecificCarModelRequest(SpecificCarModel specificCarModel) {
+        this.id = specificCarModel.getId();
         this.brand = specificCarModel.getBrand();
         this.model = specificCarModel.getModel();
         this.modelYear = specificCarModel.getModelYear();

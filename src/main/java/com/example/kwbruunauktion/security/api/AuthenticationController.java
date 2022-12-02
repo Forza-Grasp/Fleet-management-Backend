@@ -1,7 +1,6 @@
 package com.example.kwbruunauktion.security.api;
 
 
-
 import com.example.kwbruunauktion.auktionSystem.dto.users.request.ResetPasswordRequest;
 import com.example.kwbruunauktion.auktionSystem.service.users.UserAdminService;
 import com.example.kwbruunauktion.security.dto.LoginRequest;
@@ -60,25 +59,25 @@ public class AuthenticationController {
       Instant now = Instant.now();
       long expiry = tokenExpiration;
       String scope = authentication.getAuthorities().stream()
-              .map(GrantedAuthority::getAuthority)
-              .collect(joining(" "));
+          .map(GrantedAuthority::getAuthority)
+          .collect(joining(" "));
       JwtClaimsSet claims = JwtClaimsSet.builder()
-              .issuer(tokenIssuer)  //Only this for simplicity
-              .issuedAt(now)
-              .audience(Arrays.asList("not used"))
-              .expiresAt(now.plusSeconds(tokenExpiration))
-              .subject(user.getUsername())
-              .claim("roles",scope)
-              .build();
+          .issuer(tokenIssuer)  //Only this for simplicity
+          .issuedAt(now)
+          .audience(Arrays.asList("not used"))
+          .expiresAt(now.plusSeconds(expiry))
+          .subject(user.getUsername())
+          .claim("roles", scope)
+          .build();
 
       JwsHeader jwsHeader = JwsHeader.with(() -> "HS256").type("JWT").build();
 
       String token = encoder.encode(JwtEncoderParameters.from(jwsHeader, claims)).getTokenValue();
 
 
-      List<String> roles = user.getRoles().stream().map(role->role.toString()).collect(Collectors.toList());
+      List<String> roles = user.getRoles().stream().map(role -> role.toString()).collect(Collectors.toList());
       return ResponseEntity.ok()
-              .body(new LoginResponse(user.getUsername(),token,roles));
+          .body(new LoginResponse(user.getUsername(), token, roles, user.getId(), user.getEmail()));
     } catch (BadCredentialsException ex) {
       throw ex;
       //throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Username or password wrong");

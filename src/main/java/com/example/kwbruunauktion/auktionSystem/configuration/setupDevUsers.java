@@ -148,6 +148,7 @@ public class setupDevUsers implements ApplicationRunner {
     specificDamageRepository.saveAll(damages);
 
 
+
   }
 
 }

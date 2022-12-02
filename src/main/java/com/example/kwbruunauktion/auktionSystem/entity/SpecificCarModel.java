@@ -50,7 +50,7 @@ public class SpecificCarModel {
   @ManyToMany(mappedBy = "viewableCarBrands")
   @ToString.Exclude
   private List<UserLeaser> userLeaser;
-  
+
   @OneToMany(mappedBy = "specificCarModel")
   private List<BrandColorMix> brandColorMix;
 

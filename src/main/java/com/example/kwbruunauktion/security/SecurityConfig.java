@@ -80,7 +80,7 @@ public class SecurityConfig {
         .jwtAuthenticationConverter(authenticationConverter());
 
     http.authorizeHttpRequests((authorize) -> authorize
-        //Obviously we need to be able to login without being logged in :-)
+
         .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
         .antMatchers(HttpMethod.PATCH, "/api/auth/reset-password").permitAll()
 
@@ -168,10 +168,11 @@ public class SecurityConfig {
         //SpecificCarModel
         .antMatchers(HttpMethod.GET, "/api/specific-car-model").permitAll()
         .antMatchers(HttpMethod.GET, "/api/specific-car-model/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/specific-car-model/all-with-color-mix-count").permitAll()
         .antMatchers(HttpMethod.GET, "/api/specific-car-model/{id}").permitAll()
         .antMatchers(HttpMethod.POST, "/api/specific-car-model").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/specific-car-model/{id}").permitAll()
-        .antMatchers(HttpMethod.PUT, "/api/specific-car-model/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/specific-car-model").permitAll()
 
         //ColorMix
         .antMatchers(HttpMethod.GET, "/api/color-mix").permitAll()

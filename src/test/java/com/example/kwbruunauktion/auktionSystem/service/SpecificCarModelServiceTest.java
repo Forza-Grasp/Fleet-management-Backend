@@ -3,6 +3,7 @@ package com.example.kwbruunauktion.auktionSystem.service;
 import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
+import com.example.kwbruunauktion.auktionSystem.repository.BrandColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +21,7 @@ class SpecificCarModelServiceTest {
     public static SpecificCarModelRepository specificCarModelRepository;
 
     public static SpecificCarModelService specificCarModelService;
+    public static BrandColorMixRepository brandColorMixRepository;
 
     @BeforeAll
     public static void initData(@Autowired SpecificCarModelRepository specific_CarModel_Repository) {
@@ -46,7 +48,7 @@ class SpecificCarModelServiceTest {
 
     @BeforeEach
     public void setSpecificCarModelServiceUp(){
-        specificCarModelService = new SpecificCarModelService(specificCarModelRepository);
+        specificCarModelService = new SpecificCarModelService(specificCarModelRepository, brandColorMixRepository);
     }
 
     @Test
@@ -134,7 +136,7 @@ class SpecificCarModelServiceTest {
                 .modelYear("1999")
                 .build();
         SpecificCarModelRequest specificCarModelRequest = new SpecificCarModelRequest(specificCarModel);
-        specificCarModelService.editSpecificCarModel(specificCarModelRequest, 1L);
+        specificCarModelService.editSpecificCarModel(specificCarModelRequest);
 
         List<SpecificCarModelResponse> listOfSpecificCarModels2 = specificCarModelService.getSpecificCarModels();
         assertEquals(2, listOfSpecificCarModels2.size());
