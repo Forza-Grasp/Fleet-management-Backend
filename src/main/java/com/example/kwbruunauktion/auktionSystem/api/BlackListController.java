@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// TODO: 02/12/2022 Test endpoints in Postman
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/blacklist")
+
 public class BlackListController {
 
   final private BlackListService blackListService;
