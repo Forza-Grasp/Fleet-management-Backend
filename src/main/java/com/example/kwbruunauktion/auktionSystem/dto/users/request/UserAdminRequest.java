@@ -31,7 +31,6 @@ public class UserAdminRequest {
 
   public static UserAdmin getUserAdminEntity(UserAdminRequest u){
     return UserAdmin.userAdminBuilder()
-        .id(u.getId())
         .firstName(u.getFirstName())
         .lastName(u.getLastName())
         .password(u.getPassword())
