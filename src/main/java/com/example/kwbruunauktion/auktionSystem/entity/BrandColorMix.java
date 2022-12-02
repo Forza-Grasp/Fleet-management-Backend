@@ -24,10 +24,10 @@ public class BrandColorMix {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne
   private SpecificCarModel specificCarModel;
 
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne
   private ColorMix colorMix;
 
   @CreationTimestamp

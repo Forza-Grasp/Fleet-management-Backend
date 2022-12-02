@@ -60,4 +60,6 @@ public class ColorMixService {
     public void deleteColorMix(Long id) {
         colorMixRepository.deleteById(id);
     }
+
+
 }

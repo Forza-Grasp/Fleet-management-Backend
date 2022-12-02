@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,7 +27,6 @@ public class ColorTypes {
   private String type;
 
   @OneToMany(mappedBy = "colorType")
-  @JsonIgnore
   @ToString.Exclude
   private List<ColorMix> colorMixes;
 

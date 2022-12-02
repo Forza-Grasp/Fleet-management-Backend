@@ -57,7 +57,7 @@ class ColorTypesServiceTest {
 
     @BeforeEach
     public void initiateServiceClass(){
-        colorTypesService = new ColorTypesService(colorTypesRepository);
+        colorTypesService = new ColorTypesService(colorTypesRepository, colorTypesService.colorMixRepository);
 
     }
 
