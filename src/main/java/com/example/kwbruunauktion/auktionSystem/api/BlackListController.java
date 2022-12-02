@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/blacklist")
+@RequestMapping("/api/blacklist")
 public class BlackListController {
 
   final private BlackListService blackListService;

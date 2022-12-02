@@ -157,13 +157,8 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.POST,"/api/color-types").permitAll()
 
 
-
-        //Allow anonymous access to this endpoint
-            //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
-
         //necessary to allow for "nice" JSON Errors
         .antMatchers("/error").permitAll()
-        //.antMatchers("/", "/**").permitAll()
 
         //SpecificCarModel
         .antMatchers(HttpMethod.GET, "/api/specific-car-model").permitAll()
@@ -184,8 +179,6 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET,"/api/cars/all").hasAnyAuthority("ADMIN","USER")
         .antMatchers(HttpMethod.GET,"/api/cars/filter").hasAnyAuthority("ADMIN","USER")
 
-
-
         //BrandColorMix
         .antMatchers(HttpMethod.GET, "/api/brand-color-mix").permitAll()
         .antMatchers(HttpMethod.GET, "/api/brand-color-mix/all").permitAll()
@@ -195,8 +188,6 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.DELETE, "/api/brand-color-mix").permitAll()
 
 
-
-        // Demonstrates another way to add roles to an endpoint
         //Ownership
         .antMatchers(HttpMethod.GET,"/api/ownership").permitAll()
         .antMatchers(HttpMethod.GET,"/api/ownership/{id}").permitAll()
@@ -204,12 +195,22 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.DELETE,"/api/ownership/{id}").permitAll()
         .antMatchers(HttpMethod.POST,"/api/ownership").permitAll()
 
+        //BlackList
+        .antMatchers(HttpMethod.GET,"/api/blacklist").hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.GET,"/api/blacklist/all").hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.GET,"/api/blacklist/{vinNumber}").hasAuthority("ADMIN")
+
+        .antMatchers(HttpMethod.POST,"/api/blacklist").hasAnyAuthority("ADMIN")
+        .antMatchers(HttpMethod.PATCH,"/api/blacklist/de-activate/{vinNumber}").hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.PATCH,"/api/blacklist/activate/{vinNumber}").hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.DELETE,"/api/blacklist/{vinNumber}").hasAuthority("ADMIN")
+
 
 
 
             // Demonstrates another way to add roles to an endpoint
         // .antMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
-        .anyRequest().authenticated());
+        .anyRequest().permitAll());
 
     return http.build();
   }
