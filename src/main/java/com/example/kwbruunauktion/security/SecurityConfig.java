@@ -93,6 +93,9 @@ public class SecurityConfig {
         .antMatchers("/session-demo.html").permitAll()
         .antMatchers("/api/cookie/**").permitAll()
 
+        //allUsers
+            .antMatchers(HttpMethod.GET, "/api/users/all").permitAll()
+
         //userAdmin
         .antMatchers(HttpMethod.GET, "/api/users/admin").permitAll()
         .antMatchers(HttpMethod.GET, "/api/users/admin/all").permitAll()
