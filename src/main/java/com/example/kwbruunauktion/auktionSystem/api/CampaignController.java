@@ -1,12 +1,11 @@
 package com.example.kwbruunauktion.auktionSystem.api;
 
-import com.example.kwbruunauktion.auktionSystem.dto.CampaignRequest;
-import com.example.kwbruunauktion.auktionSystem.dto.CampaignResponse;
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.CampaignRequest;
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.CampaignResponse;
 import com.example.kwbruunauktion.auktionSystem.service.CampaignService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

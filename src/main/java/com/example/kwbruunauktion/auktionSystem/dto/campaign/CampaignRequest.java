@@ -1,11 +1,10 @@
-package com.example.kwbruunauktion.auktionSystem.dto;
+package com.example.kwbruunauktion.auktionSystem.dto.campaign;
 
 
 import com.example.kwbruunauktion.auktionSystem.entity.*;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,7 +28,7 @@ public class CampaignRequest {
 
     private LocalDate localDate;
 
-    private LcdvCodes lcdvCodes;
+    private LcdvCodesRequest lcdvCodes;
 
     private CampaignBid campaignBid;
 

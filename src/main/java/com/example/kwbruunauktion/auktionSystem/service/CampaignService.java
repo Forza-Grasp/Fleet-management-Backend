@@ -1,8 +1,7 @@
 package com.example.kwbruunauktion.auktionSystem.service;
 
-import com.example.kwbruunauktion.auktionSystem.dto.CampaignRequest;
-import com.example.kwbruunauktion.auktionSystem.dto.CampaignResponse;
-import com.example.kwbruunauktion.auktionSystem.dto.OwnershipRequest;
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.CampaignRequest;
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.CampaignResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.Campaign;
 import com.example.kwbruunauktion.auktionSystem.repository.CampaignRepository;
 import org.springframework.stereotype.Service;

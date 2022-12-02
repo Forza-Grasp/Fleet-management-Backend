@@ -1,4 +1,4 @@
-package com.example.kwbruunauktion.auktionSystem.dto;
+package com.example.kwbruunauktion.auktionSystem.dto.campaign;
 
 import com.example.kwbruunauktion.auktionSystem.entity.*;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 public class CampaignResponse {
-    private long id;
+    private Long id;
 
     private CampaignCar campaignCar;
 
@@ -23,7 +23,7 @@ public class CampaignResponse {
 
     private LocalDate activeDate;
 
-    private LcdvCodes lcdvCodes;
+    private LcdvCodesRequest lcdvCodes;
 
     private CampaignBid campaignBid;
 
