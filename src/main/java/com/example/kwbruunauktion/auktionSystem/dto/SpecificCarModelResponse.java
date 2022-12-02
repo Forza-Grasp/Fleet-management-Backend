@@ -28,7 +28,19 @@ public class SpecificCarModelResponse {
 
     private LocalDateTime updated;
 
-    public SpecificCarModelResponse (SpecificCarModel specificCarModel) {
+    private Long colorMixAmounts;
+
+    public SpecificCarModelResponse (SpecificCarModel specificCarModel, Long colorMixAmounts) {
+        this.id = specificCarModel.getId();
+        this.brand = specificCarModel.getBrand();
+        this.model = specificCarModel.getModel();
+        this.modelYear = specificCarModel.getModelYear();
+        this.created = specificCarModel.getCreated();
+        this.updated = specificCarModel.getUpdated();
+        this.colorMixAmounts = colorMixAmounts;
+    }
+
+    public SpecificCarModelResponse (SpecificCarModel specificCarModel){
         this.id = specificCarModel.getId();
         this.brand = specificCarModel.getBrand();
         this.model = specificCarModel.getModel();
