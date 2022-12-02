@@ -12,5 +12,7 @@ public interface BlackListRepository extends JpaRepository<BlackList, Long> {
 
   Optional<BlackList> findBlackListByVinNumber(String vinNumber);
 
+  boolean existsByVinNumber(String vinNumber);
+
 
 }

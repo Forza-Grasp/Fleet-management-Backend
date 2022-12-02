@@ -48,26 +48,23 @@ public class BlackListService {
   }
 
   public void addBlackListedCar(BlackListRequest blackListRequest) {
-    if (blackListRepository.existsById(blackListRequest.getId())) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Blacklist already exist");
-    }
-    if (specificCarRepository.existsByChassisNumber(blackListRequest.getVinNumber())) {
+    if (blackListRepository.existsByVinNumber(blackListRequest.getVinNumber())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "SpecificCarModel already exist");
     }
-    if (blackListRequest.getStatus() == BlackListStatus.ACTIVE) {
-      BlackList blackList = BlackList.blackListBuilderActive()
-          .vinNumber(blackListRequest.getVinNumber())
-          .status(Collections.singletonList(BlackListStatus.ACTIVE))
-          .build();
-      blackListRepository.save(blackList);
-    }else if (blackListRequest.getStatus() == BlackListStatus.INACTIVE) {
+    if (blackListRequest.getStatus() == BlackListStatus.INACTIVE) {
       BlackList blackList = BlackList.blackListBuilderActive()
           .vinNumber(blackListRequest.getVinNumber())
           .status(Collections.singletonList(BlackListStatus.INACTIVE))
           .build();
       blackListRepository.save(blackList);
     }
+    BlackList blackList = BlackList.blackListBuilderActive()
+        .vinNumber(blackListRequest.getVinNumber())
+        .status(Collections.singletonList(BlackListStatus.ACTIVE))
+        .build();
+    blackListRepository.save(blackList);
   }
+
   public void deActivateBlackList(@PathVariable String vinNumber) {
     BlackList blackList = blackListRepository.findBlackListByVinNumber(vinNumber).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Blacklist not found"));
     List<BlackListStatus> statusList = new ArrayList<BlackListStatus>();

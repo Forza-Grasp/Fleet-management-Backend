@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// TODO: 02/12/2022 Test endpoints in Postman
-
 @RestController
 @CrossOrigin
 @RequestMapping("/api/blacklist")
@@ -42,7 +40,7 @@ public class BlackListController {
     blackListService.addBlackListedCar(blackListRequest);
   }
 
-  @PatchMapping("/de-activate/{vinNumber}")
+  @PatchMapping("/deactivate/{vinNumber}")
   public void deActivateBlackListedCar(@PathVariable String vinNumber) {
     blackListService.deActivateBlackList(vinNumber);
   }

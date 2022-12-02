@@ -196,14 +196,14 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.POST,"/api/ownership").permitAll()
 
         //BlackList
-        .antMatchers(HttpMethod.GET,"/api/blacklist").hasAuthority("ADMIN")
-        .antMatchers(HttpMethod.GET,"/api/blacklist/all").hasAuthority("ADMIN")
-        .antMatchers(HttpMethod.GET,"/api/blacklist/{vinNumber}").hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.GET,"/api/blacklist").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/blacklist/all").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/blacklist/{vinNumber}").permitAll()
 
-        .antMatchers(HttpMethod.POST,"/api/blacklist").hasAnyAuthority("ADMIN")
-        .antMatchers(HttpMethod.PATCH,"/api/blacklist/de-activate/{vinNumber}").hasAuthority("ADMIN")
-        .antMatchers(HttpMethod.PATCH,"/api/blacklist/activate/{vinNumber}").hasAuthority("ADMIN")
-        .antMatchers(HttpMethod.DELETE,"/api/blacklist/{vinNumber}").hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.POST,"/api/blacklist").permitAll()
+        .antMatchers(HttpMethod.PATCH,"/api/blacklist/deactivate/{vinNumber}").permitAll()
+        .antMatchers(HttpMethod.PATCH,"/api/blacklist/activate/{vinNumber}").permitAll()
+        .antMatchers(HttpMethod.DELETE,"/api/blacklist/{vinNumber}").permitAll()
 
 
 
