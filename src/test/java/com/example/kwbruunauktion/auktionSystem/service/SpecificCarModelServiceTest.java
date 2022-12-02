@@ -157,9 +157,4 @@ class SpecificCarModelServiceTest {
         assertEquals(1, listOfSpecificCarModels2.size());
         assertEquals("Mazda", listOfSpecificCarModels2.get(0).getBrand());
     }
-
-    @Test
-    void getSpecificModelsWithColorMixCount() {
-
-    }
 }
