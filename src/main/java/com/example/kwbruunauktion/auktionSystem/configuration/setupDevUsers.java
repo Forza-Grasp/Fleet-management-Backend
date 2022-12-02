@@ -54,7 +54,7 @@ public class setupDevUsers implements ApplicationRunner {
         UserAdmin admin1 = UserAdmin.userAdminBuilder()
         .user("admin1")
         .password("admin1")
-        .email("admin@one.dk")
+        .email("admin@onee.dk")
         .firstName("Jens")
         .lastName("Jensen")
         .phoneNumber("12345678")
