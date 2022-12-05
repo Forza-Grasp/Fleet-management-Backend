@@ -1,4 +1,4 @@
-package com.example.kwbruunauktion.auktionSystem.entity;
+package com.example.kwbruunauktion.auktionSystem.entity.campaign;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;

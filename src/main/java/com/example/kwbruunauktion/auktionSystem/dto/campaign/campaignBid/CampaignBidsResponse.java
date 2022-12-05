@@ -1,6 +1,7 @@
-package com.example.kwbruunauktion.auktionSystem.dto.campaign;
+package com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignBid;
 
-import com.example.kwbruunauktion.auktionSystem.entity.Campaign;
+
+import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignBidStatus;
 import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CampaignBidsRequest {
+public class CampaignBidsResponse {
 
     private UserWithRoles userWithRoles;
 
@@ -25,4 +26,5 @@ public class CampaignBidsRequest {
     private int maxAmountOfCars;
 
     private double bidPrice;
+
 }

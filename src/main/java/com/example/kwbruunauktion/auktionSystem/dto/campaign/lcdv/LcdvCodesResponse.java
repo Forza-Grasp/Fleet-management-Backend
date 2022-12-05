@@ -1,16 +1,11 @@
-package com.example.kwbruunauktion.auktionSystem.dto.campaign;
+package com.example.kwbruunauktion.auktionSystem.dto.campaign.lcdv;
 
 
-import com.example.kwbruunauktion.auktionSystem.entity.CampaignBid;
-import com.example.kwbruunauktion.auktionSystem.entity.LcdvCodes;
+import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCodes;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter

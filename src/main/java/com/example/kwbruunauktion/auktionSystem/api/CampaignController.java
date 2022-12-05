@@ -1,7 +1,7 @@
 package com.example.kwbruunauktion.auktionSystem.api;
 
-import com.example.kwbruunauktion.auktionSystem.dto.campaign.CampaignRequest;
-import com.example.kwbruunauktion.auktionSystem.dto.campaign.CampaignResponse;
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignRequest;
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignResponse;
 import com.example.kwbruunauktion.auktionSystem.service.CampaignService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

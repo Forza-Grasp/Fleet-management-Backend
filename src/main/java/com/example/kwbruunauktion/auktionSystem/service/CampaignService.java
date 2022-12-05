@@ -1,8 +1,8 @@
 package com.example.kwbruunauktion.auktionSystem.service;
 
-import com.example.kwbruunauktion.auktionSystem.dto.campaign.CampaignRequest;
-import com.example.kwbruunauktion.auktionSystem.dto.campaign.CampaignResponse;
-import com.example.kwbruunauktion.auktionSystem.entity.Campaign;
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignRequest;
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignResponse;
+import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.repository.CampaignRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;

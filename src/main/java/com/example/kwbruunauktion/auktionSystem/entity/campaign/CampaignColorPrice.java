@@ -1,5 +1,6 @@
-package com.example.kwbruunauktion.auktionSystem.entity;
+package com.example.kwbruunauktion.auktionSystem.entity.campaign;
 
+import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
