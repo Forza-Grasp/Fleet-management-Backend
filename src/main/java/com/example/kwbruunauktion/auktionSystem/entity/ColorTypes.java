@@ -1,13 +1,11 @@
 package com.example.kwbruunauktion.auktionSystem.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,7 +24,7 @@ public class ColorTypes {
   @Column(length = 100, nullable = false)
   private String type;
 
-  @OneToMany(mappedBy = "colorType")
+  @OneToMany(mappedBy = "colorType", cascade = CascadeType.ALL)
   @ToString.Exclude
   private List<ColorMix> colorMixes;
 
