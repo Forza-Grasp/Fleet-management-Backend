@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SpecificCarRepository extends JpaRepository<SpecificCar, Long> {
 
+  boolean existsByChassisNumber(String chassisNumber);
+
 
 }

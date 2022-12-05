@@ -3,6 +3,7 @@ package com.example.kwbruunauktion.auktionSystem.service;
 import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
+import com.example.kwbruunauktion.auktionSystem.repository.BrandColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,11 @@ import java.util.List;
 @Service
 public class SpecificCarModelService {
     SpecificCarModelRepository specificCarModelRepository;
+    BrandColorMixRepository brandColorMixRepository;
 
-    public SpecificCarModelService(SpecificCarModelRepository specificCarModelRepository) {
+    public SpecificCarModelService(SpecificCarModelRepository specificCarModelRepository, BrandColorMixRepository brandColorMixRepository) {
         this.specificCarModelRepository = specificCarModelRepository;
+        this.brandColorMixRepository = brandColorMixRepository;
     }
 
     public SpecificCarModelResponse getSpecificCarModelById(@PathVariable Long id) {
@@ -26,7 +29,11 @@ public class SpecificCarModelService {
     public List<SpecificCarModelResponse> getSpecificCarModels() {
         List<SpecificCarModel> specificCarModels = specificCarModelRepository.findAll();
         return specificCarModels.stream().map(specificCarModel -> new SpecificCarModelResponse(specificCarModel)).toList();
+    }
 
+    public List<SpecificCarModelResponse> getSpecificModelsWithColorMixCount(){
+        List<SpecificCarModel> specificCarModels = specificCarModelRepository.findAll();
+        return specificCarModels.stream().map(specificCarModel -> new SpecificCarModelResponse(specificCarModel,Long.valueOf(brandColorMixRepository.getAllBySpecificCarModelId(specificCarModel.getId()).size()))).toList();
     }
 
     public SpecificCarModelResponse addSpecificCarModel(SpecificCarModelRequest specificCarModelRequest) {

@@ -31,7 +31,6 @@ public class UserEconomyRequest {
 
   public static UserEconomy getUserEconomyEntity(UserEconomyRequest u) {
     return UserEconomy.userEconomyBuilder()
-        .id(u.getId())
         .email(u.getEmail())
         .user(u.getUserName())
         .firstName(u.getFirstName())

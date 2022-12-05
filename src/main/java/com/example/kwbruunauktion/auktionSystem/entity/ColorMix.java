@@ -27,13 +27,13 @@ public class ColorMix {
   @Column(length = 100, nullable = false)
   private String colorCode;
 
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne
   private ColorTypes colorType;
 
   @Column(length = 100, nullable = false)
   private String colorName;
 
-  @OneToMany(mappedBy = "colorMix")
+  @OneToMany(mappedBy = "colorMix", cascade = CascadeType.ALL)
   private List<BrandColorMix> brandColorMix;
 
   @CreationTimestamp

@@ -25,7 +25,14 @@ public class SpecificCarModelController {
     }
 
     @GetMapping()
-    List<SpecificCarModelResponse> getAllSpecificCarModels() {return specificCarModelService.getSpecificCarModels();}
+    List<SpecificCarModelResponse> getAllSpecificCarModels() {
+        return specificCarModelService.getSpecificCarModels();
+    }
+
+    @GetMapping("/all-with-color-mix-count")
+    List<SpecificCarModelResponse> getAllSpecificCarModelsWithColorMixCount(){
+        return specificCarModelService.getSpecificModelsWithColorMixCount();
+    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     SpecificCarModelResponse addSpecificCarModel(@RequestBody SpecificCarModelRequest body) {

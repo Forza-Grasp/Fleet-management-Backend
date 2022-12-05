@@ -49,9 +49,9 @@ public class SpecificDamageService {
     return specificDamages.stream().map(SpecificDamageResponse::new).toList();
   }
 
-  public void addSpecificDamage(SpecificDamageRequest specificDamageRequest) {
-    if (specificDamageRepository.existsById(specificDamageRequest.getId())) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ("SpecificDamage already exists"));
+  public SpecificDamageResponse addSpecificDamage(SpecificDamageRequest specificDamageRequest) {
+    if (!damageMatrixRepository.existsById(specificDamageRequest.getMatrixId())){
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "DamageMatrix does not exist");
     }
     DamageMatrix damageMatrix = damageMatrixRepository.findById(specificDamageRequest.getMatrixId()).orElseThrow();
     SpecificDamage specificDamage = SpecificDamage.builder()
@@ -60,7 +60,7 @@ public class SpecificDamageService {
         .damageMatrix(damageMatrix)
         .build();
     specificDamageRepository.save(specificDamage);
-
+    return new SpecificDamageResponse(specificDamage);
   }
 
   public void deleteSpecificDamage(@PathVariable long id) {

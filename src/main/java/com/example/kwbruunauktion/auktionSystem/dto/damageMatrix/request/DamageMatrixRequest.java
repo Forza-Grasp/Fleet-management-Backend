@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DamageMatrixRequest {
 
@@ -35,7 +37,6 @@ public class DamageMatrixRequest {
 
   public static DamageMatrix getDamageMatrixEntity(DamageMatrixRequest d){
     return DamageMatrix.builder()
-        .id(d.getMatrixId())
         .valuta(d.getValuta())
         .userWithRoles(d.getUserWithRoles())
         .created(d.getCreated())

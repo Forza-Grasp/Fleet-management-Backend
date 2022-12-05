@@ -44,9 +44,7 @@ public class UserAdminService {
   }
 
   public UserAdminResponse addUserAdmin(UserAdminRequest userAdminRequest) {
-    if (userAdminRepository.existsById(userAdminRequest.getId())) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User with this ID already exist");
-    }if (userAdminRepository.existsByUsername(userAdminRequest.getUserName())) {
+  if (userAdminRepository.existsByUsername(userAdminRequest.getUserName())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this username already exist");
     }
     UserAdmin newUserAdmin = UserAdminRequest.getUserAdminEntity(userAdminRequest);

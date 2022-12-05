@@ -41,9 +41,6 @@ public class UserBuyerService {
 
   // Create user buyer
   public UserBuyerResponse createUserBuyer(UserBuyerRequest userBuyerRequest) {
-    if (userBuyerRepository.existsById(userBuyerRequest.getId())) {
-      throw new RuntimeException("User buyer with this ID already exist");
-    }
     if (userBuyerRepository.existsByUsername(userBuyerRequest.getUsername())) {
       throw new RuntimeException("User buyer with this Username already exist");
     }

@@ -80,7 +80,7 @@ public class SecurityConfig {
         .jwtAuthenticationConverter(authenticationConverter());
 
     http.authorizeHttpRequests((authorize) -> authorize
-        //Obviously we need to be able to login without being logged in :-)
+
         .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
         .antMatchers(HttpMethod.PATCH, "/api/auth/reset-password").permitAll()
 
@@ -92,6 +92,9 @@ public class SecurityConfig {
         //Next two lines only required if you plan to do the cookie/session-demo from within this project
         .antMatchers("/session-demo.html").permitAll()
         .antMatchers("/api/cookie/**").permitAll()
+
+        //allUsers
+            .antMatchers(HttpMethod.GET, "/api/users/all").permitAll()
 
         //userAdmin
         .antMatchers(HttpMethod.GET, "/api/users/admin").permitAll()
@@ -157,13 +160,8 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.POST,"/api/color-types").permitAll()
 
 
-
-        //Allow anonymous access to this endpoint
-            //.antMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
-
         //necessary to allow for "nice" JSON Errors
         .antMatchers("/error").permitAll()
-        //.antMatchers("/", "/**").permitAll()
 
         //SpecificCarModel
         .antMatchers(HttpMethod.GET, "/api/specific-car-model").permitAll()
@@ -184,8 +182,6 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET,"/api/cars/all").hasAnyAuthority("ADMIN","USER")
         .antMatchers(HttpMethod.GET,"/api/cars/filter").hasAnyAuthority("ADMIN","USER")
 
-
-
         //BrandColorMix
         .antMatchers(HttpMethod.GET, "/api/brand-color-mix").permitAll()
         .antMatchers(HttpMethod.GET, "/api/brand-color-mix/all").permitAll()
@@ -195,14 +191,22 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.DELETE, "/api/brand-color-mix").permitAll()
 
 
-
-        // Demonstrates another way to add roles to an endpoint
         //Ownership
         .antMatchers(HttpMethod.GET,"/api/ownership").permitAll()
         .antMatchers(HttpMethod.GET,"/api/ownership/{id}").permitAll()
         .antMatchers(HttpMethod.PUT,"/api/ownership/{id}").permitAll()
         .antMatchers(HttpMethod.DELETE,"/api/ownership/{id}").permitAll()
         .antMatchers(HttpMethod.POST,"/api/ownership").permitAll()
+
+        //BlackList
+        .antMatchers(HttpMethod.GET,"/api/blacklist").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/blacklist/all").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/blacklist/{vinNumber}").permitAll()
+
+        .antMatchers(HttpMethod.POST,"/api/blacklist").permitAll()
+        .antMatchers(HttpMethod.PATCH,"/api/blacklist/deactivate/{vinNumber}").permitAll()
+        .antMatchers(HttpMethod.PATCH,"/api/blacklist/activate/{vinNumber}").permitAll()
+        .antMatchers(HttpMethod.DELETE,"/api/blacklist/{vinNumber}").permitAll()
 
             //Campaign
         .antMatchers(HttpMethod.GET,"/api/campaign").permitAll()
@@ -216,7 +220,7 @@ public class SecurityConfig {
 
             // Demonstrates another way to add roles to an endpoint
         // .antMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
-        .anyRequest().authenticated());
+        .anyRequest().permitAll());
 
     return http.build();
   }

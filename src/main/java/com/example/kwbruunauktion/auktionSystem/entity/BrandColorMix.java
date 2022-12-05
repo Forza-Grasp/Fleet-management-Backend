@@ -3,6 +3,7 @@ package com.example.kwbruunauktion.auktionSystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -24,10 +25,10 @@ public class BrandColorMix {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne
   private SpecificCarModel specificCarModel;
 
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne
   private ColorMix colorMix;
 
   @CreationTimestamp

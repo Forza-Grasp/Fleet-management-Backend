@@ -1,6 +1,5 @@
 package com.example.kwbruunauktion.auktionSystem.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,8 +24,7 @@ public class ColorTypes {
   @Column(length = 100, nullable = false)
   private String type;
 
-  @OneToMany(mappedBy = "colorType")
-  @JsonIgnore
+  @OneToMany(mappedBy = "colorType", cascade = CascadeType.ALL)
   @ToString.Exclude
   private List<ColorMix> colorMixes;
 

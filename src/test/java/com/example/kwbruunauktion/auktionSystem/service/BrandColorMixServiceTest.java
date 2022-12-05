@@ -123,7 +123,7 @@ class BrandColorMixServiceTest {
 
     @BeforeEach
     public void setUpService() {brandColorMixService = new BrandColorMixService(brandColorMixRepository, specificCarModelRepository, colorMixRepository);
-    colorTypesService = new ColorTypesService(colorTypesRepository);}
+    colorTypesService = new ColorTypesService(colorTypesRepository, colorMixRepository);}
 
     @Test
     void getBrandColorMixById() {

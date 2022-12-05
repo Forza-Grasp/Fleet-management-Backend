@@ -40,8 +40,8 @@ public class DamageMatrixController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public void addDamageMatrix(@RequestBody DamageMatrixRequest damageMatrixRequest){
-    damageMatrixService.addDamageMatrix(damageMatrixRequest);
+  public DamageMatrixResponse addDamageMatrix(@RequestBody DamageMatrixRequest damageMatrixRequest){
+    return damageMatrixService.addDamageMatrix(damageMatrixRequest);
   }
 
   @DeleteMapping("/{id}")
