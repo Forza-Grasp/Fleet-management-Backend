@@ -20,13 +20,13 @@ import java.util.stream.Collectors;
 public class ColorTypesService {
 
     ColorTypesRepository colorTypesRepository;
-    ColorMixRepository colorMixRepository;
+    ColorMixService colorMixService;
 
 
 
-    public ColorTypesService(ColorTypesRepository colorTypesRepository, ColorMixRepository colorMixRepository) {
+    public ColorTypesService(ColorTypesRepository colorTypesRepository, ColorMixService colorMixService) {
         this.colorTypesRepository = colorTypesRepository;
-        this.colorMixRepository = colorMixRepository;
+        this.colorMixService = colorMixService;
     }
 
     public ColorTypesResponse addColorType(ColorTypesRequest colorTypesRequest){
@@ -67,8 +67,7 @@ public class ColorTypesService {
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Color type with id: "+id+" could not be found"));
 
-        List<ColorMix> colorMixes = colorMixRepository.findAllByColorTypeId(id);
-        System.out.println(colorMixes.size());
+        colorMixService.setColorTypesToNone(id);
         colorTypesRepository.deleteById(id);
 
 

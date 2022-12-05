@@ -28,6 +28,7 @@ class BrandColorMixServiceTest {
     public static BrandColorMixService brandColorMixService;
     public static SpecificCarModelRepository specificCarModelRepository;
     public static ColorMixRepository colorMixRepository;
+    public static ColorMixService colorMixService;
     public static ColorTypesRepository colorTypesRepository;
 
     public static ColorTypesService colorTypesService;
@@ -123,7 +124,7 @@ class BrandColorMixServiceTest {
 
     @BeforeEach
     public void setUpService() {brandColorMixService = new BrandColorMixService(brandColorMixRepository, specificCarModelRepository, colorMixRepository);
-    colorTypesService = new ColorTypesService(colorTypesRepository, colorMixRepository);}
+    colorTypesService = new ColorTypesService(colorTypesRepository, colorMixService);}
 
     @Test
     void getBrandColorMixById() {

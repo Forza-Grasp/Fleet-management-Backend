@@ -3,6 +3,7 @@ package com.example.kwbruunauktion.auktionSystem.service;
 import com.example.kwbruunauktion.auktionSystem.dto.colorMix.ColorMixRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.colorMix.ColorMixResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
+import com.example.kwbruunauktion.auktionSystem.entity.ColorTypes;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorTypesRepository;
 import org.springframework.http.HttpStatus;
@@ -62,4 +63,12 @@ public class ColorMixService {
     }
 
 
+    public void setColorTypesToNone(Long id) {
+        List<ColorMix> colorMixes = colorMixRepository.findAllByColorTypeId(id);
+        colorMixes.forEach(colorMix -> colorMix.setColorType(null));
+
+
+        colorMixRepository.saveAll(colorMixes);
+
+    }
 }

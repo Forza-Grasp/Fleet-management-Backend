@@ -22,7 +22,11 @@ public class ColorMixResponse {
     public ColorMixResponse(ColorMix colorMix){
         this.id = colorMix.getId();
         this.colorCode = colorMix.getColorCode();
-        this.colorTypesResponse = new ColorTypesResponse(colorMix.getColorType());
+        if(colorMix.getColorType() == null){
+            colorTypesResponse = null;
+        } else {
+            this.colorTypesResponse = new ColorTypesResponse(colorMix.getColorType());
+        }
         this.colorName = colorMix.getColorName();
     }
 

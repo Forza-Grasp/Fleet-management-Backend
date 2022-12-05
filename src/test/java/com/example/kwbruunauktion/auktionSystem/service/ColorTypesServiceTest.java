@@ -22,6 +22,8 @@ class ColorTypesServiceTest {
     public static ColorTypesRepository colorTypesRepository;
     public static ColorTypesService colorTypesService;
 
+    public static ColorMixService colorMixService;
+
     @BeforeAll
     public static void initiateData(@Autowired ColorTypesRepository colorTypesRepository){
         ColorTypesServiceTest.colorTypesRepository = colorTypesRepository;
@@ -57,7 +59,7 @@ class ColorTypesServiceTest {
 
     @BeforeEach
     public void initiateServiceClass(){
-        colorTypesService = new ColorTypesService(colorTypesRepository, colorTypesService.colorMixRepository);
+        colorTypesService = new ColorTypesService(colorTypesRepository, colorMixService);
 
     }
 
