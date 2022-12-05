@@ -43,7 +43,7 @@ public class DamageMatrixService {
     return new DamageMatrixResponse(foundDamageMatrix);
   }
 
-  public void addDamageMatrix(DamageMatrixRequest damageMatrixRequest) {
+  public DamageMatrixResponse addDamageMatrix(DamageMatrixRequest damageMatrixRequest) {
     if (damageMatrixRepository.existsById(damageMatrixRequest.getMatrixId())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "DamageMatrix already exist");
     }
@@ -52,11 +52,11 @@ public class DamageMatrixService {
       DamageMatrix newDamageMatrix = DamageMatrixRequest.getDamageMatrixEntity(damageMatrixRequest);
       newDamageMatrix.setUserWithRoles(userBuyer);
       newDamageMatrix = damageMatrixRepository.save(newDamageMatrix);
-      new DamageMatrixResponse(newDamageMatrix);
+      return new DamageMatrixResponse(newDamageMatrix);
     } else {
       DamageMatrix newDamageMatrix = DamageMatrixRequest.getDamageMatrixEntity(damageMatrixRequest);
       newDamageMatrix = damageMatrixRepository.save(newDamageMatrix);
-      new DamageMatrixResponse(newDamageMatrix);
+      return new DamageMatrixResponse(newDamageMatrix);
     }
   }
 
