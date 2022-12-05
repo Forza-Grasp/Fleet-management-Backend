@@ -42,7 +42,7 @@ public class CampaignController {
 
     @DeleteMapping ("/{id}")
     ResponseEntity<Boolean> deleteCampaign (@PathVariable Long id){
-        campaignService.deleteCampaigne(id);
+        campaignService.deleteCampaign(id);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 }

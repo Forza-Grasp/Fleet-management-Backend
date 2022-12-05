@@ -25,7 +25,7 @@ public class Campaign {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne (cascade = CascadeType.PERSIST)
     private CampaignCar campaignCar;
 
     @Enumerated(EnumType.STRING)
@@ -37,7 +37,7 @@ public class Campaign {
     private LocalDate activeDate;
 
     @JoinTable(name = "campaign_lcdvcodes")
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private List<LcdvCodes> lcdvCodes;
 
@@ -45,7 +45,7 @@ public class Campaign {
     @ToString.Exclude
     private List<CampaignBid> campaignBids;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private List<CampaignColorPrice> campaignColorPrices;
 

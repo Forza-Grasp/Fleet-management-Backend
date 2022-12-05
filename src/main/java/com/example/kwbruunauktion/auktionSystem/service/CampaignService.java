@@ -13,6 +13,7 @@ import com.example.kwbruunauktion.auktionSystem.repository.LcdvCodesRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,8 +73,7 @@ public class CampaignService {
         campaignRepository.save(campaign);
     }
 
-
-    public void deleteCampaigne(@PathVariable Long id) {
+    public void deleteCampaign(@PathVariable Long id) {
         Campaign campaign = campaignRepository.findById(id).orElseThrow(() -> new RuntimeException("campaign with this ID does not exist"));
         campaignRepository.delete(campaign);
     }
