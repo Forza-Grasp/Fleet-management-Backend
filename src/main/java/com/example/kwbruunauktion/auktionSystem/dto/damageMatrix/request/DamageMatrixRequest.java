@@ -35,7 +35,6 @@ public class DamageMatrixRequest {
 
   public static DamageMatrix getDamageMatrixEntity(DamageMatrixRequest d){
     return DamageMatrix.builder()
-        .id(d.getMatrixId())
         .valuta(d.getValuta())
         .userWithRoles(d.getUserWithRoles())
         .created(d.getCreated())
