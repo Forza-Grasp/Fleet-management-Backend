@@ -43,9 +43,6 @@ public class UserEconomyService {
   }
 
   public void addUserEconomy(UserEconomyRequest userEconomyRequest) {
-    if (userEconomyRepository.existsById(userEconomyRequest.getId())) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this ID already exist");
-    }
     if (userEconomyRepository.existsByUsername(userEconomyRequest.getUserName())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this username already exist");
     }

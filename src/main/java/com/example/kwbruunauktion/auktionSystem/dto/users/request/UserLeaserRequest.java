@@ -32,13 +32,11 @@ public class UserLeaserRequest {
     private String city;
     private String zipCode;
     private String country;
-
     private List<SpecificCarModel> viewableCarBrands;
     private Ownership ownership;
 
     public static UserLeaser getUserLeaserEntity(UserLeaserRequest userLeaserRequest) {
         return UserLeaser.userLeaserBuilder()
-                .id(userLeaserRequest.getId())
                 .user(userLeaserRequest.getUsername())
                 .email(userLeaserRequest.getEmail())
                 .password(userLeaserRequest.getPassword())

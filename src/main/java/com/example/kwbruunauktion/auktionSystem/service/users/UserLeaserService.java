@@ -43,12 +43,9 @@ public class UserLeaserService {
 
     // create user leaser
     public UserLeaserResponse createUserLeaser(UserLeaserRequest userLeaserRequest) {
-        if (userLeaserRepository.existsById(userLeaserRequest.getId())) {
-            throw new RuntimeException("User leaser with this ID already exist");
-        } if (userLeaserRepository.existsByUsername(userLeaserRequest.getUsername())) {
+        if (userLeaserRepository.existsByUsername(userLeaserRequest.getUsername())) {
             throw new RuntimeException("User leaser with this Username already exist");
         }
-
         UserLeaser newUserLeaser = UserLeaserRequest.getUserLeaserEntity(userLeaserRequest);
         newUserLeaser = userLeaserRepository.save(newUserLeaser);
 
@@ -59,7 +56,6 @@ public class UserLeaserService {
     // edit user leaser
     public void editUserLeaser(UserLeaserRequest userLeaserRequest) {
         UserLeaser userLeaser = userLeaserRepository.findById(userLeaserRequest.getId()).orElseThrow(() -> new RuntimeException("User leaser with this ID does not exist"));
-
         userLeaser.setEmail(userLeaserRequest.getEmail());
         userLeaser.setUsername(userLeaserRequest.getUsername());
         userLeaser.setFirstName(userLeaserRequest.getFirstName());

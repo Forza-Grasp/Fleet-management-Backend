@@ -158,4 +158,13 @@ class UserAdminServiceTest {
     userAdminService.resetPassword(request);
     assertTrue(BCrypt.checkpw("12345", userAdminRepository.findById(1L).get().getPassword()));
   }
+
+  @Test
+  void amountUserWithRoles(){
+    assertEquals(4, userWithRolesRepository.count());
+    System.out.println("\n");
+    userWithRolesRepository.findAll().forEach(System.out::println);
+    System.out.println("\n");
+  }
+
 }
