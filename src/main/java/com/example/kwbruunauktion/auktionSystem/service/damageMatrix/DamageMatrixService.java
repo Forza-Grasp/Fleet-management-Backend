@@ -44,20 +44,14 @@ public class DamageMatrixService {
   }
 
   public DamageMatrixResponse addDamageMatrix(DamageMatrixRequest damageMatrixRequest) {
-    if (damageMatrixRepository.existsById(damageMatrixRequest.getMatrixId())) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "DamageMatrix already exist");
-    }
-    if (damageMatrixRequest.getUserWithRoles() == null) {
       UserBuyer userBuyer = userBuyerRepository.findById(damageMatrixRequest.getUserId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-      DamageMatrix newDamageMatrix = DamageMatrixRequest.getDamageMatrixEntity(damageMatrixRequest);
-      newDamageMatrix.setUserWithRoles(userBuyer);
+    System.out.println(damageMatrixRequest);
+      DamageMatrix newDamageMatrix = DamageMatrix.builder()
+              .userWithRoles(userBuyer)
+              .valuta(damageMatrixRequest.getValuta())
+              .build();
       newDamageMatrix = damageMatrixRepository.save(newDamageMatrix);
       return new DamageMatrixResponse(newDamageMatrix);
-    } else {
-      DamageMatrix newDamageMatrix = DamageMatrixRequest.getDamageMatrixEntity(damageMatrixRequest);
-      newDamageMatrix = damageMatrixRepository.save(newDamageMatrix);
-      return new DamageMatrixResponse(newDamageMatrix);
-    }
   }
 
   public void deleteDamageMatrix(@PathVariable Long id) {

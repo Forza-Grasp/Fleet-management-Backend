@@ -41,8 +41,8 @@ public class SpecificDamageController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public void addSpecificDamage(@RequestBody SpecificDamageRequest specificDamageRequest) {
-    specificDamageService.addSpecificDamage(specificDamageRequest);
+  public SpecificDamageResponse addSpecificDamage(@RequestBody SpecificDamageRequest specificDamageRequest) {
+    return specificDamageService.addSpecificDamage(specificDamageRequest);
   }
 
   @DeleteMapping("/{id}")
