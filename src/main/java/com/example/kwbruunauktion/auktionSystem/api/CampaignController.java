@@ -30,6 +30,13 @@ public class CampaignController {
         return campaignService.getCampaignById(id);
     }
 
+    @DeleteMapping ("/{id}")
+    ResponseEntity<Boolean> deleteCampaign (@PathVariable Long id){
+        campaignService.deleteCampaign(id);
+        return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
+    /*
     @PutMapping ("/{id}")
     ResponseEntity <Boolean> editCampaign(@PathVariable CampaignRequest campaignRequest, @PathVariable Long id){
         campaignService.editCampaign(campaignRequest, id);
@@ -40,9 +47,5 @@ public class CampaignController {
         return campaignService.addCampaign(body);
     }
 
-    @DeleteMapping ("/{id}")
-    ResponseEntity<Boolean> deleteCampaign (@PathVariable Long id){
-        campaignService.deleteCampaign(id);
-        return new ResponseEntity<>(true, HttpStatus.OK);
-    }
+     */
 }

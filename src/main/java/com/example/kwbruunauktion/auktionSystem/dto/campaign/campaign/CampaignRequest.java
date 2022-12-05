@@ -1,11 +1,7 @@
 package com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign;
 
 
-import com.example.kwbruunauktion.auktionSystem.dto.campaign.lcdv.LcdvCodesRequest;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignBid;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignCar;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignColorPrice;
+
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -36,7 +32,7 @@ public class CampaignRequest {
     private List<Long> lcdvCodes;
 
     private List<Long> campaignColorPrices;
-    
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm",shape = JsonFormat.Shape.STRING)
     private LocalDateTime created;
 
