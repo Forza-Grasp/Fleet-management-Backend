@@ -15,10 +15,10 @@ public class LcdvCodesResponse {
 
     private Long id;
 
-    private LcdvCodes lcdvCode;
+    private String lcdvCode;
 
     public LcdvCodesResponse(LcdvCodes lcdvCodes){
         this.id = lcdvCodes.getId();
-        this.lcdvCode = lcdvCodes;
+        this.lcdvCode = lcdvCodes.getLcdvCode();
     }
 }

@@ -39,7 +39,7 @@ public class CampaignService {
 
     public List<CampaignResponse> getCampaigns() {
         List<Campaign> campaigns = campaignRepository.findAll();
-        return campaigns.stream().map(o -> new CampaignResponse(o)).collect(Collectors.toList());
+        return campaigns.stream().map(CampaignResponse::new).collect(Collectors.toList());
     }
 
     public CampaignResponse addCampaign(CampaignRequest campaignRequest) {
