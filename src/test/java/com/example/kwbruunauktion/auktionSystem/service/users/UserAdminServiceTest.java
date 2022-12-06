@@ -161,7 +161,7 @@ class UserAdminServiceTest {
 
   @Test
   void amountUserWithRoles(){
-    assertEquals(4, userWithRolesRepository.count());
+    assertEquals(4, userAdminRepository.count());
     System.out.println("\n");
     userWithRolesRepository.findAll().forEach(System.out::println);
     System.out.println("\n");
