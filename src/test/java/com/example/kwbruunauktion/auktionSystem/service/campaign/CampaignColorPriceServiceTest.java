@@ -8,7 +8,7 @@ import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignCar;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignColorPrice;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCodes;
+import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCode;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.example.kwbruunauktion.auktionSystem.repository.BrandColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;
@@ -16,7 +16,7 @@ import com.example.kwbruunauktion.auktionSystem.repository.ColorTypesRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignColorPriceRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
-import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodesRepository;
+import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodeRepository;
 import com.example.kwbruunauktion.auktionSystem.service.CampaignColorPriceService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +40,7 @@ class CampaignColorPriceServiceTest {
     public static ColorMixRepository colorMixRepository;
     public static ColorTypesRepository colorTypesRepository;
     public static SpecificCarModelRepository specificCarModelRepository;
-    public static LcdvCodesRepository lcdvCodesRepository;
+    public static LcdvCodeRepository lcdvCodeRepository;
 
     @BeforeAll
     public static void setupData(@Autowired CampaignColorPriceRepository campaignColorPrice_Repository,
@@ -49,7 +49,7 @@ class CampaignColorPriceServiceTest {
                                  @Autowired ColorMixRepository colorMix_Repository,
                                  @Autowired ColorTypesRepository colorTypes_Repository,
                                  @Autowired SpecificCarModelRepository specificCarModel_Repository,
-                                 @Autowired LcdvCodesRepository lcdvCodes_Repository) {
+                                 @Autowired LcdvCodeRepository lcdvCodes_Repository) {
 
         campaignColorPriceRepository = campaignColorPrice_Repository;
         brandColorMixRepository = brandColorMix_Repository;
@@ -57,26 +57,26 @@ class CampaignColorPriceServiceTest {
         colorMixRepository = colorMix_Repository;
         colorTypesRepository = colorTypes_Repository;
         specificCarModelRepository = specificCarModel_Repository;
-        lcdvCodesRepository = lcdvCodes_Repository;
+        lcdvCodeRepository = lcdvCodes_Repository;
 
 
-        List<LcdvCodes> lcdvCodes = List.of(
-                LcdvCodes.builder()
+        List<LcdvCode> lcdvCodes = List.of(
+                LcdvCode.builder()
                         .lcdvCode("0")
                         .build(),
-                LcdvCodes.builder()
+                LcdvCode.builder()
                         .lcdvCode("1")
                         .build(),
-                LcdvCodes.builder()
+                LcdvCode.builder()
                         .lcdvCode("2")
                         .build(),
-                LcdvCodes.builder()
+                LcdvCode.builder()
                         .lcdvCode("3")
                         .build(),
-                LcdvCodes.builder()
+                LcdvCode.builder()
                         .lcdvCode("4")
                         .build(),
-                LcdvCodes.builder()
+                LcdvCode.builder()
                         .lcdvCode("5")
                         .build()
         );
@@ -102,7 +102,7 @@ class CampaignColorPriceServiceTest {
                 .activeDate(LocalDate.now())
                 .build();
         campaignRepository.save(campaign1);
-        lcdvCodesRepository.saveAll(lcdvCodes);
+        lcdvCodeRepository.saveAll(lcdvCodes);
 
 
 
