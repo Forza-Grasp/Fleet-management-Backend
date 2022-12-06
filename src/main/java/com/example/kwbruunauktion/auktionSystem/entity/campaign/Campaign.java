@@ -45,7 +45,7 @@ public class Campaign {
     @ToString.Exclude
     private List<CampaignBid> campaignBids;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<CampaignColorPrice> campaignColorPrices;
 
