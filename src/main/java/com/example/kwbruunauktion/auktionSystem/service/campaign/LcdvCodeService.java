@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class LcdvCodesService {
+public class LcdvCodeService {
     private final LcdvCodeRepository lcdvCodeRepository;
     private final CampaignRepository campaignRepository;
 
-    public LcdvCodesService(LcdvCodeRepository lcdvCodeRepository,CampaignRepository campaignRepository) {
+    public LcdvCodeService(LcdvCodeRepository lcdvCodeRepository, CampaignRepository campaignRepository) {
         this.lcdvCodeRepository = lcdvCodeRepository;
         this.campaignRepository = campaignRepository;
     }
