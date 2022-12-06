@@ -18,7 +18,6 @@ import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepos
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignColorPriceRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodeRepository;
-import com.example.kwbruunauktion.auktionSystem.service.CampaignColorPriceService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

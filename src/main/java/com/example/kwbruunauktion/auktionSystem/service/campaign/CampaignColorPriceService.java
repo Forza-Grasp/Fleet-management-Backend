@@ -1,4 +1,4 @@
-package com.example.kwbruunauktion.auktionSystem.service;
+package com.example.kwbruunauktion.auktionSystem.service.campaign;
 
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignColor.CampaignColorPriceRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignColor.CampaignColorPriceResponse;

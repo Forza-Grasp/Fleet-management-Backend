@@ -25,8 +25,7 @@ public class LcdvCode {
     @Column(nullable = false, length = 400)
     private String lcdvCode;
 
-    @JoinTable(name = "lcdvcodes_campaign")
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "lcdvCodes")
     @ToString.Exclude
     private List<Campaign> campaign;
 

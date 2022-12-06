@@ -26,7 +26,7 @@ public class CampaignColorPrice {
     @JoinColumn(name = "brand_color_mix_id")
     private BrandColorMix brandColorMix;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "campaign_id")
     private Campaign campaign;
 

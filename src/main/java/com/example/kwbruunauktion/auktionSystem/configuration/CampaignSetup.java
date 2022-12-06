@@ -23,6 +23,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -35,8 +36,6 @@ public class CampaignSetup implements ApplicationRunner {
     SpecificCarModelRepository specificCarModelRepository;
     ColorMixRepository colorMixRepository;
     ColorTypesRepository colorTypesRepository;
-
-
 
 
     public CampaignSetup(CampaignRepository campaignRepository,
@@ -100,12 +99,46 @@ public class CampaignSetup implements ApplicationRunner {
                         .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
                         .build())
                 .campaignStatus(CampaignStatus.ACTIVE)
-                .lcdvCodes(lcdvCodes)
                 .activeDate(LocalDate.now())
                 .build();
-        campaignRepository.save(campaign1);
+        Campaign campaign2 = Campaign.builder()
+                .campaignCar(CampaignCar.builder()
+                        .brand("BMW")
+                        .model("X5")
+                        .campaignPictureOne("picture1")
+                        .damageAndMileage("damageAndMileage")
+                        .description("description")
+                        .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                        .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
+                        .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+                        .monthsRegistered(12)
+                        .mileage("mileage")
+                        .depositPerCar("1000")
+                        .modelText("modelText")
+                        .supplyingConditions("supplyingConditions")
+                        .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                        .build())
+                .campaignStatus(CampaignStatus.ACTIVE)
+                .activeDate(LocalDate.now())
+                .build();
+        List<Campaign> campaignList = List.of(campaign1, campaign2);
+        campaignRepository.saveAll(campaignList);
         lcdvCodeRepository.saveAll(lcdvCodes);
+        campaign1.setLcdvCodes(lcdvCodes);
+        campaignRepository.save(campaign1);
+        campaign2.setLcdvCodes(lcdvCodes);
+        campaignRepository.save(campaign2);
 
+        for(LcdvCode l : lcdvCodes){
+            l.setCampaign(Collections.singletonList(campaign1));
+            lcdvCodeRepository.save(l);
+        }
+        for(LcdvCode l : lcdvCodes){
+            l.setCampaign(Collections.singletonList(campaign2));
+            lcdvCodeRepository.save(l);
+        }
+        campaignRepository.deleteById(1L);
+        campaignRepository.deleteById(2L);
 
 
         SpecificCarModel specificCarModel1 = SpecificCarModel.builder()
@@ -177,13 +210,14 @@ public class CampaignSetup implements ApplicationRunner {
         System.out.println("\n" + brandColorMix1 + "\n");
         brandColorMixRepository.save(brandColorMix1);
 
+        //CampaignColorPrice campaignColorPrice = CampaignColorPrice.builder()
+        //        .price(1000)
+        //        .brandColorMix(brandColorMix1)
+        //        .campaign(campaign1)
+        //        .build();
+        //campaignColorPriceRepository.save(campaignColorPrice);
 
-        CampaignColorPrice campaignColorPrice = CampaignColorPrice.builder()
-                .price(1000)
-                .brandColorMix(brandColorMix1)
-                .campaign(campaign1)
-                .build();
-        campaignColorPriceRepository.save(campaignColorPrice);
+
 
     }
 }
