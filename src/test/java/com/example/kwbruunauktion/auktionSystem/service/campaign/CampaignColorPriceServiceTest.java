@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.service.campaign;
 
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignColor.CampaignColorPriceRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignColor.CampaignColorPriceResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
@@ -49,7 +50,7 @@ class CampaignColorPriceServiceTest {
                                  @Autowired ColorMixRepository colorMix_Repository,
                                  @Autowired ColorTypesRepository colorTypes_Repository,
                                  @Autowired SpecificCarModelRepository specificCarModel_Repository,
-                                 @Autowired LcdvCodeRepository lcdvCodes_Repository) {
+                                 @Autowired LcdvCodeRepository lcdvCode_Repository) {
 
         campaignColorPriceRepository = campaignColorPrice_Repository;
         brandColorMixRepository = brandColorMix_Repository;
@@ -57,7 +58,7 @@ class CampaignColorPriceServiceTest {
         colorMixRepository = colorMix_Repository;
         colorTypesRepository = colorTypes_Repository;
         specificCarModelRepository = specificCarModel_Repository;
-        lcdvCodeRepository = lcdvCodes_Repository;
+        lcdvCodeRepository = lcdvCode_Repository;
 
 
         List<LcdvCode> lcdvCodes = List.of(
@@ -207,27 +208,49 @@ class CampaignColorPriceServiceTest {
     @Test
     void getAllCampaignColorPrice() {
         List<CampaignColorPriceResponse> campaignColorPriceResponses = campaignColorPriceService.getAllCampaignColorPrice();
-        System.out.println(campaignColorPriceResponses.size());
-
+        assertEquals(3, campaignColorPriceResponses.size());
     }
 
     @Test
     void getCampaignColorPriceById() {
+        CampaignColorPriceResponse campaignColorPriceResponse = campaignColorPriceService.getCampaignColorPriceById(1L);
+        assertEquals(1000, campaignColorPriceResponse.getPrice());
     }
 
     @Test
     void addCampaignColorPrice() {
+
+        CampaignColorPriceRequest campaignColorPriceRequest = CampaignColorPriceRequest.builder()
+                .price(4000)
+                .brandColorMixId(1L)
+                .campaignId(1L)
+                .build();
+        CampaignColorPriceResponse campaignColorPriceResponse = campaignColorPriceService.addCampaignColorPrice(campaignColorPriceRequest);
+        assertEquals(4000, campaignColorPriceResponse.getPrice());
+
     }
 
     @Test
     void getCampaignColorPriceByCampaignId() {
+        CampaignColorPriceResponse campaignColorPriceResponses = campaignColorPriceService.getCampaignColorPriceByCampaignId(1L);
+        assertEquals(1000,campaignColorPriceResponses.getPrice() );
     }
 
     @Test
     void deleteCampaignColorPrice() {
+        campaignColorPriceService.deleteCampaignColorPrice(1L);
+        assertEquals(2, campaignColorPriceRepository.count());
     }
 
     @Test
     void editCampaignColorPrice() {
+        CampaignColorPriceRequest campaignColorPriceRequest = CampaignColorPriceRequest.builder()
+                .id(1L)
+                .price(4000)
+                .brandColorMixId(1L)
+                .campaignId(1L)
+                .build();
+        campaignColorPriceService.editCampaignColorPrice(campaignColorPriceRequest);
+        assertEquals(4000, campaignColorPriceRepository.findById(1L).get().getPrice());
     }
 }
