@@ -70,11 +70,12 @@ public class CampaignColorPriceService {
         campaignColorPriceRepository.deleteById(id);
     }
 
-    public void editCampaignColorPrice(CampaignColorPriceRequest campaignColorPriceRequest) {
+    public CampaignColorPriceResponse editCampaignColorPrice(CampaignColorPriceRequest campaignColorPriceRequest) {
         CampaignColorPrice campaignColorPrice = campaignColorPriceRepository.findById(campaignColorPriceRequest.getId())
                 .orElseThrow(() -> new RuntimeException("CampaignColorPrice with that ID not found"));
         campaignColorPrice.setPrice(campaignColorPriceRequest.getPrice());
         campaignColorPriceRepository.save(campaignColorPrice);
+        return new CampaignColorPriceResponse(campaignColorPrice);
     }
 
 }

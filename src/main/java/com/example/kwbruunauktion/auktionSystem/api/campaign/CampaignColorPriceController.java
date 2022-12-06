@@ -1,13 +1,12 @@
 package com.example.kwbruunauktion.auktionSystem.api.campaign;
 
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignColor.CampaignColorPriceRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignColor.CampaignColorPriceResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignColorPrice;
 import com.example.kwbruunauktion.auktionSystem.service.CampaignColorPriceService;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,17 +23,32 @@ public class CampaignColorPriceController {
     }
 
     @GetMapping("/all")
-    public List<CampaignColorPriceResponse> getAllCampaignColorPrices(){
+    public List<CampaignColorPriceResponse> getAllCampaignColorPrices() {
         return campaignColorPriceService.getAllCampaignColorPrice();
     }
+
     @GetMapping
-    public List<CampaignColorPriceResponse> getAllCampaignColorPrices(Pageable p){
+    public List<CampaignColorPriceResponse> getAllCampaignColorPrices(Pageable p) {
         return campaignColorPriceService.getAllCampaignColorPrice(p);
     }
 
+    @GetMapping("/{id}")
+    public CampaignColorPriceResponse getCampaignColorPriceById(@PathVariable Long id) {
+        return campaignColorPriceService.getCampaignColorPriceById(id);
+    }
 
+    @DeleteMapping("/{id}")
+    public void deleteCampaignColorPriceById(@PathVariable Long id) {
+        campaignColorPriceService.deleteCampaignColorPrice(id);
+    }
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public CampaignColorPriceResponse addCampaignColorPrice(@RequestBody CampaignColorPriceRequest campaignColorPriceRequest) {
+        return campaignColorPriceService.addCampaignColorPrice(campaignColorPriceRequest);
+    }
 
-
-
+    @PatchMapping("/{id}")
+    public CampaignColorPriceResponse editCampaignColorPrice(@RequestBody CampaignColorPriceRequest campaignColorPriceRequest) {
+        return campaignColorPriceService.editCampaignColorPrice(campaignColorPriceRequest);
+    }
 
 }
