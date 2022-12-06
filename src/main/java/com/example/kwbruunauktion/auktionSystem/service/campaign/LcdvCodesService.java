@@ -9,6 +9,7 @@ import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodeRepo
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LcdvCodesService {
@@ -22,7 +23,7 @@ public class LcdvCodesService {
 
     public LcdvCodeResponse addLcdvCode(LcdvCodeRequest lcdvCodeRequest){
         if (lcdvCodeRepository.existsById(lcdvCodeRequest.getId())){
-            throw new RuntimeException("LcdvCode with this id: "+lcdvCodeRequest.getId()+" already exists");
+            throw new RuntimeException("LcdvCode with id: "+lcdvCodeRequest.getId()+" already exists");
         }
         List<Campaign> attachedCampagins = campaignRepository.findAllById(lcdvCodeRequest.getCampaignResponseIds());
         LcdvCode lcdvCodeToSave = LcdvCode.builder()
@@ -32,5 +33,14 @@ public class LcdvCodesService {
 
         lcdvCodeRepository.save(lcdvCodeToSave);
         return new LcdvCodeResponse(lcdvCodeToSave);
+    }
+
+    public List<LcdvCodeResponse> getLcdvCodes(){
+        return lcdvCodeRepository.findAll().stream().map(LcdvCodeResponse::new).collect(Collectors.toList());
+    }
+
+    public LcdvCodeResponse getLcdvCodeById(Long id){
+        return lcdvCodeRepository.findById(id).map(LcdvCodeResponse::new)
+                .orElseThrow(() -> new RuntimeException("LcdvCode with id: "+id+" does not exist"));
     }
 }
