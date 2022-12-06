@@ -30,5 +30,4 @@ public class SpecificCarModelRequest {
         this.model = specificCarModel.getModel();
         this.modelYear = specificCarModel.getModelYear();
     }
-
 }

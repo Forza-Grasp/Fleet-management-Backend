@@ -1,4 +1,4 @@
-package com.example.kwbruunauktion.auktionSystem.dto.campaign.lcdv;
+package com.example.kwbruunauktion.auktionSystem.dto.campaign.lcdvCodes;
 
 
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCodes;
