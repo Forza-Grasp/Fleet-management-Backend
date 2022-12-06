@@ -25,10 +25,10 @@ public class LcdvCodesService {
         if (lcdvCodeRepository.existsById(lcdvCodeRequest.getId())){
             throw new RuntimeException("LcdvCode with id: "+lcdvCodeRequest.getId()+" already exists");
         }
-        List<Campaign> attachedCampagins = campaignRepository.findAllById(lcdvCodeRequest.getCampaignResponseIds());
+        List<Campaign> attachedCampaigns = campaignRepository.findAllById(lcdvCodeRequest.getCampaignResponseIds());
         LcdvCode lcdvCodeToSave = LcdvCode.builder()
                 .lcdvCode(lcdvCodeRequest.getLcdvCode())
-                .campaign(attachedCampagins)
+                .campaign(attachedCampaigns)
                 .build();
 
         lcdvCodeRepository.save(lcdvCodeToSave);
