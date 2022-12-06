@@ -106,5 +106,9 @@ public class CampaignCarService {
         return new CampaignCarResponse(campaignCar);
     }
 
+    public CampaignCarResponse getCampaignCarByCampaignId(@PathVariable Long id) {
+        return new CampaignCarResponse(campaignCarRepository.findByCampaignId(id).orElseThrow(() -> new RuntimeException("CampaignCar with that Campaign not found")));
+    }
+
 }
 

@@ -2,7 +2,9 @@ package com.example.kwbruunauktion.auktionSystem.service.campaign;
 
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignCarResponse.CampaignCarRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignCarResponse.CampaignCarResponse;
+import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignCar;
+import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignCarRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
 import org.junit.jupiter.api.BeforeAll;
@@ -29,6 +31,7 @@ class CampaignCarServiceTest {
                                  @Autowired CampaignCarRepository campaignCar_Repository) {
         campaignRepository = campaign_Repository;
         campaignCarRepository = campaignCar_Repository;
+
 
         List<CampaignCar> campaignCarList = List.of(
        CampaignCar.builder()
@@ -73,6 +76,26 @@ class CampaignCarServiceTest {
                 .description("description")
                 .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
                 .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
+            .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+            .monthsRegistered(12)
+            .mileage("mileage")
+            .depositPerCar("1000")
+            .modelText("modelText")
+            .supplyingConditions("supplyingConditions")
+            .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+            .build()
+        );
+        campaignCarRepository.saveAll(campaignCarList);
+
+        Campaign campaign1 = Campaign.builder()
+            .campaignCar(CampaignCar.builder()
+                .brand("CAMPAIGN Audi")
+                .model("CAMPAIGN A4")
+                .campaignPictureOne("picture1")
+                .damageAndMileage("damageAndMileage")
+                .description("description")
+                .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
                 .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
                 .monthsRegistered(12)
                 .mileage("mileage")
@@ -80,10 +103,34 @@ class CampaignCarServiceTest {
                 .modelText("modelText")
                 .supplyingConditions("supplyingConditions")
                 .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                .build()
-        );
+                .build())
+            .campaignStatus(CampaignStatus.ACTIVE)
+            .activeDate(LocalDate.now())
+            .build();
+        Campaign campaign2 = Campaign.builder()
+            .campaignCar(CampaignCar.builder()
+                .brand("CAMPAIGN BMW")
+                .model("CAMPAIGN X5")
+                .campaignPictureOne("picture1")
+                .damageAndMileage("damageAndMileage")
+                .description("description")
+                .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+                .monthsRegistered(12)
+                .mileage("mileage")
+                .depositPerCar("1000")
+                .modelText("modelText")
+                .supplyingConditions("supplyingConditions")
+                .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .build())
+            .campaignStatus(CampaignStatus.ACTIVE)
+            .activeDate(LocalDate.now())
+            .build();
+        List<Campaign> campaignList = List.of(campaign1, campaign2);
+        campaignRepository.saveAll(campaignList);
 
-        campaignCarRepository.saveAll(campaignCarList);
+
     }
 
     @BeforeEach
@@ -95,7 +142,7 @@ class CampaignCarServiceTest {
     @Test
     void getAllCampaignCars() {
         List<CampaignCarResponse> campaignCarList = campaignCarService.getAllCampaignCars();
-        assertEquals(3, campaignCarList.size());
+        assertEquals(5, campaignCarList.size());
     }
     @Test
     void getCampaignCarById() {
@@ -113,24 +160,24 @@ class CampaignCarServiceTest {
                 .description("description")
                 .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
                 .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
-                .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
-                .monthsRegistered(12)
-                .mileage("mileage")
-                .depositPerCar("1000")
-                .modelText("modelText")
-                .supplyingConditions("supplyingConditions")
-                .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                .campaignId(5L)
-                .build();
+            .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+            .monthsRegistered(12)
+            .mileage("mileage")
+            .depositPerCar("1000")
+            .modelText("modelText")
+            .supplyingConditions("supplyingConditions")
+            .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+            .campaignId(5L)
+            .build();
         campaignCarService.addCampaignCar(carRequest);
-        assertEquals(4, campaignCarRepository.findAll().size());
-        assertEquals("NEWCAR", campaignCarRepository.findAll().get(3).getBrand());
+        assertEquals(6, campaignCarRepository.findAll().size());
+        assertEquals("NEWCAR", campaignCarRepository.findAll().get(5).getBrand());
     }
 
     @Test
     void deleteCampaignCar() {
         campaignCarService.deleteCampaignCar(1L);
-        assertEquals(2, campaignCarService.getAllCampaignCars().size());
+        assertEquals(4, campaignCarService.getAllCampaignCars().size());
     }
 
     @Test
@@ -140,5 +187,12 @@ class CampaignCarServiceTest {
         carRequest.setBrand("Brand from Test world");
         campaignCarService.editCampaignCar(carRequest);
         assertEquals("Brand from Test world", campaignCarRepository.findById(1L).get().getBrand());
+    }
+
+    @Test
+    void getCampaignCarByCampaignId() {
+        CampaignCarResponse foundCarResponse = campaignCarService.getCampaignCarByCampaignId(1L);
+        assertEquals("CAMPAIGN Audi", foundCarResponse.getBrand());
+
     }
 }

@@ -205,21 +205,35 @@ public class SecurityConfig {
 
         .antMatchers(HttpMethod.POST,"/api/blacklist").permitAll()
         .antMatchers(HttpMethod.PATCH,"/api/blacklist/deactivate/{vinNumber}").permitAll()
-        .antMatchers(HttpMethod.PATCH,"/api/blacklist/activate/{vinNumber}").permitAll()
-        .antMatchers(HttpMethod.DELETE,"/api/blacklist/{vinNumber}").permitAll()
+        .antMatchers(HttpMethod.PATCH, "/api/blacklist/activate/{vinNumber}").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/blacklist/{vinNumber}").permitAll()
 
-            //Campaign
-        .antMatchers(HttpMethod.GET,"/api/campaign").permitAll()
-        .antMatchers(HttpMethod.GET,"/api/campaign/{id}").permitAll()
-        .antMatchers(HttpMethod.PUT,"/api/campaign/{id}").permitAll()
-        .antMatchers(HttpMethod.DELETE,"/api/campaign/{id}").permitAll()
-        .antMatchers(HttpMethod.POST,"/api/campaign").permitAll()
+        //Campaign
+        .antMatchers(HttpMethod.GET, "/api/campaign").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/campaign/{id}").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/campaign/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/campaign").permitAll()
 
+        //Campaign Car
+        .antMatchers(HttpMethod.GET, "/api/campaign/car").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/car/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/car/{id}").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/car/campaign/{id}").permitAll()
 
+        .antMatchers(HttpMethod.DELETE, "/api/campaign/car/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/campaign/car").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/campaign/car").permitAll()
 
+        //Campaign Color Price
+        .antMatchers(HttpMethod.GET, "api/campaign/color-price").permitAll()
+        .antMatchers(HttpMethod.GET, "api/campaign/color-price/all").permitAll()
+        .antMatchers(HttpMethod.GET, "api/campaign/color-price/{id}").permitAll()
 
-            // Demonstrates another way to add roles to an endpoint
-        // .antMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.DELETE, "api/campaign/color-price/{id}").permitAll()
+        .antMatchers(HttpMethod.PATCH, "api/campaign/color-price/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "api/campaign/color-price").permitAll()
+
         .anyRequest().permitAll());
 
     return http.build();

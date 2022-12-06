@@ -26,7 +26,7 @@ public class CampaignController {
     }
 
     @GetMapping("/{id}")
-    CampaignResponse getCampaign(@PathVariable Long id){
+    public CampaignResponse getCampaign(@PathVariable Long id) {
         return campaignService.getCampaignById(id);
     }
 
