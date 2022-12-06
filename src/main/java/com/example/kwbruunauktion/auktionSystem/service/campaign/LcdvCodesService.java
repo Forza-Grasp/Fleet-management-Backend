@@ -43,4 +43,10 @@ public class LcdvCodesService {
         return lcdvCodeRepository.findById(id).map(LcdvCodeResponse::new)
                 .orElseThrow(() -> new RuntimeException("LcdvCode with id: "+id+" does not exist"));
     }
+
+    public LcdvCodeResponse deleteLcdvCodeById(Long id){
+        LcdvCodeResponse lcdvCodeToDelete = getLcdvCodeById(id);
+        lcdvCodeRepository.deleteById(id);
+        return lcdvCodeToDelete;
+    }
 }
