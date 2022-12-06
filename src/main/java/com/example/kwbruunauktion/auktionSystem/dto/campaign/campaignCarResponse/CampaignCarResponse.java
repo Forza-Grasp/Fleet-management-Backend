@@ -84,7 +84,9 @@ public class CampaignCarResponse {
         this.damageAndMileage = c.getDamageAndMileage();
         this.supplyingConditions = c.getSupplyingConditions();
         this.campaignPictureOne = c.getCampaignPictureOne();
-        this.campaignId = c.getCampaign().getId();
+        if (c.getCampaign() != null){
+            this.campaignId = c.getCampaign().getId();
+        }
         this.created = c.getCreated();
         this.updated = c.getUpdated();
     }
