@@ -16,7 +16,7 @@ import java.util.List;
 @ToString
 
 @Entity
-public class LcdvCodes {
+public class LcdvCode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

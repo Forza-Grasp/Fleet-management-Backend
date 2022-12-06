@@ -39,7 +39,7 @@ public class Campaign {
     @JoinTable(name = "campaign_lcdvcodes")
     @ManyToMany(cascade = CascadeType.PERSIST)
     @ToString.Exclude
-    private List<LcdvCodes> lcdvCodes;
+    private List<LcdvCode> lcdvCodes;
 
     @OneToMany(mappedBy = "campaign")
     @ToString.Exclude

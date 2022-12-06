@@ -1,7 +1,5 @@
 package com.example.kwbruunauktion.auktionSystem.dto.campaign.lcdvCodes;
 
-import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignResponse;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCodes;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -15,7 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LcdvCodesRequest {
+public class LcdvCodeRequest {
     private Long id;
     private String lcdvCode;
     private List<Long> campaignResponseIds;

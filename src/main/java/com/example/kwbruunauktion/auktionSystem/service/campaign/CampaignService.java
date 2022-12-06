@@ -5,11 +5,11 @@ import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignRe
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignCar;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignColorPrice;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCodes;
+import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCode;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignCarRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignColorPriceRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
-import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodesRepository;
+import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -19,16 +19,16 @@ import java.util.stream.Collectors;
 @Service
 public class CampaignService {
     private final CampaignRepository campaignRepository;
-    private final LcdvCodesRepository lcdvCodesRepository;
+    private final LcdvCodeRepository lcdvCodeRepository;
     private final CampaignColorPriceRepository campaignColorPriceRepository;
     private final CampaignCarRepository campaignCarRepository;
 
     public CampaignService(CampaignRepository campaignRepository,
-                           LcdvCodesRepository lcdvCodesRepository,
+                           LcdvCodeRepository lcdvCodeRepository,
                            CampaignColorPriceRepository campaignColorPriceRepository,
                            CampaignCarRepository campaignCarRepository) {
         this.campaignRepository = campaignRepository;
-        this.lcdvCodesRepository = lcdvCodesRepository;
+        this.lcdvCodeRepository = lcdvCodeRepository;
         this.campaignColorPriceRepository = campaignColorPriceRepository;
         this.campaignCarRepository = campaignCarRepository;
     }
@@ -46,7 +46,7 @@ public class CampaignService {
         if (campaignRepository.existsById(campaignRequest.getId())) {
             throw new RuntimeException("Campaign with this IS already exist");
         }
-        List<LcdvCodes> lcdvCodes = lcdvCodesRepository.findAllById(campaignRequest.getLcdvCodes());
+        List<LcdvCode> lcdvCodes = lcdvCodeRepository.findAllById(campaignRequest.getLcdvCodes());
         List<CampaignColorPrice> campaignColorPrices = campaignColorPriceRepository.findAllById(campaignRequest.getCampaignColorPrices());
         CampaignCar campaignCar = campaignCarRepository.findById(campaignRequest.getCampaignCarId()).orElseThrow(() -> new RuntimeException("CampaignCar With that ID not found"));
         Campaign campaign = Campaign.builder()

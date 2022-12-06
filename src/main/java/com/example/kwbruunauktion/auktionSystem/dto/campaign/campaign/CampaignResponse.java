@@ -3,7 +3,7 @@ package com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignBid.CampaignBidsResponse;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignCarResponse.CampaignCarResponse;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignColor.CampaignColorPriceResponse;
-import com.example.kwbruunauktion.auktionSystem.dto.campaign.lcdvCodes.LcdvCodesResponse;
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.lcdvCodes.LcdvCodeResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.*;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -28,7 +28,7 @@ public class CampaignResponse {
 
     private LocalDate activeDate;
 
-    private List<LcdvCodesResponse> lcdvCodes;
+    private List<LcdvCodeResponse> lcdvCodes;
 
     private List<CampaignBidsResponse> campaignBid;
 
@@ -49,7 +49,7 @@ public class CampaignResponse {
             this.campaignColorPrices = campaign.getCampaignColorPrices().stream().map(CampaignColorPriceResponse::new).toList();
         }
         if (campaign.getLcdvCodes() != null){
-            this.lcdvCodes = campaign.getLcdvCodes().stream().map(LcdvCodesResponse::new).toList();
+            this.lcdvCodes = campaign.getLcdvCodes().stream().map(LcdvCodeResponse::new).toList();
         }
         if (campaign.getCampaignBids() != null){
             this.campaignBid = campaign.getCampaignBids().stream().map(CampaignBidsResponse::new).toList();

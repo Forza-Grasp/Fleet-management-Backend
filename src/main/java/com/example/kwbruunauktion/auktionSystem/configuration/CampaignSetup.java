@@ -2,10 +2,10 @@ package com.example.kwbruunauktion.auktionSystem.configuration;
 
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignCar;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCodes;
+import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCode;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
-import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodesRepository;
+import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodeRepository;
 import com.example.kwbruunauktion.auktionSystem.service.campaign.CampaignService;
 import lombok.SneakyThrows;
 import org.springframework.boot.ApplicationArguments;
@@ -19,13 +19,13 @@ import java.util.List;
 public class CampaignSetup implements ApplicationRunner {
     CampaignRepository campaignRepository;
     CampaignService campaignService;
-    LcdvCodesRepository lcdvCodesRepository;
+    LcdvCodeRepository lcdvCodeRepository;
 
 
-    public CampaignSetup(CampaignRepository campaignRepository, CampaignService campaignService, LcdvCodesRepository lcdvCodesRepository) {
+    public CampaignSetup(CampaignRepository campaignRepository, CampaignService campaignService, LcdvCodeRepository lcdvCodeRepository) {
         this.campaignRepository = campaignRepository;
         this.campaignService = campaignService;
-        this.lcdvCodesRepository = lcdvCodesRepository;
+        this.lcdvCodeRepository = lcdvCodeRepository;
     }
 
     @Override
@@ -33,23 +33,23 @@ public class CampaignSetup implements ApplicationRunner {
     public void run(ApplicationArguments args) {
 
 
-        List<LcdvCodes> lcdvCodes = List.of(
-                LcdvCodes.builder()
+        List<LcdvCode> lcdvCodes = List.of(
+                LcdvCode.builder()
                         .lcdvCode("0")
                         .build(),
-                LcdvCodes.builder()
+                LcdvCode.builder()
                         .lcdvCode("1")
                         .build(),
-                LcdvCodes.builder()
+                LcdvCode.builder()
                         .lcdvCode("2")
                         .build(),
-                LcdvCodes.builder()
+                LcdvCode.builder()
                         .lcdvCode("3")
                         .build(),
-                LcdvCodes.builder()
+                LcdvCode.builder()
                         .lcdvCode("4")
                         .build(),
-                LcdvCodes.builder()
+                LcdvCode.builder()
                         .lcdvCode("5")
                         .build()
         );
@@ -75,7 +75,7 @@ public class CampaignSetup implements ApplicationRunner {
                 .activeDate(LocalDate.now())
                 .build();
         campaignRepository.save(campaign1);
-        lcdvCodesRepository.saveAll(lcdvCodes);
+        lcdvCodeRepository.saveAll(lcdvCodes);
 
     }
 }

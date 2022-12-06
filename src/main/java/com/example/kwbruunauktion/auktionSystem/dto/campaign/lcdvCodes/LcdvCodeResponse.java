@@ -2,7 +2,7 @@ package com.example.kwbruunauktion.auktionSystem.dto.campaign.lcdvCodes;
 
 
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignResponse;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCodes;
+import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCode;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
@@ -16,14 +16,14 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LcdvCodesResponse {
+public class LcdvCodeResponse {
     private Long id;
     private String lcdvCode;
     private List<CampaignResponse> campaignResponses;
     private LocalDateTime created;
     private LocalDateTime updated;
 
-    public LcdvCodesResponse(LcdvCodes lcdvCode) {
+    public LcdvCodeResponse(LcdvCode lcdvCode) {
         this.id = lcdvCode.getId();
         this.lcdvCode = lcdvCode.getLcdvCode();
         if (lcdvCode.getCampaign() != null) {
