@@ -31,14 +31,12 @@ public class CampaignSetup implements ApplicationRunner {
     CampaignService campaignService;
     LcdvCodeRepository lcdvCodeRepository;
     CampaignColorPriceRepository campaignColorPriceRepository;
-
     BrandColorMixRepository brandColorMixRepository;
-
     SpecificCarModelRepository specificCarModelRepository;
-
-    public CampaignSetup(CampaignRepository campaignRepository, CampaignService campaignService, LcdvCodeRepository lcdvCodeRepository) {
     ColorMixRepository colorMixRepository;
     ColorTypesRepository colorTypesRepository;
+
+
 
 
     public CampaignSetup(CampaignRepository campaignRepository,
