@@ -1,5 +1,6 @@
-package com.example.kwbruunauktion.auktionSystem.configuration;
+package com.example.kwbruunauktion.auktionSystem.service.campaign;
 
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignColor.CampaignColorPriceResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorTypes;
@@ -16,51 +17,47 @@ import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepos
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignColorPriceRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodesRepository;
-import com.example.kwbruunauktion.auktionSystem.service.campaign.CampaignService;
-import lombok.SneakyThrows;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.stereotype.Controller;
+import com.example.kwbruunauktion.auktionSystem.service.CampaignColorPriceService;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Controller
-public class CampaignSetup implements ApplicationRunner {
-    CampaignRepository campaignRepository;
-    CampaignService campaignService;
-    LcdvCodesRepository lcdvCodesRepository;
-    CampaignColorPriceRepository campaignColorPriceRepository;
+import static org.junit.jupiter.api.Assertions.*;
 
-    BrandColorMixRepository brandColorMixRepository;
+@DataJpaTest
+class CampaignColorPriceServiceTest {
 
-    SpecificCarModelRepository specificCarModelRepository;
+    public CampaignColorPriceService campaignColorPriceService;
 
-    ColorMixRepository colorMixRepository;
-    ColorTypesRepository colorTypesRepository;
+    public static CampaignColorPriceRepository campaignColorPriceRepository;
+    public static BrandColorMixRepository brandColorMixRepository;
+    public static CampaignRepository campaignRepository;
+    public static ColorMixRepository colorMixRepository;
+    public static ColorTypesRepository colorTypesRepository;
+    public static SpecificCarModelRepository specificCarModelRepository;
+    public static LcdvCodesRepository lcdvCodesRepository;
 
+    @BeforeAll
+    public static void setupData(@Autowired CampaignColorPriceRepository campaignColorPrice_Repository,
+                                 @Autowired BrandColorMixRepository brandColorMix_Repository,
+                                 @Autowired CampaignRepository campaign_Repository,
+                                 @Autowired ColorMixRepository colorMix_Repository,
+                                 @Autowired ColorTypesRepository colorTypes_Repository,
+                                 @Autowired SpecificCarModelRepository specificCarModel_Repository,
+                                 @Autowired LcdvCodesRepository lcdvCodes_Repository) {
 
-    public CampaignSetup(CampaignRepository campaignRepository,
-                         CampaignService campaignService,
-                         LcdvCodesRepository lcdvCodesRepository,
-                         CampaignColorPriceRepository campaignColorPriceRepository,
-                         BrandColorMixRepository brandColorMixRepository,
-                         SpecificCarModelRepository specificCarModelRepository,
-                         ColorMixRepository colorMixRepository,
-                         ColorTypesRepository colorTypesRepository) {
-        this.campaignRepository = campaignRepository;
-        this.campaignService = campaignService;
-        this.lcdvCodesRepository = lcdvCodesRepository;
-        this.campaignColorPriceRepository = campaignColorPriceRepository;
-        this.brandColorMixRepository = brandColorMixRepository;
-        this.specificCarModelRepository = specificCarModelRepository;
-        this.colorMixRepository = colorMixRepository;
-        this.colorTypesRepository = colorTypesRepository;
-    }
-
-    @Override
-    @SneakyThrows
-    public void run(ApplicationArguments args) {
+        campaignColorPriceRepository = campaignColorPrice_Repository;
+        brandColorMixRepository = brandColorMix_Repository;
+        campaignRepository = campaign_Repository;
+        colorMixRepository = colorMix_Repository;
+        colorTypesRepository = colorTypes_Repository;
+        specificCarModelRepository = specificCarModel_Repository;
+        lcdvCodesRepository = lcdvCodes_Repository;
 
 
         List<LcdvCodes> lcdvCodes = List.of(
@@ -169,14 +166,16 @@ public class CampaignSetup implements ApplicationRunner {
                 .build();
         BrandColorMix brandColorMix2 = BrandColorMix.builder()
                 .colorMix(colorMix2)
+                .specificCarModel(specificCarModel3)
                 .build();
         BrandColorMix brandColorMix3 = BrandColorMix.builder()
                 .colorMix(colorMix3)
-                .specificCarModel(specificCarModel1)
+                .specificCarModel(specificCarModel2)
                 .build();
 
-        System.out.println("\n" + brandColorMix1 + "\n");
         brandColorMixRepository.save(brandColorMix1);
+        brandColorMixRepository.save(brandColorMix2);
+        brandColorMixRepository.save(brandColorMix3);
 
 
         CampaignColorPrice campaignColorPrice = CampaignColorPrice.builder()
@@ -184,7 +183,51 @@ public class CampaignSetup implements ApplicationRunner {
                 .brandColorMix(brandColorMix1)
                 .campaign(campaign1)
                 .build();
+        CampaignColorPrice campaignColorPrice1 = CampaignColorPrice.builder()
+                .price(2000)
+                .brandColorMix(brandColorMix1)
+                .campaign(campaign1)
+                .build();
+        CampaignColorPrice campaignColorPrice2 = CampaignColorPrice.builder()
+                .price(3000)
+                .brandColorMix(brandColorMix1)
+                .campaign(campaign1)
+                .build();
         campaignColorPriceRepository.save(campaignColorPrice);
+        campaignColorPriceRepository.save(campaignColorPrice1);
+        campaignColorPriceRepository.save(campaignColorPrice2);
 
+    }
+
+    @BeforeEach
+    public void setupService() {
+        campaignColorPriceService = new CampaignColorPriceService(campaignColorPriceRepository,brandColorMixRepository,campaignRepository);
+    }
+
+    @Test
+    void getAllCampaignColorPrice() {
+        List<CampaignColorPriceResponse> campaignColorPriceResponses = campaignColorPriceService.getAllCampaignColorPrice();
+        System.out.println(campaignColorPriceResponses.size());
+
+    }
+
+    @Test
+    void getCampaignColorPriceById() {
+    }
+
+    @Test
+    void addCampaignColorPrice() {
+    }
+
+    @Test
+    void getCampaignColorPriceByCampaignId() {
+    }
+
+    @Test
+    void deleteCampaignColorPrice() {
+    }
+
+    @Test
+    void editCampaignColorPrice() {
     }
 }
