@@ -4,16 +4,15 @@ import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignCar;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCodes;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
-import com.example.kwbruunauktion.auktionSystem.repository.CampaignRepository;
-import com.example.kwbruunauktion.auktionSystem.repository.LcdvCodesRepository;
-import com.example.kwbruunauktion.auktionSystem.service.CampaignService;
+import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
+import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodesRepository;
+import com.example.kwbruunauktion.auktionSystem.service.campaign.CampaignService;
 import lombok.SneakyThrows;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 @Controller

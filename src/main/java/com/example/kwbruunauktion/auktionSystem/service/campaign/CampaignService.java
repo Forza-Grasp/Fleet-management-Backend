@@ -1,4 +1,4 @@
-package com.example.kwbruunauktion.auktionSystem.service;
+package com.example.kwbruunauktion.auktionSystem.service.campaign;
 
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignResponse;
@@ -6,14 +6,13 @@ import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignCar;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignColorPrice;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCodes;
-import com.example.kwbruunauktion.auktionSystem.repository.CampaignCarRepository;
-import com.example.kwbruunauktion.auktionSystem.repository.CampaignColorPriceRepository;
-import com.example.kwbruunauktion.auktionSystem.repository.CampaignRepository;
-import com.example.kwbruunauktion.auktionSystem.repository.LcdvCodesRepository;
+import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignCarRepository;
+import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignColorPriceRepository;
+import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
+import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodesRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
