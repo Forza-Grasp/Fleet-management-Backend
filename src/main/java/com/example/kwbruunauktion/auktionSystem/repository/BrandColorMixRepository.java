@@ -15,6 +15,6 @@ public interface BrandColorMixRepository extends JpaRepository<BrandColorMix, Lo
     //Boolean existBySpecificCarModelIdAndColorMixId(Long specificCarModelId, Long colorMixId);
     Boolean existsBySpecificCarModelIdAndColorMixId(Long specificCarModelId, Long colorMixId);
 
-
+    BrandColorMix findBySpecificCarModelIdAndColorMixId(Long specificCarModelId, Long colorMixId);
 }
 

@@ -69,24 +69,18 @@ public class BrandColorMixService {
 
     }
 
-
-
-
     public void editBrandColorMix(BrandColorMixRequest brandColorMixRequest) {
-        BrandColorMix brandColorMix = brandColorMixRepository.findById(brandColorMixRequest.getId()).orElseThrow(() -> new RuntimeException("BrandColorMix with this ID does not exist"));
-
+        BrandColorMix brandColorMix = brandColorMixRepository.findById(brandColorMixRequest.getId()).orElseThrow(() -> new RuntimeException("BrandColorMix not found"));
         if(!specificCarModelRepository.existsById(brandColorMixRequest.getSpecificCarModelId())) {
             throw new RuntimeException("SpecificCarModel with this ID doesnt exist");
         }
         if(!colorMixRepository.existsById(brandColorMixRequest.getColorMixId())) {
             throw new RuntimeException("ColorMix with this ID doesnt exist");
         }
-
-        BrandColorMix tempBrandColorMix = BrandColorMixRequest.getBrandColorMixEntity(brandColorMixRequest);
-        brandColorMix.setSpecificCarModel(tempBrandColorMix.getSpecificCarModel());
-
-        brandColorMix.setColorMix(tempBrandColorMix.getColorMix());
-
+        SpecificCarModel specificCarModel = specificCarModelRepository.findById(brandColorMixRequest.getSpecificCarModelId()).orElseThrow(() -> new RuntimeException("SpecificCarModel not found"));
+        ColorMix colorMix = colorMixRepository.findById(brandColorMixRequest.getColorMixId()).orElseThrow(() -> new RuntimeException("ColorMix not found"));
+        brandColorMix.setSpecificCarModel(specificCarModel);
+        brandColorMix.setColorMix(colorMix);
         brandColorMixRepository.save(brandColorMix);
     }
 
