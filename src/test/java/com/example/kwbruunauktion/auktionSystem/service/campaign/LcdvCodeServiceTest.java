@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.service.campaign;
 
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.lcdvCodes.LcdvCodeRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.lcdvCodes.LcdvCodeResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignCar;
@@ -15,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,96 +56,68 @@ class LcdvCodeServiceTest {
                         .build()
         );
 
+        Campaign campaign1 = Campaign.builder()
+                .campaignCar(CampaignCar.builder()
+                        .brand("Audi")
+                        .model("A4")
+                        .campaignPictureOne("picture1")
+                        .damageAndMileage("damageAndMileage")
+                        .description("description")
+                        .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                        .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
+                        .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+                        .monthsRegistered(12)
+                        .mileage("mileage")
+                        .depositPerCar("1000")
+                        .modelText("modelText")
+                        .supplyingConditions("supplyingConditions")
+                        .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                        .build())
+                .campaignStatus(CampaignStatus.ACTIVE)
+                .activeDate(LocalDate.now())
+                .build();
 
-        List<Campaign> campaignList = List.of(
-                Campaign.builder()
-                        .campaignCar(CampaignCar.builder()
-                                .brand("Audi")
-                                .model("A4")
-                                .campaignPictureOne("picture1")
-                                .damageAndMileage("damageAndMileage")
-                                .description("description")
-                                .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                                .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
-                                .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
-                                .monthsRegistered(12)
-                                .mileage("mileage")
-                                .depositPerCar("1000")
-                                .modelText("modelText")
-                                .supplyingConditions("supplyingConditions")
-                                .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                                .build())
-                        .campaignStatus(CampaignStatus.ACTIVE)
-                        .lcdvCodes(lcdvCodes)
-                        .activeDate(LocalDate.now())
-                        .build(),
+        Campaign campaign2 = Campaign.builder()
+                .campaignCar(CampaignCar.builder()
+                        .brand("BMW")
+                        .model("X5")
+                        .campaignPictureOne("picture1")
+                        .damageAndMileage("damageAndMileage")
+                        .description("description")
+                        .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                        .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
+                        .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+                        .monthsRegistered(12)
+                        .mileage("mileage")
+                        .depositPerCar("1000")
+                        .modelText("modelText")
+                        .supplyingConditions("supplyingConditions")
+                        .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                        .build())
+                .campaignStatus(CampaignStatus.ACTIVE)
+                .activeDate(LocalDate.now())
+                .build();
 
-                Campaign.builder()
-                        .campaignCar(CampaignCar.builder()
-                                .brand("BMW")
-                                .model("Q3")
-                                .campaignPictureOne("picture1")
-                                .damageAndMileage("damageAndMileage")
-                                .description("description")
-                                .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                                .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
-                                .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
-                                .monthsRegistered(12)
-                                .mileage("mileage")
-                                .depositPerCar("1000")
-                                .modelText("modelText")
-                                .supplyingConditions("supplyingConditions")
-                                .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                                .build())
-                        .campaignStatus(CampaignStatus.ACTIVE)
-                        .lcdvCodes(lcdvCodes)
-                        .activeDate(LocalDate.now())
-                        .build(),
-
-                Campaign.builder()
-                        .campaignCar(CampaignCar.builder()
-                                .brand("BMW")
-                                .model("Q3")
-                                .campaignPictureOne("picture1")
-                                .damageAndMileage("damageAndMileage")
-                                .description("description")
-                                .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                                .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
-                                .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
-                                .monthsRegistered(12)
-                                .mileage("mileage")
-                                .depositPerCar("1000")
-                                .modelText("modelText")
-                                .supplyingConditions("supplyingConditions")
-                                .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                                .build())
-                        .campaignStatus(CampaignStatus.ACTIVE)
-                        .lcdvCodes(lcdvCodes)
-                        .activeDate(LocalDate.now())
-                        .build()
-        );
-
+        List<Campaign> campaignList = List.of(campaign1, campaign2);
         campaignRepository.saveAll(campaignList);
         lcdvCodeRepository.saveAll(lcdvCodes);
 
-        LcdvCode lcdvCode1 = LcdvCode.builder()
-                .lcdvCode("111")
-                .campaign(campaignList)
-                .build();
+        /*
+        campaign1.setLcdvCodes(lcdvCodes);
+        campaignRepository.save(campaign1);
+        campaign2.setLcdvCodes(lcdvCodes);
+        campaignRepository.save(campaign2);
 
-        LcdvCode lcdvCode2 = LcdvCode.builder()
-                .lcdvCode("222")
-                .campaign(campaignList)
-                .build();
+        for(LcdvCode l : lcdvCodes){
+            l.setCampaign(Collections.singletonList(campaign1));
+            lcdvCodeRepository.save(l);
+        }
+        for(LcdvCode l : lcdvCodes){
+            l.setCampaign(Collections.singletonList(campaign2));
+            lcdvCodeRepository.save(l);
+        }
 
-        LcdvCode lcdvCode3 = LcdvCode.builder()
-                .lcdvCode("333")
-                .campaign(campaignList)
-                .build();
-
-        lcdvCodeRepository.save(lcdvCode1);
-        lcdvCodeRepository.save(lcdvCode2);
-        lcdvCodeRepository.save(lcdvCode3);
+         */
     }
 
 
@@ -154,6 +128,11 @@ class LcdvCodeServiceTest {
 
     @Test
     void addLcdvCode() {
+        LcdvCodeRequest lcq = LcdvCodeRequest.builder()
+                .lcdvCode("6")
+                .build();
+        LcdvCodeResponse lcdvCodeResponse = lcdvCodeService.addLcdvCode(lcq);
+        assertEquals(6, lcdvCodeService.getLcdvCodes().size());
     }
 
     @Test
@@ -171,7 +150,9 @@ class LcdvCodeServiceTest {
 
     @Test
     void deleteLcdvCodeById() {
-        lcdvCodeRepository.deleteById(1L);
-        assertEquals(8,lcdvCodeRepository.count());
+        //List<LcdvCodeResponse> responsesBeforeDeletion = lcdvCodeService.getLcdvCodes();
+        lcdvCodeService.deleteLcdvCodeById(1L);
+        List<LcdvCodeResponse> responsesAfterDeletion = lcdvCodeService.getLcdvCodes();
+        assertEquals(5,responsesAfterDeletion.size());
     }
 }

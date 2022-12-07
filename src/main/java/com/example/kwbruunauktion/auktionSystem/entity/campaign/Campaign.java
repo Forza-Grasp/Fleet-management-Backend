@@ -1,6 +1,5 @@
 package com.example.kwbruunauktion.auktionSystem.entity.campaign;
 
-import com.example.kwbruunauktion.auktionSystem.entity.CampaignLcdvCodeJoin;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;

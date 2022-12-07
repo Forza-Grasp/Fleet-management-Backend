@@ -1,6 +1,5 @@
 package com.example.kwbruunauktion.auktionSystem.entity.campaign;
 
-import com.example.kwbruunauktion.auktionSystem.entity.CampaignLcdvCodeJoin;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

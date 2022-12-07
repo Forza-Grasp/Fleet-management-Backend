@@ -1,10 +1,7 @@
 package com.example.kwbruunauktion.auktionSystem.configuration;
 
 import com.example.kwbruunauktion.auktionSystem.entity.*;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignCar;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCode;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignColorPrice;
+import com.example.kwbruunauktion.auktionSystem.entity.campaign.*;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.example.kwbruunauktion.auktionSystem.repository.BrandColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;
@@ -21,7 +18,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
