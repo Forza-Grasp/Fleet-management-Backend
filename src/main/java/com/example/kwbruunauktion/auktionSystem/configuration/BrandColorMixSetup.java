@@ -100,14 +100,33 @@ public class BrandColorMixSetup implements ApplicationRunner {
                 .build();
         BrandColorMix brandColorMix2 = BrandColorMix.builder()
                 .colorMix(colorMix2)
+                .specificCarModel(specificCarModel2)
                 .build();
         BrandColorMix brandColorMix3 = BrandColorMix.builder()
                 .colorMix(colorMix3)
                 .specificCarModel(specificCarModel1)
                 .build();
+        BrandColorMix brandColorMix4 = BrandColorMix.builder()
+                .colorMix(colorMix2)
+                .specificCarModel(specificCarModel3)
+                .build();
+        BrandColorMix brandColorMix5 = BrandColorMix.builder()
+                .colorMix(colorMix3)
+                .specificCarModel(specificCarModel3)
+                .build();
+        BrandColorMix brandColorMix6 = BrandColorMix.builder()
+                .colorMix(colorMix3)
+                .specificCarModel(specificCarModel3)
+                .build();
+
 
         System.out.println("\n" + brandColorMix1 + "\n");
         brandColorMixRepository.save(brandColorMix1);
+        brandColorMixRepository.save(brandColorMix2);
+        brandColorMixRepository.save(brandColorMix3);
+        brandColorMixRepository.save(brandColorMix4);
+        brandColorMixRepository.save(brandColorMix5);
+        brandColorMixRepository.save(brandColorMix6);
 
 
     }

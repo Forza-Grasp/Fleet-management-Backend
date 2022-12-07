@@ -12,7 +12,8 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Builder
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BrandColorMixRequest {
 
@@ -23,11 +24,13 @@ public class BrandColorMixRequest {
     private Long colorMixId;
 
     public static BrandColorMix getBrandColorMixEntity(BrandColorMixRequest brandColorMixRequest){
-        return BrandColorMix.builder()
+        BrandColorMix brandColorMix = BrandColorMix.builder()
                 .id(brandColorMixRequest.getColorMixId())
                 .colorMix(ColorMix.builder().id(brandColorMixRequest.getColorMixId()).build())
                 .specificCarModel(SpecificCarModel.builder().id(brandColorMixRequest.getSpecificCarModelId()).build())
                 .build();
+        return brandColorMix;
+
     }
 
 
