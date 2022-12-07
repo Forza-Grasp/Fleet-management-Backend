@@ -1,9 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.configuration;
 
-import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
-import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
-import com.example.kwbruunauktion.auktionSystem.entity.ColorTypes;
-import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
+import com.example.kwbruunauktion.auktionSystem.entity.*;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignCar;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCode;
@@ -14,6 +11,7 @@ import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorTypesRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignColorPriceRepository;
+import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignLcdvCodeJoinRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
 import com.example.kwbruunauktion.auktionSystem.service.campaign.CampaignService;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodeRepository;
@@ -36,6 +34,7 @@ public class CampaignSetup implements ApplicationRunner {
     SpecificCarModelRepository specificCarModelRepository;
     ColorMixRepository colorMixRepository;
     ColorTypesRepository colorTypesRepository;
+    CampaignLcdvCodeJoinRepository campaignLcdvCodeJoinRepository;
 
 
     public CampaignSetup(CampaignRepository campaignRepository,
@@ -45,7 +44,8 @@ public class CampaignSetup implements ApplicationRunner {
                          BrandColorMixRepository brandColorMixRepository,
                          SpecificCarModelRepository specificCarModelRepository,
                          ColorMixRepository colorMixRepository,
-                         ColorTypesRepository colorTypesRepository) {
+                         ColorTypesRepository colorTypesRepository,
+                         CampaignLcdvCodeJoinRepository campaignLcdvCodeJoinRepository) {
         this.campaignRepository = campaignRepository;
         this.campaignService = campaignService;
         this.lcdvCodeRepository = lcdvCodeRepository;
@@ -54,6 +54,7 @@ public class CampaignSetup implements ApplicationRunner {
         this.specificCarModelRepository = specificCarModelRepository;
         this.colorMixRepository = colorMixRepository;
         this.colorTypesRepository = colorTypesRepository;
+        this.campaignLcdvCodeJoinRepository = campaignLcdvCodeJoinRepository;
     }
 
     @Override
@@ -121,24 +122,28 @@ public class CampaignSetup implements ApplicationRunner {
                 .campaignStatus(CampaignStatus.ACTIVE)
                 .activeDate(LocalDate.now())
                 .build();
+
         List<Campaign> campaignList = List.of(campaign1, campaign2);
         campaignRepository.saveAll(campaignList);
         lcdvCodeRepository.saveAll(lcdvCodes);
-        campaign1.setLcdvCodes(lcdvCodes);
-        campaignRepository.save(campaign1);
-        campaign2.setLcdvCodes(lcdvCodes);
-        campaignRepository.save(campaign2);
 
-        for(LcdvCode l : lcdvCodes){
-            l.setCampaign(Collections.singletonList(campaign1));
-            lcdvCodeRepository.save(l);
-        }
-        for(LcdvCode l : lcdvCodes){
-            l.setCampaign(Collections.singletonList(campaign2));
-            lcdvCodeRepository.save(l);
-        }
-        campaignRepository.deleteById(1L);
-        campaignRepository.deleteById(2L);
+
+
+        lcdvCodes.stream().map(lcdvcode ->
+                CampaignLcdvCodeJoin.builder()
+                        .campaign(campaign1)
+                        .lcdvCode(lcdvcode)
+                        .build()
+        ).forEach(campaignLcdvCodeJoin -> campaignLcdvCodeJoinRepository.save(campaignLcdvCodeJoin));
+
+        lcdvCodes.stream().map(lcdvcode ->
+                CampaignLcdvCodeJoin.builder()
+                        .campaign(campaign2)
+                        .lcdvCode(lcdvcode)
+                        .build()
+        ).forEach(campaignLcdvCodeJoin -> campaignLcdvCodeJoinRepository.save(campaignLcdvCodeJoin));
+
+
 
 
         SpecificCarModel specificCarModel1 = SpecificCarModel.builder()

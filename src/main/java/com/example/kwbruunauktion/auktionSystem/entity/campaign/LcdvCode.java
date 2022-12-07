@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.entity.campaign;
 
+import com.example.kwbruunauktion.auktionSystem.entity.CampaignLcdvCodeJoin;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,9 +26,8 @@ public class LcdvCode {
     @Column(nullable = false, length = 400)
     private String lcdvCode;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "lcdvCodes")
-    @ToString.Exclude
-    private List<Campaign> campaign;
+    @OneToMany(mappedBy = "lcdvCode", cascade = CascadeType.ALL)
+    List<CampaignLcdvCodeJoin> campaignLcdvCodeJoins;
 
     @CreationTimestamp
     private LocalDateTime created;

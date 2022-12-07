@@ -20,16 +20,12 @@ import java.util.stream.Collectors;
 public class LcdvCodeResponse {
     private Long id;
     private String lcdvCode;
-    private List<CampaignResponse> campaignResponses;
     private LocalDateTime created;
     private LocalDateTime updated;
 
     public LcdvCodeResponse(LcdvCode lcdvCode) {
         this.id = lcdvCode.getId();
         this.lcdvCode = lcdvCode.getLcdvCode();
-        if (lcdvCode.getCampaign() != null) {
-            this.campaignResponses = lcdvCode.getCampaign().stream().map(CampaignResponse::new).collect(Collectors.toList());
-        }
         this.created = lcdvCode.getCreated();
         this.updated = lcdvCode.getUpdated();
     }

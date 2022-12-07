@@ -48,9 +48,11 @@ public class CampaignResponse {
         if (campaign.getCampaignColorPrices() != null){
             this.campaignColorPrices = campaign.getCampaignColorPrices().stream().map(CampaignColorPriceResponse::new).toList();
         }
+        /*
         if (campaign.getLcdvCodes() != null){
             this.lcdvCodes = campaign.getLcdvCodes().stream().map(LcdvCodeResponse::new).toList();
         }
+         */
         if (campaign.getCampaignBids() != null){
             this.campaignBid = campaign.getCampaignBids().stream().map(CampaignBidsResponse::new).toList();
         }

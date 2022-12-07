@@ -22,10 +22,8 @@ public class LcdvCodeService {
     }
 
     public LcdvCodeResponse addLcdvCode(LcdvCodeRequest lcdvCodeRequest){
-        List<Campaign> attachedCampaigns = campaignRepository.findAllById(lcdvCodeRequest.getCampaignResponseIds());
         LcdvCode lcdvCodeToSave = LcdvCode.builder()
                 .lcdvCode(lcdvCodeRequest.getLcdvCode())
-                .campaign(attachedCampaigns)
                 .build();
 
         lcdvCodeRepository.save(lcdvCodeToSave);
@@ -41,9 +39,7 @@ public class LcdvCodeService {
                 .orElseThrow(() -> new RuntimeException("LcdvCode with id: "+id+" does not exist"));
     }
 
-    public LcdvCodeResponse deleteLcdvCodeById(Long id){
-        LcdvCodeResponse lcdvCodeToDelete = getLcdvCodeById(id);
+    public void deleteLcdvCodeById(Long id){
         lcdvCodeRepository.deleteById(id);
-        return lcdvCodeToDelete;
     }
 }

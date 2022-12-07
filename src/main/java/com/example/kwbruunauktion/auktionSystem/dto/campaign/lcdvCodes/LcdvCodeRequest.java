@@ -16,7 +16,6 @@ import java.util.List;
 public class LcdvCodeRequest {
     private Long id;
     private String lcdvCode;
-    private List<Long> campaignResponseIds;
     @JsonFormat(pattern = "yyyy-mm-dd", shape = JsonFormat.Shape.STRING)
     private LocalDateTime created;
     @JsonFormat(pattern = "yyyy-mm-dd", shape = JsonFormat.Shape.STRING)

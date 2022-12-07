@@ -1,5 +1,6 @@
 package com.example.kwbruunauktion.auktionSystem.entity.campaign;
 
+import com.example.kwbruunauktion.auktionSystem.entity.CampaignLcdvCodeJoin;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
@@ -36,10 +37,8 @@ public class Campaign {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate activeDate;
 
-    @JoinTable(name = "campaign_lcdvcodes")
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @ToString.Exclude
-    private List<LcdvCode> lcdvCodes;
+    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
+    List<CampaignLcdvCodeJoin> campaignLcdvCodeJoins;
 
     @OneToMany(mappedBy = "campaign")
     @ToString.Exclude

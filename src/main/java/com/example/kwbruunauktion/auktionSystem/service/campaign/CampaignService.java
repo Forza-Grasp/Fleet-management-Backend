@@ -10,6 +10,7 @@ import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignCarR
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignColorPriceRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodeRepository;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -46,7 +47,6 @@ public class CampaignService {
         if (campaignRepository.existsById(campaignRequest.getId())) {
             throw new RuntimeException("Campaign with this IS already exist");
         }
-        List<LcdvCode> lcdvCodes = lcdvCodeRepository.findAllById(campaignRequest.getLcdvCodes());
         List<CampaignColorPrice> campaignColorPrices = campaignColorPriceRepository.findAllById(campaignRequest.getCampaignColorPrices());
         CampaignCar campaignCar = campaignCarRepository.findById(campaignRequest.getCampaignCarId()).orElseThrow(() -> new RuntimeException("CampaignCar With that ID not found"));
         Campaign campaign = Campaign.builder()
@@ -54,7 +54,6 @@ public class CampaignService {
                 .campaignStatus(campaignRequest.getCampaignStatus())
                 .campaignCar(campaignCar)
                 .activeDate(campaignRequest.getActiveDate())
-                .lcdvCodes(lcdvCodes)
                 .build();
         campaignRepository.save(campaign);
         return new CampaignResponse(campaign);
