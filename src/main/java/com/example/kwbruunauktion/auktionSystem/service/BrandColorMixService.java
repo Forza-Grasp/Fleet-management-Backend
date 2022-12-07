@@ -58,6 +58,10 @@ public class BrandColorMixService {
                 .specificCarModel(specificCarModel)
                 .colorMix(colorMix)
                 .build();
+        if(brandColorMixRepository.existsBySpecificCarModelIdAndColorMixId(specificCarModel.getId(), colorMix.getId())){
+            throw new RuntimeException("BrandColorMix already exists");
+        }
+
         System.out.println(brandColorMixRequest);
         brandColorMixRepository.save(newBrandColorMix);
         return new BrandColorMixResponse(newBrandColorMix);

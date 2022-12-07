@@ -12,5 +12,9 @@ import java.util.List;
 @Repository
 public interface BrandColorMixRepository extends JpaRepository<BrandColorMix, Long> {
     List<BrandColorMix> getAllBySpecificCarModelId(Long id);
+    //Boolean existBySpecificCarModelIdAndColorMixId(Long specificCarModelId, Long colorMixId);
+    Boolean existsBySpecificCarModelIdAndColorMixId(Long specificCarModelId, Long colorMixId);
+
+
 }
 
