@@ -2,6 +2,7 @@ package com.example.kwbruunauktion.auktionSystem.service.campaign;
 
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.CampaignLcdvCodeJoin.CampaignLcdvCodeJoinRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.CampaignLcdvCodeJoin.CampaignLcdvCodeJoinResponse;
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignLcdvCodeJoin;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCode;
@@ -26,15 +27,15 @@ public class CampaignLcdvCodeJoinService {
         this.campaignLcdvCodeJoinRepository = campaignLcdvCodeJoinRepository;
     }
 
-    public CampaignLcdvCodeJoinResponse addCampaignLcdvCodeJoin(CampaignLcdvCodeJoinRequest campaignLcdvCodeJoinRequest){
-        LcdvCode lcdvCodeToAdd = lcdvCodeRepository.findById(campaignLcdvCodeJoinRequest.getLcdvCodeId()).orElseThrow(() ->new RuntimeException("LcdvCode not found"));
+    public CampaignResponse addCampaignLcdvCodeJoin(CampaignLcdvCodeJoinRequest campaignLcdvCodeJoinRequest){
+        List<LcdvCode> lcdvCodesToAdd = lcdvCodeRepository.findAllById(campaignLcdvCodeJoinRequest.getLcdvCodeIds());
         Campaign campaignToAdd = campaignRepository.findById(campaignLcdvCodeJoinRequest.getCampaignId()).orElseThrow(() ->new RuntimeException("Campaign not found"));
-        CampaignLcdvCodeJoin campaignLcdvCodeJoinToSave = CampaignLcdvCodeJoin.builder()
-                .lcdvCode(lcdvCodeToAdd)
+        lcdvCodesToAdd.stream().map(lcdvCode -> CampaignLcdvCodeJoin.builder()
                 .campaign(campaignToAdd)
-                .build();
-        campaignLcdvCodeJoinRepository.save(campaignLcdvCodeJoinToSave);
-        return new CampaignLcdvCodeJoinResponse(campaignLcdvCodeJoinToSave);
+                .lcdvCode(lcdvCode)
+                .build()).forEach(campaignLcdvCodeJoinRepository::save);
+
+        return new CampaignResponse(campaignRepository.findById(campaignLcdvCodeJoinRequest.getCampaignId()).orElseThrow(() ->new RuntimeException("Campaign not found")));
     }
 
     public List<CampaignLcdvCodeJoinResponse> getAllCampaignLcdvCodeJoins(){

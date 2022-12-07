@@ -1,7 +1,5 @@
 package com.example.kwbruunauktion.auktionSystem.entity.campaign;
 
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCode;
 import lombok.*;
 
 import javax.persistence.*;

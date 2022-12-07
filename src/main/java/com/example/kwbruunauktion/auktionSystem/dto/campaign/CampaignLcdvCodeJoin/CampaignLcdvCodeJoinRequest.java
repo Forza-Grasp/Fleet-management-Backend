@@ -4,6 +4,8 @@ import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignLcdvCode
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,11 +16,6 @@ import lombok.*;
 public class CampaignLcdvCodeJoinRequest {
     Long id;
     Long campaignId;
-    Long lcdvCodeId;
+    List<Long> lcdvCodeIds;
 
-    public CampaignLcdvCodeJoinRequest(CampaignLcdvCodeJoin campaignLcdvCodeJoin) {
-        this.id = campaignLcdvCodeJoin.getId();
-        this.campaignId = campaignLcdvCodeJoin.getCampaign().getId();
-        this.lcdvCodeId = campaignLcdvCodeJoin.getLcdvCode().getId();
-    }
 }

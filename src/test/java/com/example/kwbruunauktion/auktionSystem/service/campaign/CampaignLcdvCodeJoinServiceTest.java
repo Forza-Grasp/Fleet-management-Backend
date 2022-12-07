@@ -110,19 +110,19 @@ class CampaignLcdvCodeJoinServiceTest {
     void addCampaignLcdvCodeJoin() {
         CampaignLcdvCodeJoinRequest campaignLcdvCodeJoinRequest1 = CampaignLcdvCodeJoinRequest.builder()
                 .campaignId(1L)
-                .lcdvCodeId(1L)
+                .lcdvCodeIds(List.of(1L,2L,3L,4L,5L))
                 .build();
 
         CampaignLcdvCodeJoinRequest campaignLcdvCodeJoinRequest2 = CampaignLcdvCodeJoinRequest.builder()
                 .campaignId(1L)
-                .lcdvCodeId(1L)
+                .lcdvCodeIds(List.of(1L,2L,3L,4L,5L))
                 .build();
 
         campaignLcdvCodeJoinService.addCampaignLcdvCodeJoin(campaignLcdvCodeJoinRequest1);
-        assertEquals(4, campaignLcdvCodeJoinRepository.findAll().size());
+        assertEquals(8, campaignLcdvCodeJoinRepository.findAll().size());
         campaignLcdvCodeJoinService.addCampaignLcdvCodeJoin(campaignLcdvCodeJoinRequest2);
-        assertEquals(5, campaignLcdvCodeJoinRepository.findAll().size());
-        assertNotEquals(4, campaignLcdvCodeJoinRepository.findAll().size());
+        assertEquals(13, campaignLcdvCodeJoinRepository.findAll().size());
+        assertNotEquals(8, campaignLcdvCodeJoinRepository.findAll().size());
     }
 
     @Test
