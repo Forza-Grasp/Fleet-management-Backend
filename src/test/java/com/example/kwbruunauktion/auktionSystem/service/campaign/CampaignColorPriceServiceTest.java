@@ -98,7 +98,6 @@ class CampaignColorPriceServiceTest {
                         .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
                         .build())
                 .campaignStatus(CampaignStatus.ACTIVE)
-                .lcdvCodes(lcdvCodes)
                 .activeDate(LocalDate.now())
                 .build();
         campaignRepository.save(campaign1);
