@@ -36,6 +36,9 @@ class UserBuyerServiceTest {
                                  @Autowired SpecificCarModelRepository specificCarModel_Repository) {
         userBuyerRepository = userBuyer_Repository;
         specificCarModelRepository = specificCarModel_Repository;
+        userBuyerRepository.deleteAll();
+        specificCarModelRepository.deleteAll();
+
         List<UserBuyer> userBuyerList = List.of(
                 UserBuyer.userBuyerBuilder()
                         .id(1L)
@@ -113,7 +116,7 @@ class UserBuyerServiceTest {
     }
 
     @Test
-    void getAllUserBuyers() {
+    public void getAllUserBuyers() {
         int actualResult = userBuyerRepository.findAll().size();
         int expectedResult = userBuyerSize;
 
@@ -124,7 +127,7 @@ class UserBuyerServiceTest {
     }
 
     @Test
-    void getUserBuyerById() {
+    public void getUserBuyerById() {
         UserBuyerResponse userBuyerResponse = userBuyerService.getUserBuyerById(1L);
         String actualResult = userBuyerResponse.getFirstName();
         String expectedResult = "Peter";
@@ -132,7 +135,7 @@ class UserBuyerServiceTest {
     }
 
     @Test
-    void createUserBuyer() {
+    public void createUserBuyer() {
         String expectedFirstName = "Laura";
         UserBuyer newUserBuyer = UserBuyer.userBuyerBuilder()
                 .id(4L)
@@ -156,10 +159,10 @@ class UserBuyerServiceTest {
                         .build())
                 .build();
 
-        UserBuyer addedUserBuyer = userBuyerRepository.save(newUserBuyer);
+        userBuyerService.createUserBuyer(new UserBuyerRequest(newUserBuyer));
         int actualResult = userBuyerRepository.findAll().size();
         int expectedResult = userBuyerSize + 1;
-        String actualFirstName = addedUserBuyer.getFirstName();
+        String actualFirstName = newUserBuyer.getFirstName();
 
         int actualResultService = userBuyerService.getAllUserBuyers().size();
         String actualFirstNameService = userBuyerService.getUserBuyerById(4L).getFirstName();
@@ -172,7 +175,7 @@ class UserBuyerServiceTest {
     }
 
     @Test
-    void editUserBuyer() {
+    public  void editUserBuyer() {
         UserBuyer findUserBuyer = userBuyerRepository.findAll().get(0);
         String firstNameBefore = findUserBuyer.getFirstName();
         String newFirstName = "Karl";
@@ -193,7 +196,7 @@ class UserBuyerServiceTest {
     }
 
     @Test
-    void deleteUserBuyer() {
+    public void deleteUserBuyer() {
         userBuyerService.deleteUserBuyer(1L);
         int actualResult = userBuyerRepository.findAll().size();
         int expectedResult = userBuyerSize - 1;
@@ -202,7 +205,7 @@ class UserBuyerServiceTest {
     }
 
     @Test
-    void addCarBrandToUserBuyer(){
+    public void addCarBrandToUserBuyer(){
         SpecificCarModel specificCarModel = SpecificCarModel.builder()
             .id(1L)
             .model("model1")

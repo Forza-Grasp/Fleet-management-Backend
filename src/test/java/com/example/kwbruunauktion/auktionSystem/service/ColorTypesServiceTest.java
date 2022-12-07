@@ -3,6 +3,7 @@ package com.example.kwbruunauktion.auktionSystem.service;
 import com.example.kwbruunauktion.auktionSystem.dto.ColorTypesRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.ColorTypesResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorTypes;
+import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorTypesRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,11 +21,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class ColorTypesServiceTest {
 
     public static ColorTypesRepository colorTypesRepository;
-    public static ColorTypesService colorTypesService;
+    public static ColorMixRepository colorMixRepository;
+    public ColorTypesService colorTypesService;
 
     @BeforeAll
-    public static void initiateData(@Autowired ColorTypesRepository colorTypesRepository){
-        ColorTypesServiceTest.colorTypesRepository = colorTypesRepository;
+    public static void initiateData(@Autowired ColorTypesRepository colorTypes_Repository,
+                                    @Autowired ColorMixRepository colorMix_Repository){
+        colorTypesRepository = colorTypes_Repository;
+        colorMixRepository = colorMix_Repository;
+        colorTypesRepository.deleteAll();
+        colorMixRepository.deleteAll();
 
         ColorTypes colorTypes1 = ColorTypes.builder()
                 .id(1L)
@@ -57,7 +63,7 @@ class ColorTypesServiceTest {
 
     @BeforeEach
     public void initiateServiceClass(){
-        colorTypesService = new ColorTypesService(colorTypesRepository, colorTypesService.colorMixRepository);
+        colorTypesService = new ColorTypesService(colorTypesRepository, colorMixRepository);
 
     }
 

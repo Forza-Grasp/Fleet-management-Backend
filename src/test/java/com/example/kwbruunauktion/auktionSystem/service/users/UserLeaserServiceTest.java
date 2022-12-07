@@ -8,11 +8,11 @@ import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserLeaser;
 import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.users.UserLeaserRepository;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Optional;
@@ -109,8 +109,21 @@ class UserLeaserServiceTest {
         userLeaserService = new UserLeaserService(userLeaserRepository, specificCarModelRepository);
     }
 
+    @AfterEach
+    public void deleteAfterTest() {
+        userLeaserRepository.deleteAll();
+        specificCarModelRepository.deleteAll();
+    }
+
+    @AfterAll
+    public static void deleteAfterAll() {
+        userLeaserRepository.deleteAll();
+        specificCarModelRepository.deleteAll();
+    }
+
+
     @Test
-    void getAllUserLeasers() {
+    public void getAllUserLeasers() {
         int actualResult = userLeaserRepository.findAll().size();
         int expectedResult = userLeaserSize;
 
@@ -122,7 +135,7 @@ class UserLeaserServiceTest {
     }
 
     @Test
-    void getUserLeaserById() {
+    public void getUserLeaserById() {
         UserLeaserResponse userLeaserResponse = userLeaserService.getUserLeaserById(1L);
         String actualResult = userLeaserResponse.getFirstName();
         String expectedResult = "Peter";
@@ -130,7 +143,7 @@ class UserLeaserServiceTest {
     }
 
     @Test
-    void createUserLeaser() {
+    public void createUserLeaser() {
         String expectedFirstName = "Laura";
         UserLeaser newUserLeaser = UserLeaser.userLeaserBuilder()
                 .id(4L)
@@ -170,29 +183,25 @@ class UserLeaserServiceTest {
     }
 
     @Test
-    void editUserLeaser() {
-        // find first userLeaser
-        UserLeaser findUserLeaser = userLeaserRepository.findAll().get(0);
-        String firstNameBefore = findUserLeaser.getFirstName();
-        String newFirstName = "Karl";
-        Optional<UserLeaser> userLeaserToEdit = userLeaserRepository.findById(1L);
-
-        if (userLeaserToEdit.isPresent()) {
-            UserLeaser userLeaser = userLeaserToEdit.get();
-
-            userLeaser.setFirstName(newFirstName);
-            UserLeaserRequest userLeaserRequest = new UserLeaserRequest(userLeaser);
-            userLeaserService.editUserLeaser(userLeaserRequest);
-        }
-
-        String firstNameAfter = userLeaserRepository.findAll().get(0).getFirstName();
-        assertNotEquals(firstNameBefore, firstNameAfter);
-        assertEquals(newFirstName, firstNameAfter);
+    public void editUserLeaser() {
+       //find userLeaser
+        UserLeaser userLeaser = userLeaserRepository.findById(1L).get();
+        //edit userLeaser
+        userLeaser.setFirstName("PeterEdited");
+        //save userLeaser
+        UserLeaserRequest userLeaserRequest = new UserLeaserRequest(userLeaser);
+        userLeaserService.editUserLeaser(userLeaserRequest);
+        //find userLeaser
+        UserLeaser userLeaserEdited = userLeaserRepository.findById(1L).get();
+        //check if userLeaser is edited
+        String actualResult = userLeaserEdited.getFirstName();
+        String expectedResult = "PeterEdited";
+        assertEquals(expectedResult, actualResult);
 
     }
 
     @Test
-    void deleteUserLeaser() {
+    public void deleteUserLeaser() {
         userLeaserService.deleteUserLeaser(1L);
         int actualResult = userLeaserRepository.findAll().size();
         int expectedResult = userLeaserSize - 1;
@@ -201,7 +210,7 @@ class UserLeaserServiceTest {
     }
 
     @Test
-    void addCarBrandToUserLeaser(){
+    public void addCarBrandToUserLeaser(){
         SpecificCarModel specificCarModel = SpecificCarModel.builder()
             .id(1L)
             .model("model1")

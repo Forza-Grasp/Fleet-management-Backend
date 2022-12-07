@@ -50,7 +50,6 @@ public class UserBuyerRequest {
                 .city(userBuyerRequest.getCity())
                 .zipCode(userBuyerRequest.getZipCode())
                 .country(userBuyerRequest.getCountry())
-                .ownership(userBuyerRequest.getOwnership())
                 .build();
     }
 
@@ -65,6 +64,7 @@ public class UserBuyerRequest {
         this.companyEuVatNumber = userBuyer.getCompanyEuVatNumber();
         this.addressLine1 = userBuyer.getAddressLine1();
         this.addressLine2 = userBuyer.getAddressLine2();
+        this.password = userBuyer.getPassword();
         this.city = userBuyer.getCity();
         this.zipCode = userBuyer.getZipCode();
         this.country = userBuyer.getCountry();

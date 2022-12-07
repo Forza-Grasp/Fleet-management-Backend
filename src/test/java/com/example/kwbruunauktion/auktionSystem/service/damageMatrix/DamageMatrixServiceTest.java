@@ -29,6 +29,8 @@ class DamageMatrixServiceTest {
                                @Autowired UserBuyerRepository userBuyer_Repository) {
     damageMatrixRepository = damageMatrix_Repository;
     userBuyerRepository = userBuyer_Repository;
+    damageMatrixRepository.deleteAll();
+    userBuyerRepository.deleteAll();
     UserBuyer userBuyer1 = userBuyerRepository.save(UserBuyer.userBuyerBuilder()
         .id(1L)
         .user("buyer1")

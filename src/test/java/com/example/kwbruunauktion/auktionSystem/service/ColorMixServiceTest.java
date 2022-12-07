@@ -30,8 +30,10 @@ class ColorMixServiceTest {
     @BeforeAll
     public static void dataInitializer(@Autowired ColorMixRepository colorMixRepo, @Autowired ColorTypesRepository colorTypesRepo, @Autowired BrandColorMixRepository brandColorMixRepo){
         colorMixRepository = colorMixRepo;
-        colorTypesRepository = colorTypesRepo;
+        colorTypesRepository = colorTypesRepo;er
         brandColorMixRepository = brandColorMixRepo;
+        colorMixRepository.deleteAll();
+        colorTypesRepository.deleteAll();
 
         ColorTypes colorType1 = ColorTypes.builder()
                 .id(1L)

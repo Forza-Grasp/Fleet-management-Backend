@@ -36,6 +36,10 @@ class SpecificDamageServiceTest {
     damageMatrixRepository = damageMatrix_Repository;
     userBuyerRepository = userBuyer_Repository;
     specificDamageRepository = specificDamage_Repository;
+    damageMatrixRepository.deleteAll();
+    userBuyerRepository.deleteAll();
+    specificDamageRepository.deleteAll();
+
     UserBuyer userBuyer1 = userBuyerRepository.save(UserBuyer.userBuyerBuilder()
         .id(1L)
         .user("buyer1")

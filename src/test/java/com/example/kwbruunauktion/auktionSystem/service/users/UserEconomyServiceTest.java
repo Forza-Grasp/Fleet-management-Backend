@@ -28,6 +28,7 @@ class UserEconomyServiceTest {
   @BeforeAll
   public static void setupData(@Autowired UserEconomyRepository userEconomy_Repository) {
     userEconomyRepository = userEconomy_Repository;
+    userEconomyRepository.deleteAll();
     List<UserEconomy> userEconomyList = List.of(
         UserEconomy.userEconomyBuilder()
             .id(1L)
