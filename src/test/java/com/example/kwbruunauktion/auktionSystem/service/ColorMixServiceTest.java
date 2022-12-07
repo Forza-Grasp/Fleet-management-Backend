@@ -28,6 +28,8 @@ class ColorMixServiceTest {
     public static void dataInitializer(@Autowired ColorMixRepository colorMixRepo, @Autowired ColorTypesRepository colorTypesRepo){
         colorMixRepository = colorMixRepo;
         colorTypesRepository = colorTypesRepo;
+        colorMixRepository.deleteAll();
+        colorTypesRepository.deleteAll();
 
         ColorTypes colorType1 = ColorTypes.builder()
                 .id(1L)

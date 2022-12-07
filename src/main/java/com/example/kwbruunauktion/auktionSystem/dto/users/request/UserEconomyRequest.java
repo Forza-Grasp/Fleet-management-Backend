@@ -36,7 +36,6 @@ public class UserEconomyRequest {
         .firstName(u.getFirstName())
         .lastName(u.getLastName())
         .phoneNumber(u.getPhoneNumber())
-        .ownership(u.getOwnership())
         .password(u.getPassword())
         .build();
   }

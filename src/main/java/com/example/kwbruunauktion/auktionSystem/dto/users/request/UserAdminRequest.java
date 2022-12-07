@@ -36,7 +36,6 @@ public class UserAdminRequest {
         .password(u.getPassword())
         .phoneNumber(u.getPhoneNumber())
         .email(u.getEmail())
-        .ownership(u.getOwnerShip())
         .user(u.getUserName())
         .build();
   }

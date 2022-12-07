@@ -7,9 +7,7 @@ import com.example.kwbruunauktion.auktionSystem.entity.Ownership;
 import com.example.kwbruunauktion.auktionSystem.entity.users.UserAdmin;
 import com.example.kwbruunauktion.auktionSystem.repository.users.UserAdminRepository;
 import com.example.kwbruunauktion.security.repository.UserWithRolesRepository;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -97,6 +95,18 @@ class UserAdminServiceTest {
   public void setUserAdminService() {
     userAdminService = new UserAdminService(userAdminRepository, userWithRolesRepository);
   }
+    @AfterEach
+    public void clearDataBetweenTests() {
+        userAdminRepository.deleteAll();
+        userWithRolesRepository.deleteAll();
+    }
+
+    @AfterAll
+    public static void clearDataAfterTests() {
+        userAdminRepository.deleteAll();
+        userWithRolesRepository.deleteAll();
+    }
+
 
   @Test
   void getAllUserAdmin() {
@@ -158,13 +168,4 @@ class UserAdminServiceTest {
     userAdminService.resetPassword(request);
     assertTrue(BCrypt.checkpw("12345", userAdminRepository.findById(1L).get().getPassword()));
   }
-
-  @Test
-  void amountUserWithRoles(){
-    assertEquals(4, userWithRolesRepository.count());
-    System.out.println("\n");
-    userWithRolesRepository.findAll().forEach(System.out::println);
-    System.out.println("\n");
-  }
-
 }

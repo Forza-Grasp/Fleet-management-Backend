@@ -31,6 +31,8 @@ class BlackListServiceTest {
                                @Autowired SpecificCarRepository specificCar_Repository) {
     blackListRepository = blackList_Repository;
     specificCarRepository = specificCar_Repository;
+    blackListRepository.deleteAll();
+    specificCarRepository.deleteAll();
 
 
     SpecificCar car1 = SpecificCar.builder()
