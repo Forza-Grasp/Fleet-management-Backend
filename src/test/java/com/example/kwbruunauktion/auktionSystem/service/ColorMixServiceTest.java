@@ -30,7 +30,7 @@ class ColorMixServiceTest {
     @BeforeAll
     public static void dataInitializer(@Autowired ColorMixRepository colorMixRepo, @Autowired ColorTypesRepository colorTypesRepo, @Autowired BrandColorMixRepository brandColorMixRepo){
         colorMixRepository = colorMixRepo;
-        colorTypesRepository = colorTypesRepo;er
+        colorTypesRepository = colorTypesRepo;
         brandColorMixRepository = brandColorMixRepo;
         colorMixRepository.deleteAll();
         colorTypesRepository.deleteAll();
