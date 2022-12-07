@@ -214,6 +214,7 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.PUT, "/api/campaign/{id}").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/campaign/{id}").permitAll()
         .antMatchers(HttpMethod.POST, "/api/campaign").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/campaign/add-lcdv-code").permitAll()
 
         //Campaign Car
         .antMatchers(HttpMethod.GET, "/api/campaign/car").permitAll()

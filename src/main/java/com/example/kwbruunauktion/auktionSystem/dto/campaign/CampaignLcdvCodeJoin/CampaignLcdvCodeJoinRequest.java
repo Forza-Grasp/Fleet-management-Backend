@@ -14,7 +14,6 @@ import java.util.List;
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CampaignLcdvCodeJoinRequest {
-    Long id;
     Long campaignId;
     List<Long> lcdvCodeIds;
 

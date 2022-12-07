@@ -1,7 +1,9 @@
 package com.example.kwbruunauktion.auktionSystem.api.campaign;
 
+import com.example.kwbruunauktion.auktionSystem.dto.campaign.CampaignLcdvCodeJoin.CampaignLcdvCodeJoinRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignResponse;
+import com.example.kwbruunauktion.auktionSystem.service.campaign.CampaignLcdvCodeJoinService;
 import com.example.kwbruunauktion.auktionSystem.service.campaign.CampaignService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,9 +17,11 @@ import java.util.List;
 @RequestMapping ("/api/campaign")
 public class CampaignController {
     private final CampaignService campaignService;
+    private final CampaignLcdvCodeJoinService campaignLcdvCodeJoinService;
 
-    public CampaignController (CampaignService campaignService){
+    public CampaignController (CampaignService campaignService, CampaignLcdvCodeJoinService campaignLcdvCodeJoinService) {
         this.campaignService = campaignService;
+        this.campaignLcdvCodeJoinService = campaignLcdvCodeJoinService;
     }
 
     @GetMapping
@@ -39,6 +43,11 @@ public class CampaignController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     CampaignResponse addCampaign( @RequestBody CampaignRequest body){
         return campaignService.addCampaign(body);
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/add-lcdv-code")
+    CampaignResponse addLcdvCodeToCampaign(@RequestBody CampaignLcdvCodeJoinRequest campaignLcdvCodeJoinRequest){
+        return campaignLcdvCodeJoinService.addCampaignLcdvCodeJoin(campaignLcdvCodeJoinRequest);
     }
 
     /*
