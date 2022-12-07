@@ -160,6 +160,7 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.POST,"/api/color-types").permitAll()
 
 
+
         //necessary to allow for "nice" JSON Errors
         .antMatchers("/error").permitAll()
 
@@ -175,6 +176,7 @@ public class SecurityConfig {
         //ColorMix
         .antMatchers(HttpMethod.GET, "/api/color-mix").permitAll()
         .antMatchers(HttpMethod.GET, "/api/color-mix/{id}").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/color-mix/c-mix/{id}").permitAll()
         .antMatchers(HttpMethod.POST, "/api/color-mix").permitAll()
         .antMatchers(HttpMethod.PUT, "/api/color-mix").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/color-mix/{id}").permitAll()

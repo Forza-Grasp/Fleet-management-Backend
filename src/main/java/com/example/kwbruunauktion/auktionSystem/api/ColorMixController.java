@@ -1,7 +1,10 @@
 package com.example.kwbruunauktion.auktionSystem.api;
 
+import com.example.kwbruunauktion.auktionSystem.dto.BrandColorMixResponse;
 import com.example.kwbruunauktion.auktionSystem.dto.colorMix.ColorMixRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.colorMix.ColorMixResponse;
+import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
+import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
 import com.example.kwbruunauktion.auktionSystem.service.ColorMixService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -48,6 +51,10 @@ public class ColorMixController {
     }
 
 
+    @GetMapping("/c-mix/{id}")
+    List<ColorMixResponse> getColorMixFromSpecificCarId(@PathVariable Long id) {
+        return colorMixService.getColorMixFromSpecificCarId(id);
+    }
 
 }
 

@@ -1,6 +1,8 @@
 package com.example.kwbruunauktion.auktionSystem.repository;
 
+import com.example.kwbruunauktion.auktionSystem.dto.colorMix.ColorMixResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
+import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
 import com.example.kwbruunauktion.auktionSystem.entity.SpecificCarModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

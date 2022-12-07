@@ -52,9 +52,15 @@ public class BrandColorMixService {
         if(!colorMixRepository.existsById(brandColorMixRequest.getColorMixId())) {
             throw new RuntimeException("ColorMix with this ID doesnt exist");
         }
-        BrandColorMix createdBrandColorMix = BrandColorMixRequest.getBrandColorMixEntity(brandColorMixRequest);
-        brandColorMixRepository.save(createdBrandColorMix);
-        return new BrandColorMixResponse(createdBrandColorMix);
+        SpecificCarModel specificCarModel = specificCarModelRepository.findById(brandColorMixRequest.getSpecificCarModelId()).orElseThrow(() -> new RuntimeException("SpecificCarModel not found"));
+        ColorMix colorMix = colorMixRepository.findById(brandColorMixRequest.getColorMixId()).orElseThrow(() -> new RuntimeException("ColorMix not found"));
+        BrandColorMix newBrandColorMix = BrandColorMix.builder()
+                .specificCarModel(specificCarModel)
+                .colorMix(colorMix)
+                .build();
+        System.out.println(brandColorMixRequest);
+        brandColorMixRepository.save(newBrandColorMix);
+        return new BrandColorMixResponse(newBrandColorMix);
     }
 
 

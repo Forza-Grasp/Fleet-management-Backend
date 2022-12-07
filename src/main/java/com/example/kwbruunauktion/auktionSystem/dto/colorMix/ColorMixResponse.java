@@ -2,7 +2,6 @@ package com.example.kwbruunauktion.auktionSystem.dto.colorMix;
 
 import com.example.kwbruunauktion.auktionSystem.dto.ColorTypesResponse;
 import com.example.kwbruunauktion.auktionSystem.entity.ColorMix;
-import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
