@@ -24,6 +24,7 @@ class OwnershipServiceTest {
     @BeforeAll
     public static void initData(@Autowired OwnershipRepository ownership_Repository) {
         ownershipRepository = ownership_Repository;
+        ownershipRepository.deleteAll();
 
         Ownership ownership1 = Ownership.builder()
                 .id(1L)

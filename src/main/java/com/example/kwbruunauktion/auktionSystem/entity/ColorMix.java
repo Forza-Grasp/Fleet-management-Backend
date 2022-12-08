@@ -34,6 +34,7 @@ public class ColorMix {
   private String colorName;
 
   @OneToMany(mappedBy = "colorMix", cascade = CascadeType.ALL)
+  @ToString.Exclude
   private List<BrandColorMix> brandColorMix;
 
   @CreationTimestamp

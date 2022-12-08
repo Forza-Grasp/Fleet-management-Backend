@@ -24,8 +24,12 @@ class SpecificCarModelServiceTest {
     public static BrandColorMixRepository brandColorMixRepository;
 
     @BeforeAll
-    public static void initData(@Autowired SpecificCarModelRepository specific_CarModel_Repository) {
+    public static void initData(@Autowired SpecificCarModelRepository specific_CarModel_Repository,
+                                @Autowired BrandColorMixRepository brand_Color_Mix_Repository) {
         specificCarModelRepository = specific_CarModel_Repository;
+        brandColorMixRepository = brand_Color_Mix_Repository;
+        specificCarModelRepository.deleteAll();
+        brandColorMixRepository.deleteAll();
 
         SpecificCarModel specificCarModel = SpecificCarModel.builder()
                 .id(1L)
