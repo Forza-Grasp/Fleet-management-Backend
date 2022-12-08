@@ -139,7 +139,27 @@ public class CampaignSetup implements ApplicationRunner {
                         .build()
         ).forEach(campaignLcdvCodeJoin -> campaignLcdvCodeJoinRepository.save(campaignLcdvCodeJoin));
 
-
+        Campaign campaign3 = Campaign.builder()
+                .campaignCar(CampaignCar.builder()
+                        .brand("Audi")
+                        .model("A4")
+                        .campaignPictureOne("picture1")
+                        .damageAndMileage("damageAndMileage")
+                        .description("description")
+                        .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                        .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
+                        .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+                        .monthsRegistered(12)
+                        .mileage("mileage")
+                        .depositPerCar("1000")
+                        .modelText("modelText")
+                        .supplyingConditions("supplyingConditions")
+                        .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                        .build())
+                .campaignStatus(CampaignStatus.ACTIVE)
+                .activeDate(LocalDate.now())
+                .build();
+        campaignRepository.save(campaign3);
 
 
         SpecificCarModel specificCarModel1 = SpecificCarModel.builder()

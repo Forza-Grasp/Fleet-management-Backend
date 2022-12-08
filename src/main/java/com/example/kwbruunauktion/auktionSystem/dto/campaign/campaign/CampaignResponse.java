@@ -38,24 +38,22 @@ public class CampaignResponse {
 
     private LocalDateTime updated;
 
-    public CampaignResponse(Campaign campaign){
+    public CampaignResponse(Campaign campaign) {
         this.id = campaign.getId();
         this.campaignStatus = campaign.getCampaignStatus();
         this.activeDate = campaign.getActiveDate();
         this.created = campaign.getCreated();
         this.updated = campaign.getUpdated();
         this.campaignCar = new CampaignCarResponse(campaign.getCampaignCar());
-        if (campaign.getCampaignColorPrices() != null){
+        if (campaign.getCampaignColorPrices() != null) {
             this.campaignColorPrices = campaign.getCampaignColorPrices().stream().map(CampaignColorPriceResponse::new).toList();
         }
-        /*
-        if (campaign.getLcdvCodes() != null){
-            this.lcdvCodes = campaign.getLcdvCodes().stream().map(LcdvCodeResponse::new).toList();
+        if (campaign.getCampaignLcdvCodeJoins() != null) {
+            this.lcdvCodes = campaign.getCampaignLcdvCodeJoins().stream().map(CampaignLcdvCodeJoin::getLcdvCode).map(LcdvCodeResponse::new).toList();
         }
-         */
-        if (campaign.getCampaignBids() != null){
+        if (campaign.getCampaignBids() != null) {
             this.campaignBid = campaign.getCampaignBids().stream().map(CampaignBidsResponse::new).toList();
         }
-        }
     }
+}
 
