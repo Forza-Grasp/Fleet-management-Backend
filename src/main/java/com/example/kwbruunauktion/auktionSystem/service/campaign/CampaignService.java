@@ -57,7 +57,6 @@ public class CampaignService {
     }
 
     public void editCampaign(CampaignRequest campaignRequest) {
-        System.out.println(campaignRequest);
         Campaign campaign = campaignRepository.findById(campaignRequest.getId()).orElseThrow(() -> new RuntimeException("campaign with this ID does not exist"));
         if (campaignRequest.getCampaignColorPrices() != null) {
             List<CampaignColorPrice> campaignColorPrices = campaignColorPriceRepository.findAllById(campaignRequest.getCampaignColorPrices());
@@ -65,7 +64,6 @@ public class CampaignService {
         }
         if (campaignRequest.getCampaignCarId() != null) {
             CampaignCar campaignCar = campaignCarRepository.findById(campaignRequest.getCampaignCarId()).orElseThrow(() -> new RuntimeException("CampaignCar With that ID not found"));
-            System.out.printf("campaignCar = " + campaignCar);
             campaignCar.setCampaign(campaign);
             campaignCarRepository.save(campaignCar);
         }
@@ -75,7 +73,6 @@ public class CampaignService {
         if (campaignRequest.getActiveDate() != null) {
             campaign.setActiveDate(campaignRequest.getActiveDate());
         }
-        System.out.println("\n"+campaign+"\n");
         campaignRepository.save(campaign);
     }
 
