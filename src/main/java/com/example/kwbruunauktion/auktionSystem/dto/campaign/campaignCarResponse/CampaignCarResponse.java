@@ -68,29 +68,28 @@ public class CampaignCarResponse {
 
 
 
-    public CampaignCarResponse(CampaignCar c){
-        this.id = c.getId();
-        this.brand = c.getBrand();
-        this.model = c.getModel();
-        this.modelText = c.getModelText();
-        this.description = c.getDescription();
-        this.exceptedRegistrationFromDate = c.getExceptedRegistrationFromDate();
-        this.exceptedRegistrationToDate = c.getExceptedRegistrationToDate();
-        this.monthsRegistered = c.getMonthsRegistered();
-        this.earliestExceptedReturnDate = c.getEarliestExceptedReturnDate();
-        this.latestExceptedReturnDate = c.getLatestExceptedReturnDate();
-        this.mileage = c.getMileage();
-        this.depositPerCar = c.getDepositPerCar();
-        this.damageAndMileage = c.getDamageAndMileage();
-        this.supplyingConditions = c.getSupplyingConditions();
-        this.campaignPictureOne = c.getCampaignPictureOne();
-        if (c.getCampaign() != null){
-            this.campaignId = c.getCampaign().getId();
-        }
-        this.created = c.getCreated();
-        this.updated = c.getUpdated();
+    public CampaignCarResponse(CampaignCar c) {
+            this.id = c.getId();
+            this.brand = c.getBrand();
+            this.model = c.getModel();
+            this.modelText = c.getModelText();
+            this.description = c.getDescription();
+            this.exceptedRegistrationFromDate = c.getExceptedRegistrationFromDate();
+            this.exceptedRegistrationToDate = c.getExceptedRegistrationToDate();
+            this.monthsRegistered = c.getMonthsRegistered();
+            this.earliestExceptedReturnDate = c.getEarliestExceptedReturnDate();
+            this.latestExceptedReturnDate = c.getLatestExceptedReturnDate();
+            this.mileage = c.getMileage();
+            this.depositPerCar = c.getDepositPerCar();
+            this.damageAndMileage = c.getDamageAndMileage();
+            this.supplyingConditions = c.getSupplyingConditions();
+            this.campaignPictureOne = c.getCampaignPictureOne();
+            if (c.getCampaign() != null) {
+                this.campaignId = c.getCampaign().getId();
+            }
+            this.created = c.getCreated();
+            this.updated = c.getUpdated();
     }
-
 
 
 

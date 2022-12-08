@@ -44,9 +44,6 @@ public class CampaignService {
     }
 
     public CampaignResponse addCampaign(CampaignRequest campaignRequest) {
-        if (campaignRepository.existsById(campaignRequest.getId())) {
-            throw new RuntimeException("Campaign with this IS already exist");
-        }
         List<CampaignColorPrice> campaignColorPrices = campaignColorPriceRepository.findAllById(campaignRequest.getCampaignColorPrices());
         CampaignCar campaignCar = campaignCarRepository.findById(campaignRequest.getCampaignCarId()).orElseThrow(() -> new RuntimeException("CampaignCar With that ID not found"));
         Campaign campaign = Campaign.builder()
@@ -59,15 +56,26 @@ public class CampaignService {
         return new CampaignResponse(campaign);
     }
 
-    public void editCampaign(CampaignRequest campaignRequest, Long id) {
-        Campaign campaign = campaignRepository.findById(id).orElseThrow(() -> new RuntimeException("campaign with this ID does not exist"));
-        campaign.setId(campaign.getId());
-        campaign.setCampaignCar(campaign.getCampaignCar());
-        campaign.setCampaignStatus(campaign.getCampaignStatus());
-        campaign.setActiveDate(campaign.getActiveDate());
-        campaign.setCreated(campaign.getCreated());
-        campaign.setUpdated(campaign.getUpdated());
-
+    public void editCampaign(CampaignRequest campaignRequest) {
+        System.out.println(campaignRequest);
+        Campaign campaign = campaignRepository.findById(campaignRequest.getId()).orElseThrow(() -> new RuntimeException("campaign with this ID does not exist"));
+        if (campaignRequest.getCampaignColorPrices() != null) {
+            List<CampaignColorPrice> campaignColorPrices = campaignColorPriceRepository.findAllById(campaignRequest.getCampaignColorPrices());
+            campaign.setCampaignColorPrices(campaignColorPrices);
+        }
+        if (campaignRequest.getCampaignCarId() != null) {
+            CampaignCar campaignCar = campaignCarRepository.findById(campaignRequest.getCampaignCarId()).orElseThrow(() -> new RuntimeException("CampaignCar With that ID not found"));
+            System.out.printf("campaignCar = " + campaignCar);
+            campaignCar.setCampaign(campaign);
+            campaignCarRepository.save(campaignCar);
+        }
+        if (campaignRequest.getCampaignStatus() != null) {
+            campaign.setCampaignStatus(campaignRequest.getCampaignStatus());
+        }
+        if (campaignRequest.getActiveDate() != null) {
+            campaign.setActiveDate(campaignRequest.getActiveDate());
+        }
+        System.out.println("\n"+campaign+"\n");
         campaignRepository.save(campaign);
     }
 

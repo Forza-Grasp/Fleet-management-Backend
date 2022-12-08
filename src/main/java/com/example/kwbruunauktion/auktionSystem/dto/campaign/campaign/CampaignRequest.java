@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -25,18 +26,10 @@ public class CampaignRequest {
 
     private CampaignStatus campaignStatus;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
     private LocalDate activeDate;
-
-    private LocalDate localDate;
-
-    private List<Long> lcdvCodes;
 
     private List<Long> campaignColorPrices;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",shape = JsonFormat.Shape.STRING)
-    private LocalDateTime created;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",shape = JsonFormat.Shape.STRING)
-    private LocalDateTime updated;
 
 }

@@ -25,7 +25,7 @@ public class Campaign {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne (cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "campaign")
     private CampaignCar campaignCar;
 
     @Enumerated(EnumType.STRING)

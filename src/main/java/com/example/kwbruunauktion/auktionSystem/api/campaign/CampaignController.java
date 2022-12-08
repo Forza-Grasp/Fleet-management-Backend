@@ -50,13 +50,9 @@ public class CampaignController {
         return campaignLcdvCodeJoinService.addCampaignLcdvCodeJoin(campaignLcdvCodeJoinRequest);
     }
 
-    /*
-    @PutMapping ("/{id}")
-    ResponseEntity <Boolean> editCampaign(@PathVariable CampaignRequest campaignRequest, @PathVariable Long id){
-        campaignService.editCampaign(campaignRequest, id);
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity <Boolean> editCampaign(@RequestBody CampaignRequest campaignRequest){
+        campaignService.editCampaign(campaignRequest);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
-
-
-     */
 }

@@ -7,11 +7,8 @@ import com.example.kwbruunauktion.auktionSystem.repository.BrandColorMixReposito
 import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorTypesRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepository;
-import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignColorPriceRepository;
-import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignLcdvCodeJoinRepository;
-import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
+import com.example.kwbruunauktion.auktionSystem.repository.campaign.*;
 import com.example.kwbruunauktion.auktionSystem.service.campaign.CampaignService;
-import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodeRepository;
 import lombok.SneakyThrows;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -31,6 +28,7 @@ public class CampaignSetup implements ApplicationRunner {
     ColorMixRepository colorMixRepository;
     ColorTypesRepository colorTypesRepository;
     CampaignLcdvCodeJoinRepository campaignLcdvCodeJoinRepository;
+    private final CampaignCarRepository campaignCarRepository;
 
 
     public CampaignSetup(CampaignRepository campaignRepository,
@@ -41,7 +39,8 @@ public class CampaignSetup implements ApplicationRunner {
                          SpecificCarModelRepository specificCarModelRepository,
                          ColorMixRepository colorMixRepository,
                          ColorTypesRepository colorTypesRepository,
-                         CampaignLcdvCodeJoinRepository campaignLcdvCodeJoinRepository) {
+                         CampaignLcdvCodeJoinRepository campaignLcdvCodeJoinRepository,
+                         CampaignCarRepository campaignCarRepository) {
         this.campaignRepository = campaignRepository;
         this.campaignService = campaignService;
         this.lcdvCodeRepository = lcdvCodeRepository;
@@ -51,6 +50,7 @@ public class CampaignSetup implements ApplicationRunner {
         this.colorMixRepository = colorMixRepository;
         this.colorTypesRepository = colorTypesRepository;
         this.campaignLcdvCodeJoinRepository = campaignLcdvCodeJoinRepository;
+        this.campaignCarRepository = campaignCarRepository;
     }
 
     @Override
@@ -79,50 +79,77 @@ public class CampaignSetup implements ApplicationRunner {
                         .build()
         );
         Campaign campaign1 = Campaign.builder()
-                .campaignCar(CampaignCar.builder()
-                        .brand("Audi")
-                        .model("A4")
-                        .campaignPictureOne("picture1")
-                        .damageAndMileage("damageAndMileage")
-                        .description("description")
-                        .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                        .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
-                        .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
-                        .monthsRegistered(12)
-                        .mileage("mileage")
-                        .depositPerCar("1000")
-                        .modelText("modelText")
-                        .supplyingConditions("supplyingConditions")
-                        .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                        .build())
                 .campaignStatus(CampaignStatus.ACTIVE)
                 .activeDate(LocalDate.now())
                 .build();
         Campaign campaign2 = Campaign.builder()
-                .campaignCar(CampaignCar.builder()
-                        .brand("BMW")
-                        .model("X5")
-                        .campaignPictureOne("picture1")
-                        .damageAndMileage("damageAndMileage")
-                        .description("description")
-                        .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                        .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
-                        .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
-                        .monthsRegistered(12)
-                        .mileage("mileage")
-                        .depositPerCar("1000")
-                        .modelText("modelText")
-                        .supplyingConditions("supplyingConditions")
-                        .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                        .build())
                 .campaignStatus(CampaignStatus.ACTIVE)
                 .activeDate(LocalDate.now())
                 .build();
 
         List<Campaign> campaignList = List.of(campaign1, campaign2);
+        CampaignCar campaignCar1 = CampaignCar.builder()
+                .brand("BMW")
+                .model("X5")
+                .campaignPictureOne("picture1")
+                .damageAndMileage("damageAndMileage")
+                .description("description")
+                .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+                .monthsRegistered(12)
+                .mileage("mileage")
+                .depositPerCar("1000")
+                .modelText("modelText")
+                .supplyingConditions("supplyingConditions")
+                .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .build();
+        CampaignCar campaignCar2 = CampaignCar.builder()
+                .brand("Audi")
+                .model("A4")
+                .campaignPictureOne("picture1")
+                .damageAndMileage("damageAndMileage")
+                .description("description")
+                .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+                .monthsRegistered(12)
+                .mileage("mileage")
+                .depositPerCar("1000")
+                .modelText("modelText")
+                .supplyingConditions("supplyingConditions")
+                .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .build();
+        CampaignCar campaignCar3 = CampaignCar.builder()
+                .brand("Audi")
+                .model("A4")
+                .campaignPictureOne("picture1")
+                .damageAndMileage("damageAndMileage")
+                .description("description")
+                .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+                .monthsRegistered(12)
+                .mileage("mileage")
+                .depositPerCar("1000")
+                .modelText("modelText")
+                .supplyingConditions("supplyingConditions")
+                .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .build();
+
+        List<CampaignCar> campaignCarList = List.of(campaignCar1, campaignCar2, campaignCar3);
+
+        campaignCarRepository.saveAll(campaignCarList);
         campaignRepository.saveAll(campaignList);
         lcdvCodeRepository.saveAll(lcdvCodes);
-
+        campaignCar1.setCampaign(campaign1);
+        campaignCar2.setCampaign(campaign2);
+        campaignCarRepository.save(campaignCar1);
+        campaignCarRepository.save(campaignCar2);
+        //campaign1.setCampaignCar(campaignCar1);
+        //campaign2.setCampaignCar(campaignCar2);
+        //campaignRepository.save(campaign1);
+        //campaignRepository.save(campaign2);
 
 
         lcdvCodes.stream().map(lcdvcode ->
@@ -140,22 +167,6 @@ public class CampaignSetup implements ApplicationRunner {
         ).forEach(campaignLcdvCodeJoin -> campaignLcdvCodeJoinRepository.save(campaignLcdvCodeJoin));
 
         Campaign campaign3 = Campaign.builder()
-                .campaignCar(CampaignCar.builder()
-                        .brand("Audi")
-                        .model("A4")
-                        .campaignPictureOne("picture1")
-                        .damageAndMileage("damageAndMileage")
-                        .description("description")
-                        .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                        .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
-                        .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
-                        .monthsRegistered(12)
-                        .mileage("mileage")
-                        .depositPerCar("1000")
-                        .modelText("modelText")
-                        .supplyingConditions("supplyingConditions")
-                        .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                        .build())
                 .campaignStatus(CampaignStatus.ACTIVE)
                 .activeDate(LocalDate.now())
                 .build();
@@ -231,13 +242,11 @@ public class CampaignSetup implements ApplicationRunner {
         System.out.println("\n" + brandColorMix1 + "\n");
         brandColorMixRepository.save(brandColorMix1);
 
-        //CampaignColorPrice campaignColorPrice = CampaignColorPrice.builder()
-        //        .price(1000)
-        //        .brandColorMix(brandColorMix1)
-        //        .campaign(campaign1)
-        //        .build();
-        //campaignColorPriceRepository.save(campaignColorPrice);
-
+        CampaignColorPrice campaignColorPrice = CampaignColorPrice.builder()
+                .price(1000)
+                .brandColorMix(brandColorMix1)
+                .build();
+        campaignColorPriceRepository.save(campaignColorPrice);
 
 
     }

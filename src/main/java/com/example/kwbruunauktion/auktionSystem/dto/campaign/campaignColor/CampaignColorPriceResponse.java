@@ -39,7 +39,9 @@ public class CampaignColorPriceResponse {
     public CampaignColorPriceResponse(CampaignColorPrice c){
         this.id = c.getId();
         this.brandColorMix = new BrandColorMixResponse(c.getBrandColorMix());
-        this.campaignId = c.getCampaign().getId();
+        if (c.getCampaign() != null){
+            this.campaignId = c.getCampaign().getId();
+        }
         this.created = c.getCreated();
         this.updated = c.getUpdated();
         this.price = c.getPrice();

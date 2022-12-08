@@ -24,12 +24,4 @@ public class CampaignColorPriceRequest {
 
     private Long campaignId;
 
-    @CreationTimestamp
-    private LocalDateTime created;
-
-    @UpdateTimestamp
-    private LocalDateTime updated;
-
-
-
 }

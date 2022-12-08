@@ -44,7 +44,9 @@ public class CampaignResponse {
         this.activeDate = campaign.getActiveDate();
         this.created = campaign.getCreated();
         this.updated = campaign.getUpdated();
-        this.campaignCar = new CampaignCarResponse(campaign.getCampaignCar());
+        if (campaign.getCampaignCar() != null) {
+            this.campaignCar = new CampaignCarResponse(campaign.getCampaignCar());
+        }
         if (campaign.getCampaignColorPrices() != null) {
             this.campaignColorPrices = campaign.getCampaignColorPrices().stream().map(CampaignColorPriceResponse::new).toList();
         }
