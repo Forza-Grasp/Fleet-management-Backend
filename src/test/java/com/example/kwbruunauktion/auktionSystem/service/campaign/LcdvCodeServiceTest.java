@@ -6,6 +6,7 @@ import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignCar;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCode;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
+import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignCarRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodeRepository;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,13 +28,16 @@ class LcdvCodeServiceTest {
     public static LcdvCodeService lcdvCodeService;
     public static LcdvCodeRepository lcdvCodeRepository;
     public static CampaignRepository campaignRepository;
+    public static CampaignCarRepository campaignCarRepository;
 
 
     @BeforeAll
     public static void setup(@Autowired LcdvCodeRepository lcdvCode_Repository,
-                             @Autowired CampaignRepository campaign_Repository) {
+                             @Autowired CampaignRepository campaign_Repository,
+                             @Autowired CampaignCarRepository campaignCar_Repository) {
         lcdvCodeRepository = lcdvCode_Repository;
         campaignRepository = campaign_Repository;
+        campaignCarRepository = campaignCar_Repository;
 
         List<LcdvCode> lcdvCodes = List.of(
                 LcdvCode.builder()
@@ -56,50 +60,57 @@ class LcdvCodeServiceTest {
                         .build()
         );
 
+        CampaignCar campaignCar1 = CampaignCar.builder()
+                .brand("Audi")
+                .model("A4")
+                .campaignPictureOne("picture1")
+                .damageAndMileage("damageAndMileage")
+                .description("description")
+                .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+                .monthsRegistered(12)
+                .mileage("mileage")
+                .depositPerCar("1000")
+                .modelText("modelText")
+                .supplyingConditions("supplyingConditions")
+                .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .build();
+        CampaignCar campaignCar2 = CampaignCar.builder()
+                .brand("BMW")
+                .model("X5")
+                .campaignPictureOne("picture1")
+                .damageAndMileage("damageAndMileage")
+                .description("description")
+                .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+                .monthsRegistered(12)
+                .mileage("mileage")
+                .depositPerCar("1000")
+                .modelText("modelText")
+                .supplyingConditions("supplyingConditions")
+                .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .build();
+        campaignCarRepository.save(campaignCar1);
+        campaignCarRepository.save(campaignCar2);
+
         Campaign campaign1 = Campaign.builder()
-                .campaignCar(CampaignCar.builder()
-                        .brand("Audi")
-                        .model("A4")
-                        .campaignPictureOne("picture1")
-                        .damageAndMileage("damageAndMileage")
-                        .description("description")
-                        .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                        .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
-                        .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
-                        .monthsRegistered(12)
-                        .mileage("mileage")
-                        .depositPerCar("1000")
-                        .modelText("modelText")
-                        .supplyingConditions("supplyingConditions")
-                        .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                        .build())
                 .campaignStatus(CampaignStatus.ACTIVE)
                 .activeDate(LocalDate.now())
                 .build();
 
         Campaign campaign2 = Campaign.builder()
-                .campaignCar(CampaignCar.builder()
-                        .brand("BMW")
-                        .model("X5")
-                        .campaignPictureOne("picture1")
-                        .damageAndMileage("damageAndMileage")
-                        .description("description")
-                        .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                        .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
-                        .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
-                        .monthsRegistered(12)
-                        .mileage("mileage")
-                        .depositPerCar("1000")
-                        .modelText("modelText")
-                        .supplyingConditions("supplyingConditions")
-                        .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                        .build())
                 .campaignStatus(CampaignStatus.ACTIVE)
                 .activeDate(LocalDate.now())
                 .build();
 
         List<Campaign> campaignList = List.of(campaign1, campaign2);
         campaignRepository.saveAll(campaignList);
+        campaignCar1.setCampaign(campaign1);
+        campaignCar2.setCampaign(campaign2);
+        campaignCarRepository.save(campaignCar1);
+        campaignCarRepository.save(campaignCar2);
         lcdvCodeRepository.saveAll(lcdvCodes);
 
         /*
@@ -132,13 +143,13 @@ class LcdvCodeServiceTest {
                 .lcdvCode("6")
                 .build();
         LcdvCodeResponse lcdvCodeResponse = lcdvCodeService.addLcdvCode(lcq);
-        assertEquals(6, lcdvCodeService.getLcdvCodes().size());
+        assertEquals(7, lcdvCodeService.getLcdvCodes().size());
     }
 
     @Test
     void getLcdvCodes() {
         List<LcdvCodeResponse> lcdvCodeResponses = lcdvCodeService.getLcdvCodes();
-        assertEquals(9,lcdvCodeResponses.size());
+        assertEquals(6,lcdvCodeResponses.size());
     }
 
     @Test
