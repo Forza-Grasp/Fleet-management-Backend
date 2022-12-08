@@ -32,9 +32,7 @@ class CampaignCarServiceTest {
         campaignRepository = campaign_Repository;
         campaignCarRepository = campaignCar_Repository;
 
-
-        List<CampaignCar> campaignCarList = List.of(
-       CampaignCar.builder()
+        CampaignCar campaignCar1 = CampaignCar.builder()
                 .brand("BMW")
                 .model("X5")
                 .campaignPictureOne("picture1")
@@ -49,7 +47,7 @@ class CampaignCarServiceTest {
                 .modelText("modelText")
                 .supplyingConditions("supplyingConditions")
                 .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                .build(),
+                .build();
 
         CampaignCar.builder()
                 .brand("OPEL")
@@ -66,31 +64,11 @@ class CampaignCarServiceTest {
                 .modelText("modelText")
                 .supplyingConditions("supplyingConditions")
                 .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                .build(),
+                .build();
 
-        CampaignCar.builder()
+        CampaignCar campaignCar2 = CampaignCar.builder()
                 .brand("MERCEDES")
                 .model("X5")
-                .campaignPictureOne("picture1")
-                .damageAndMileage("damageAndMileage")
-                .description("description")
-                .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
-            .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
-            .monthsRegistered(12)
-            .mileage("mileage")
-            .depositPerCar("1000")
-            .modelText("modelText")
-            .supplyingConditions("supplyingConditions")
-            .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-            .build()
-        );
-        campaignCarRepository.saveAll(campaignCarList);
-
-        Campaign campaign1 = Campaign.builder()
-            .campaignCar(CampaignCar.builder()
-                .brand("CAMPAIGN Audi")
-                .model("CAMPAIGN A4")
                 .campaignPictureOne("picture1")
                 .damageAndMileage("damageAndMileage")
                 .description("description")
@@ -103,12 +81,8 @@ class CampaignCarServiceTest {
                 .modelText("modelText")
                 .supplyingConditions("supplyingConditions")
                 .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                .build())
-            .campaignStatus(CampaignStatus.ACTIVE)
-            .activeDate(LocalDate.now())
-            .build();
-        Campaign campaign2 = Campaign.builder()
-            .campaignCar(CampaignCar.builder()
+                .build();
+        CampaignCar campaignCar3 = CampaignCar.builder()
                 .brand("CAMPAIGN BMW")
                 .model("CAMPAIGN X5")
                 .campaignPictureOne("picture1")
@@ -123,18 +97,45 @@ class CampaignCarServiceTest {
                 .modelText("modelText")
                 .supplyingConditions("supplyingConditions")
                 .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-                .build())
-            .campaignStatus(CampaignStatus.ACTIVE)
-            .activeDate(LocalDate.now())
-            .build();
+                .build();
+        CampaignCar campaignCar4 = CampaignCar.builder()
+                .brand("CAMPAIGN Audi")
+                .model("CAMPAIGN A4")
+                .campaignPictureOne("picture1")
+                .damageAndMileage("damageAndMileage")
+                .description("description")
+                .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
+                .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+                .monthsRegistered(12)
+                .mileage("mileage")
+                .depositPerCar("1000")
+                .modelText("modelText")
+                .supplyingConditions("supplyingConditions")
+                .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .build();
+        List<CampaignCar> campaignCarList = List.of(campaignCar1, campaignCar2, campaignCar3, campaignCar4);
+        campaignCarRepository.saveAll(campaignCarList);
+        Campaign campaign1 = Campaign.builder()
+                .campaignStatus(CampaignStatus.ACTIVE)
+                .activeDate(LocalDate.now())
+                .build();
+        Campaign campaign2 = Campaign.builder()
+                .campaignStatus(CampaignStatus.ACTIVE)
+                .activeDate(LocalDate.now())
+                .build();
         List<Campaign> campaignList = List.of(campaign1, campaign2);
         campaignRepository.saveAll(campaignList);
+        campaignCar1.setCampaign(campaign1);
+        campaignCar2.setCampaign(campaign2);
+        campaignCarRepository.save(campaignCar1);
+        campaignCarRepository.save(campaignCar2);
 
 
     }
 
     @BeforeEach
-    public void setupService(){
+    public void setupService() {
         campaignCarService = new CampaignCarService(campaignRepository, campaignCarRepository);
     }
 
@@ -142,8 +143,9 @@ class CampaignCarServiceTest {
     @Test
     void getAllCampaignCars() {
         List<CampaignCarResponse> campaignCarList = campaignCarService.getAllCampaignCars();
-        assertEquals(5, campaignCarList.size());
+        assertEquals(4, campaignCarList.size());
     }
+
     @Test
     void getCampaignCarById() {
         CampaignCarResponse foundCarResponse = campaignCarService.getCampaignCarById(1L);
@@ -160,24 +162,24 @@ class CampaignCarServiceTest {
                 .description("description")
                 .earliestExceptedReturnDate(LocalDate.of(2021, 10, 10))
                 .exceptedRegistrationFromDate(LocalDate.of(2021, 10, 10))
-            .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
-            .monthsRegistered(12)
-            .mileage("mileage")
-            .depositPerCar("1000")
-            .modelText("modelText")
-            .supplyingConditions("supplyingConditions")
-            .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
-            .campaignId(5L)
-            .build();
+                .exceptedRegistrationToDate(LocalDate.of(2021, 10, 10))
+                .monthsRegistered(12)
+                .mileage("mileage")
+                .depositPerCar("1000")
+                .modelText("modelText")
+                .supplyingConditions("supplyingConditions")
+                .latestExceptedReturnDate(LocalDate.of(2021, 10, 10))
+                .campaignId(5L)
+                .build();
         campaignCarService.addCampaignCar(carRequest);
-        assertEquals(6, campaignCarRepository.findAll().size());
-        assertEquals("NEWCAR", campaignCarRepository.findAll().get(5).getBrand());
+        assertEquals(5, campaignCarRepository.findAll().size());
+        assertEquals("NEWCAR", campaignCarRepository.findAll().get(4).getBrand());
     }
 
     @Test
     void deleteCampaignCar() {
         campaignCarService.deleteCampaignCar(1L);
-        assertEquals(4, campaignCarService.getAllCampaignCars().size());
+        assertEquals(3, campaignCarService.getAllCampaignCars().size());
     }
 
     @Test
@@ -192,7 +194,7 @@ class CampaignCarServiceTest {
     @Test
     void getCampaignCarByCampaignId() {
         CampaignCarResponse foundCarResponse = campaignCarService.getCampaignCarByCampaignId(1L);
-        assertEquals("CAMPAIGN Audi", foundCarResponse.getBrand());
+        assertEquals("BMW", foundCarResponse.getBrand());
 
     }
 }
