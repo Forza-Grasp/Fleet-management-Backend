@@ -247,6 +247,8 @@ public class CampaignSetup implements ApplicationRunner {
                 .brandColorMix(brandColorMix1)
                 .build();
         campaignColorPriceRepository.save(campaignColorPrice);
+        campaignColorPrice.setCampaign(campaign1);
+        campaignColorPriceRepository.save(campaignColorPrice);
 
 
     }
