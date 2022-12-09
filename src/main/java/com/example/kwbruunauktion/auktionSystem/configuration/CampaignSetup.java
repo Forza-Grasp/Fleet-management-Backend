@@ -2,12 +2,15 @@ package com.example.kwbruunauktion.auktionSystem.configuration;
 
 import com.example.kwbruunauktion.auktionSystem.entity.*;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.*;
+import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
+import com.example.kwbruunauktion.auktionSystem.enums.CampaignBidStatus;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.example.kwbruunauktion.auktionSystem.repository.BrandColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorMixRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.ColorTypesRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.SpecificCarModelRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.*;
+import com.example.kwbruunauktion.auktionSystem.repository.users.UserBuyerRepository;
 import com.example.kwbruunauktion.auktionSystem.service.campaign.CampaignService;
 import lombok.SneakyThrows;
 import org.springframework.boot.ApplicationArguments;
@@ -29,6 +32,8 @@ public class CampaignSetup implements ApplicationRunner {
     ColorTypesRepository colorTypesRepository;
     CampaignLcdvCodeJoinRepository campaignLcdvCodeJoinRepository;
     private final CampaignCarRepository campaignCarRepository;
+    private final CampaignBidRepository campaignBidRepository;
+    private final UserBuyerRepository userBuyerRepository;
 
 
     public CampaignSetup(CampaignRepository campaignRepository,
@@ -40,7 +45,9 @@ public class CampaignSetup implements ApplicationRunner {
                          ColorMixRepository colorMixRepository,
                          ColorTypesRepository colorTypesRepository,
                          CampaignLcdvCodeJoinRepository campaignLcdvCodeJoinRepository,
-                         CampaignCarRepository campaignCarRepository) {
+                         CampaignCarRepository campaignCarRepository,
+                         CampaignBidRepository campaignBidRepository,
+                         UserBuyerRepository userBuyerRepository) {
         this.campaignRepository = campaignRepository;
         this.campaignService = campaignService;
         this.lcdvCodeRepository = lcdvCodeRepository;
@@ -51,6 +58,8 @@ public class CampaignSetup implements ApplicationRunner {
         this.colorTypesRepository = colorTypesRepository;
         this.campaignLcdvCodeJoinRepository = campaignLcdvCodeJoinRepository;
         this.campaignCarRepository = campaignCarRepository;
+        this.campaignBidRepository = campaignBidRepository;
+        this.userBuyerRepository = userBuyerRepository;
     }
 
     @Override
@@ -249,6 +258,33 @@ public class CampaignSetup implements ApplicationRunner {
         campaignColorPriceRepository.save(campaignColorPrice);
         campaignColorPrice.setCampaign(campaign1);
         campaignColorPriceRepository.save(campaignColorPrice);
+        UserBuyer buyer1 = UserBuyer.userBuyerBuilder()
+                .user("buyer10")
+                .password("buyer")
+                .email("buyer@Ten.dk")
+                .firstName("Mo")
+                .lastName("Adel")
+                .phoneNumber("12345678")
+                .city("Aarhus")
+                .companyEuVatNumber("DK29233133")
+                .zipCode("8000")
+                .addressLine1("Vej 1")
+                .addressLine2("Vej 2")
+                .companyName("Mo's Cars")
+                .companyEuVatNumber("12345678")
+                .country("Denmark")
+                .build();
+        userBuyerRepository.save(buyer1);
+        CampaignBid bid1 = CampaignBid.builder()
+                .userWithRoles(buyer1)
+                .bidPrice(1000)
+                .minAmountOfCars(20)
+                .maxAmountOfCars(100)
+                .campaignBidStatus(CampaignBidStatus.CURRENT_OFFER)
+                .build();
+        campaignBidRepository.save(bid1);
+        bid1.setCampaign(campaign1);
+        campaignBidRepository.save(bid1);
 
 
     }
