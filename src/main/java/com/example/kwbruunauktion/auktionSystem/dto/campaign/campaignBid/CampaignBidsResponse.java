@@ -14,6 +14,7 @@ import lombok.*;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CampaignBidsResponse {
 
+    private Long bidId;
     private Long userId;
 
     private Long campaignId;
@@ -27,6 +28,9 @@ public class CampaignBidsResponse {
     private double bidPrice;
 
     public CampaignBidsResponse(CampaignBid c) {
+        if (c.getId() != null) {
+            this.bidId = c.getId();
+        }
         this.userId = c.getUserWithRoles().getId();
         if (c.getCampaign() != null) {
             this.campaignId = c.getCampaign().getId();

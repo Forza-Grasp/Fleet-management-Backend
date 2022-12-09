@@ -61,6 +61,7 @@ public class CampaignBidService {
                 .bidPrice(campaignBidsRequest.getBidPrice())
                 .minAmountOfCars(campaignBidsRequest.getMinAmountOfCars())
                 .maxAmountOfCars(campaignBidsRequest.getMaxAmountOfCars())
+                .campaignBidStatus(campaignBidsRequest.getCampaignBidStatus())
                 .build();
         campaignBidRepository.save(campaignBid);
         campaignBid.setCampaign(foundCampaign);
@@ -72,6 +73,13 @@ public class CampaignBidService {
         CampaignBidsResponse campaignBidsResponse = new CampaignBidsResponse(campaignBidRepository.findById(id).orElseThrow(() -> new RuntimeException("Bid with that ID not found")));
         campaignBidRepository.deleteById(id);
         return campaignBidsResponse;
+    }
+
+    public CampaignBidsResponse changeStatusOfCampaignBidById(CampaignBidsRequest campaignBidsRequest) {
+        CampaignBid campaignBid = campaignBidRepository.findById(campaignBidsRequest.getBidId()).orElseThrow(() -> new RuntimeException("Bid with that ID not found"));
+        campaignBid.setCampaignBidStatus(campaignBidsRequest.getCampaignBidStatus());
+        campaignBidRepository.save(campaignBid);
+        return new CampaignBidsResponse(campaignBidRepository.findById(campaignBidsRequest.getBidId()).orElseThrow(() -> new RuntimeException("Bid with that ID not found")));
     }
 
 }
