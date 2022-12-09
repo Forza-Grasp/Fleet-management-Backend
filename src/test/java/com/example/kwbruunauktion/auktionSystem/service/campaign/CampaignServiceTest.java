@@ -321,4 +321,14 @@ class CampaignServiceTest {
         campaignService.deleteCampaign(1L);
         assertFalse(campaignRepository.findById(1L).isPresent());
     }
+
+    @Test
+    void changeCampaignStatus(){
+        CampaignRequest campaignRequest = CampaignRequest.builder()
+                .id(1L)
+                .campaignStatus(CampaignStatus.DRAFT)
+                .build();
+        campaignService.changeCampaignStatus(campaignRequest);
+        assertEquals(CampaignStatus.DRAFT, campaignService.getCampaignById(1L).getCampaignStatus());
+    }
 }

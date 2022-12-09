@@ -55,4 +55,9 @@ public class CampaignController {
         campaignService.editCampaign(campaignRequest);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
+
+    @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    CampaignResponse changeCampaignStatus(@RequestBody CampaignRequest campaignRequest){
+        return campaignService.changeCampaignStatus(campaignRequest);
+    }
 }

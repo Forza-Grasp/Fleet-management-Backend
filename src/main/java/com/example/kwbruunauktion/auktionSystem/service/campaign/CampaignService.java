@@ -80,4 +80,11 @@ public class CampaignService {
         Campaign campaign = campaignRepository.findById(id).orElseThrow(() -> new RuntimeException("campaign with this ID does not exist"));
         campaignRepository.delete(campaign);
     }
+
+    public CampaignResponse changeCampaignStatus(CampaignRequest campaignRequest) {
+        Campaign campaign = campaignRepository.findById(campaignRequest.getId()).orElseThrow(() -> new RuntimeException("campaign with this ID does not exist"));
+        campaign.setCampaignStatus(campaignRequest.getCampaignStatus());
+        campaignRepository.save(campaign);
+        return new CampaignResponse(campaign);
+    }
 }
