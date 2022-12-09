@@ -2,9 +2,7 @@ package com.example.kwbruunauktion.auktionSystem.service.campaign;
 
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.lcdvCodes.LcdvCodeRequest;
 import com.example.kwbruunauktion.auktionSystem.dto.campaign.lcdvCodes.LcdvCodeResponse;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.LcdvCode;
-import com.example.kwbruunauktion.auktionSystem.repository.campaign.CampaignRepository;
 import com.example.kwbruunauktion.auktionSystem.repository.campaign.LcdvCodeRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +12,9 @@ import java.util.stream.Collectors;
 @Service
 public class LcdvCodeService {
     private final LcdvCodeRepository lcdvCodeRepository;
-    private final CampaignRepository campaignRepository;
 
-    public LcdvCodeService(LcdvCodeRepository lcdvCodeRepository, CampaignRepository campaignRepository) {
+    public LcdvCodeService(LcdvCodeRepository lcdvCodeRepository) {
         this.lcdvCodeRepository = lcdvCodeRepository;
-        this.campaignRepository = campaignRepository;
     }
 
     public LcdvCodeResponse addLcdvCode(LcdvCodeRequest lcdvCodeRequest){
