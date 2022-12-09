@@ -57,21 +57,21 @@ class LcdvCodeServiceTest {
 
     @Test
     void addLcdvCode() {
-        List<LcdvCodeResponse> responsesBeforeAddition = lcdvCodeService.getLcdvCodes();
+        List<LcdvCodeResponse> responsesBeforeAddition = lcdvCodeService.getAllLcdvCodes();
 
         LcdvCodeRequest lcr = LcdvCodeRequest.builder()
                 .lcdvCode("6")
                 .build();
         LcdvCodeResponse lcdvCodeResponse = lcdvCodeService.addLcdvCode(lcr);
 
-        List<LcdvCodeResponse> responsesAfterAddition = lcdvCodeService.getLcdvCodes();
+        List<LcdvCodeResponse> responsesAfterAddition = lcdvCodeService.getAllLcdvCodes();
         assertNotEquals(responsesBeforeAddition, responsesAfterAddition);
         assertEquals(7,responsesAfterAddition.size());
     }
 
     @Test
     void getLcdvCodes() {
-        List<LcdvCodeResponse> lcdvCodeResponses = lcdvCodeService.getLcdvCodes();
+        List<LcdvCodeResponse> lcdvCodeResponses = lcdvCodeService.getAllLcdvCodes();
         assertNotEquals(0,lcdvCodeResponses.size());
         assertEquals(6,lcdvCodeResponses.size());
     }
@@ -85,13 +85,12 @@ class LcdvCodeServiceTest {
 
     @Test
     void deleteLcdvCodeById() {
-        List<LcdvCodeResponse> responsesBeforeDeletion = lcdvCodeService.getLcdvCodes();
+        List<LcdvCodeResponse> responsesBeforeDeletion = lcdvCodeService.getAllLcdvCodes();
         lcdvCodeService.deleteLcdvCodeById(1L);
-        List<LcdvCodeResponse> responsesAfterDeletion = lcdvCodeService.getLcdvCodes();
+        List<LcdvCodeResponse> responsesAfterDeletion = lcdvCodeService.getAllLcdvCodes();
         assertNotEquals(responsesBeforeDeletion.size(),responsesAfterDeletion.size());
         assertEquals(5,responsesAfterDeletion.size());
         assertNotEquals(1L,responsesAfterDeletion.get(0).getId());
         assertEquals(2L,responsesAfterDeletion.get(0).getId());
-
     }
 }
