@@ -213,6 +213,7 @@ public class SecurityConfig {
         //Campaign
         .antMatchers(HttpMethod.GET, "/api/campaign").permitAll()
         .antMatchers(HttpMethod.GET, "/api/campaign/{id}").permitAll()
+
         .antMatchers(HttpMethod.PUT, "/api/campaign/{id}").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/campaign/{id}").permitAll()
         .antMatchers(HttpMethod.POST, "/api/campaign").permitAll()
@@ -236,6 +237,29 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.DELETE, "api/campaign/color-price/{id}").permitAll()
         .antMatchers(HttpMethod.PATCH, "api/campaign/color-price/{id}").permitAll()
         .antMatchers(HttpMethod.POST, "api/campaign/color-price").permitAll()
+
+        //Campaign Bid
+        .antMatchers(HttpMethod.GET, "/api/campaign/bids").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/bids/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/bids/{id}").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/bids/campaign/{campaignId}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/campaign/bids").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/campaign/bids/{id}").permitAll()
+        .antMatchers(HttpMethod.PATCH, "/api/campaign/bids/{id}").permitAll()
+
+        // LcdvCodes
+        .antMatchers(HttpMethod.GET, "/api/lcdv-codes").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/lcdv-codes/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/lcdv-codes/{id}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/campaign/bids").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/campaign/bids/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/campaign/bids").permitAll()
+
+
+
+
 
         .anyRequest().permitAll());
 
