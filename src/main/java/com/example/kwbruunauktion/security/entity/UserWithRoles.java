@@ -1,7 +1,7 @@
 package com.example.kwbruunauktion.security.entity;
 
 
-import com.example.kwbruunauktion.auktionSystem.entity.CampaignBid;
+import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignBid;
 import com.example.kwbruunauktion.auktionSystem.entity.damageMatrix.DamageMatrix;
 import com.example.kwbruunauktion.security.dto.UserWithRolesRequest;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.example.kwbruunauktion.auktionSystem.entity;
+package com.example.kwbruunauktion.auktionSystem.entity.campaign;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -6,7 +6,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -17,7 +16,7 @@ import java.util.List;
 @ToString
 
 @Entity
-public class LcdvCodes {
+public class LcdvCode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +25,8 @@ public class LcdvCodes {
     @Column(nullable = false, length = 400)
     private String lcdvCode;
 
-    @JoinTable(name = "lcdvcodes_campaign")
-    @ManyToMany
-    @ToString.Exclude
-    private List<Campaign> campaign;
+    @OneToMany(mappedBy = "lcdvCode", cascade = CascadeType.ALL)
+    List<CampaignLcdvCodeJoin> campaignLcdvCodeJoins;
 
     @CreationTimestamp
     private LocalDateTime created;
