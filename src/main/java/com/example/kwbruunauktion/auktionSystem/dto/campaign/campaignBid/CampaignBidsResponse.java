@@ -1,27 +1,22 @@
 package com.example.kwbruunauktion.auktionSystem.dto.campaign.campaignBid;
 
 
-import com.example.kwbruunauktion.auktionSystem.dto.campaign.campaign.CampaignResponse;
-import com.example.kwbruunauktion.auktionSystem.dto.users.response.UserBuyerResponse;
-import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.entity.campaign.CampaignBid;
-import com.example.kwbruunauktion.auktionSystem.entity.users.UserBuyer;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignBidStatus;
-import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@Builder
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CampaignBidsResponse {
 
-    private UserBuyerResponse userWithRoles;
+    private Long userId;
 
-    private CampaignResponse campaign;
+    private Long campaignId;
 
     private CampaignBidStatus campaignBidStatus;
 
@@ -31,9 +26,11 @@ public class CampaignBidsResponse {
 
     private double bidPrice;
 
-    public CampaignBidsResponse(CampaignBid c){
-        this.userWithRoles = new UserBuyerResponse((UserBuyer) c.getUserWithRoles());
-        this.campaign = new CampaignResponse(c.getCampaign());
+    public CampaignBidsResponse(CampaignBid c) {
+        this.userId = c.getUserWithRoles().getId();
+        if (c.getCampaign() != null) {
+            this.campaignId = c.getCampaign().getId();
+        }
         this.campaignBidStatus = c.getCampaignBidStatus();
         this.minAmountOfCars = c.getMinAmountOfCars();
         this.maxAmountOfCars = c.getMaxAmountOfCars();
