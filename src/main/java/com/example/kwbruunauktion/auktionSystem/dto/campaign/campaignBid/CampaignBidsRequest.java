@@ -4,19 +4,20 @@ import com.example.kwbruunauktion.auktionSystem.entity.campaign.Campaign;
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignBidStatus;
 import com.example.kwbruunauktion.security.entity.UserWithRoles;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CampaignBidsRequest {
 
-    private UserWithRoles userWithRoles;
+    private long bidId;
+    private Long userId;
 
-    private Campaign campaign;
+    private Long campaignId;
 
     private CampaignBidStatus campaignBidStatus;
 
