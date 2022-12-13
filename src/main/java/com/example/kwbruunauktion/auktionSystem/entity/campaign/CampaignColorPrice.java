@@ -1,5 +1,6 @@
-package com.example.kwbruunauktion.auktionSystem.entity;
+package com.example.kwbruunauktion.auktionSystem.entity.campaign;
 
+import com.example.kwbruunauktion.auktionSystem.entity.BrandColorMix;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,7 +26,7 @@ public class CampaignColorPrice {
     @JoinColumn(name = "brand_color_mix_id")
     private BrandColorMix brandColorMix;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "campaign_id")
     private Campaign campaign;
 

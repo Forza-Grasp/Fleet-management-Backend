@@ -1,8 +1,7 @@
 package com.example.kwbruunauktion.auktionSystem.api;
 
-import com.example.kwbruunauktion.auktionSystem.dto.OwnershipRepsonse;
+import com.example.kwbruunauktion.auktionSystem.dto.OwnershipResponse;
 import com.example.kwbruunauktion.auktionSystem.dto.OwnershipRequest;
-import com.example.kwbruunauktion.auktionSystem.dto.SpecificCarModelResponse;
 import com.example.kwbruunauktion.auktionSystem.service.OwnershipService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,12 +21,12 @@ public class OwnershipController {
     }
 
     @GetMapping
-     public List<OwnershipRepsonse> getOwnerships(){
+     public List<OwnershipResponse> getOwnerships(){
         return ownershipService.getOwnerships();
     }
 
     @GetMapping("/{id}")
-    OwnershipRepsonse getOwnershipById(@PathVariable Long id) {
+    OwnershipResponse getOwnershipById(@PathVariable Long id) {
         return ownershipService.getOwnershipById(id);
     }
 
@@ -38,7 +37,7 @@ public class OwnershipController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    OwnershipRepsonse addOwnership(@RequestBody OwnershipRequest body) {
+    OwnershipResponse addOwnership(@RequestBody OwnershipRequest body) {
         return ownershipService.addOwnership(body);
     }
 

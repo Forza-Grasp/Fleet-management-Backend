@@ -110,7 +110,7 @@ class DamageMatrixServiceTest {
   @Test
   void getAllDamageMatrix() {
     List<DamageMatrixResponse> damageMatrixResponseList = damageMatrixService.getAllDamageMatrix();
-    assertEquals(3, damageMatrixRepository.count());
+    assertEquals(3, damageMatrixResponseList.size());
   }
 
   @Test

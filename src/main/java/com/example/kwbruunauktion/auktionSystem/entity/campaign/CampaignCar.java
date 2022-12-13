@@ -1,4 +1,4 @@
-package com.example.kwbruunauktion.auktionSystem.entity;
+package com.example.kwbruunauktion.auktionSystem.entity.campaign;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 
 @Entity
 public class CampaignCar {
@@ -69,7 +68,8 @@ public class CampaignCar {
   @Column(nullable = false, length = 300)
   private String campaignPictureOne;
 
-  @OneToOne(mappedBy = "campaignCar")
+  @OneToOne(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "campaign_id", referencedColumnName = "id")
   private Campaign campaign;
 
   @CreationTimestamp

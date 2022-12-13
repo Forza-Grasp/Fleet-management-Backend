@@ -1,4 +1,4 @@
-package com.example.kwbruunauktion.auktionSystem.entity;
+package com.example.kwbruunauktion.auktionSystem.entity.campaign;
 
 import com.example.kwbruunauktion.auktionSystem.enums.CampaignStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
+
 
 @Entity
 public class Campaign {
@@ -25,7 +25,7 @@ public class Campaign {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "campaign")
     private CampaignCar campaignCar;
 
     @Enumerated(EnumType.STRING)
@@ -36,16 +36,14 @@ public class Campaign {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate activeDate;
 
-    @JoinTable(name = "campaign_lcdvcodes")
-    @ManyToMany(cascade = CascadeType.ALL)
-    @ToString.Exclude
-    private List<LcdvCodes> lcdvCodes;
+    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
+    List<CampaignLcdvCodeJoin> campaignLcdvCodeJoins;
 
     @OneToMany(mappedBy = "campaign")
     @ToString.Exclude
     private List<CampaignBid> campaignBids;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @ToString.Exclude
     private List<CampaignColorPrice> campaignColorPrices;
 
@@ -54,4 +52,5 @@ public class Campaign {
 
     @UpdateTimestamp
     private LocalDateTime updated;
+
 }

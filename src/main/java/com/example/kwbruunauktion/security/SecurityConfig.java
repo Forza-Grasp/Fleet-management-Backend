@@ -167,7 +167,6 @@ public class SecurityConfig {
         //SpecificCarModel
         .antMatchers(HttpMethod.GET, "/api/specific-car-model").permitAll()
         .antMatchers(HttpMethod.GET, "/api/specific-car-model/all").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/specific-car-model/all-with-color-mix-count").permitAll()
         .antMatchers(HttpMethod.GET, "/api/specific-car-model/{id}").permitAll()
         .antMatchers(HttpMethod.POST, "/api/specific-car-model").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api/specific-car-model/{id}").permitAll()
@@ -208,14 +207,61 @@ public class SecurityConfig {
 
         .antMatchers(HttpMethod.POST,"/api/blacklist").permitAll()
         .antMatchers(HttpMethod.PATCH,"/api/blacklist/deactivate/{vinNumber}").permitAll()
-        .antMatchers(HttpMethod.PATCH,"/api/blacklist/activate/{vinNumber}").permitAll()
-        .antMatchers(HttpMethod.DELETE,"/api/blacklist/{vinNumber}").permitAll()
+        .antMatchers(HttpMethod.PATCH, "/api/blacklist/activate/{vinNumber}").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/blacklist/{vinNumber}").permitAll()
+
+        //Campaign
+        .antMatchers(HttpMethod.GET, "/api/campaign").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/{id}").permitAll()
+
+        .antMatchers(HttpMethod.PUT, "/api/campaign/{id}").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/campaign/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/campaign").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/campaign/add-lcdv-code").permitAll()
+        .antMatchers(HttpMethod.PATCH, "/api/campaign").permitAll()
+
+        //Campaign Car
+        .antMatchers(HttpMethod.GET, "/api/campaign/car").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/car/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/car/{id}").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/car/campaign/{id}").permitAll()
+
+        .antMatchers(HttpMethod.DELETE, "/api/campaign/car/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "/api/campaign/car").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/campaign/car").permitAll()
+
+        //Campaign Color Price
+        .antMatchers(HttpMethod.GET, "api/campaign/color-price").permitAll()
+        .antMatchers(HttpMethod.GET, "api/campaign/color-price/all").permitAll()
+        .antMatchers(HttpMethod.GET, "api/campaign/color-price/{id}").permitAll()
+
+        .antMatchers(HttpMethod.DELETE, "api/campaign/color-price/{id}").permitAll()
+        .antMatchers(HttpMethod.PATCH, "api/campaign/color-price/{id}").permitAll()
+        .antMatchers(HttpMethod.POST, "api/campaign/color-price").permitAll()
+
+        //Campaign Bid
+        .antMatchers(HttpMethod.GET, "/api/campaign/bids").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/bids/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/bids/{id}").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/campaign/bids/campaign/{campaignId}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/campaign/bids").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/campaign/bids/{id}").permitAll()
+        .antMatchers(HttpMethod.PATCH, "/api/campaign/bids/{id}").permitAll()
+
+        // LcdvCodes
+        .antMatchers(HttpMethod.GET, "/api/lcdv-codes").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/lcdv-codes/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/lcdv-codes/{id}").permitAll()
+
+        .antMatchers(HttpMethod.POST, "/api/campaign/bids").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/api/campaign/bids/{id}").permitAll()
+        .antMatchers(HttpMethod.PUT, "/api/campaign/bids").permitAll()
 
 
 
 
-            // Demonstrates another way to add roles to an endpoint
-        // .antMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
+
         .anyRequest().permitAll());
 
     return http.build();

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 
-public class OwnershipRepsonse {
+public class OwnershipResponse {
 
     private Long id;
 
@@ -29,7 +29,7 @@ public class OwnershipRepsonse {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm",shape = JsonFormat.Shape.STRING)
     private LocalDateTime updated;
 
-    public OwnershipRepsonse(Ownership o) {
+    public OwnershipResponse(Ownership o) {
         this.id = o.getId();
         this.name = o.getName();
         this.abbreviation = o.getAbbreviation();
